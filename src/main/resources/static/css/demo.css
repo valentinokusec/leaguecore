@@ -365,16 +365,8 @@ body {
 	overflow-x: hidden;
 }
 
-a {
-	text-decoration: none;
-	color: #ed8151;
-	outline: none;
-}
 
-a:hover, a:focus {
-	color: #e86a32;
-	outline: none;
-}
+
 
 /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before,
@@ -514,15 +506,8 @@ button {
 	background: #777;
 }
 
-button {
-	font-size: 75%;
-	background: #ed8151;
-}
 
-button:hover,
-button:active {
-	background: #e86a32;
-}
+
 
 .related {
 	text-align: center;

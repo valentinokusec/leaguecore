@@ -15,12 +15,13 @@
 		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="../css/component.css" />
 		<link rel="stylesheet" type="text/css" href="../css/style5.css" />
-		
+		<link rel="stylesheet" type="text/css" href="../css/style1.css" />
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/set2.css" />
 	</head>
 <body>
 
@@ -58,7 +59,7 @@
   <div id="toggle_main" class="ip-main1">
 
 
-  <img src="static/logo.png" class="main_logo toggle_main anim"></img>
+  <img src="../img/logo.png" class="main_logo toggle_main anim"></img>
   <div class="index_line  toggle_main_line anim">
 
   </div>
@@ -70,8 +71,8 @@
       <div class="input_index anim">
 
 
-        <form id="main_input ">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div id="main_input " style="width:800px">
+         
 
             <span class="input input--yoshiko">
               <input class="input__field input__field--yoshiko main_input" type="text"  id="sample3" />
@@ -79,17 +80,18 @@
                 <span class="input__label-content input__label-content--yoshiko" data-content="summoner name">summoner name</span>
               </label>
             </span>
-          </div>
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" style="margin-top: 50px;" ng-click="myFunction()">
+       
+          <button class="kda_text_main kda_text" style="margin-top: 10px;padding-left: 18px;" id="trigger-overlay" >
                      W
                  </button>
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" style="margin-top: 50px;" id="demo-show-snackbar" ng-click="showProgress()">
-              <i class="material-icons">search</i>
-          </button>
-          <div class="{{className}}" id="overlay">
+          <button class="kda_text_main kda_text" style="margin-top: 10px;padding-left: 18px;" >
+                    <i class="fa fa-search" aria-hidden="true" onlick="myFunction()"></i>
+                 </button>
+          <div class="overlay overlay-hugeinc" id="overlay">
+          <button type="button" class="overlay-close">Close</button>
                       <div class="overlay-menu">
                           <ul>
-                              <li>  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" ng-click="closePicker()">
+                              <li> <button class="kda_text_main kda_text"  style="padding-left: 18px;">
                                   W
                               </button>
                             <span style="color:white;"> EU West </span></li>
@@ -97,11 +99,8 @@
                           </ul>
                       </div>
                   </div>
-        </form>
-        <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
-          <div class="mdl-snackbar__text"></div>
-          <button class="mdl-snackbar__action" type="button"></button>
         </div>
+ 
         <button  onclick="Toggle()" class="kda_text_main kda_text trigger" style="padding-top:0px !important;"><i class="fa fa-th-large" aria-hidden="true"></i></button>
 
     </div>
@@ -116,7 +115,7 @@
 
           </div>
           <div class="col-md-5">
-              <img class="screenshot" src="static/leadboard.png" alt="" />
+              <img class="screenshot" src="../static/img/leadboard.png" alt="" />
           </div>
           <div class="col-md-4 headlines" >
             View the most <span style="color:rgb(255,64,129);">popular</span> players. You can try be the <span style="color:rgb(255,64,129);">number one</span>  yourself and get <span style="color:rgb(255,64,129);">rewards!</span>
@@ -209,7 +208,9 @@
 	<script  src="../js/classie.js"></script>
 	<script  src="../js/pathLoader.js"></script>
     <script  src="../js/material.js"></script>
+    
     <script  src="../js/modernizr.custom.js"></script>
+    <script  src="../js/demo1.js"></script>
     <script>
     /*<![CDATA[*/
     var snackbarContainer;
@@ -241,7 +242,7 @@ $(window).bind('mousewheel DOMMouseScroll', function(event){
                      pagi1--;
                    }
                    $("#"+pagi1).addClass("active");
-                   $apply();
+               
                 console.log(pagi1);
                  $(".content1").css({"margin-top": "30%","opacity":"1"});
               

@@ -390,7 +390,7 @@ background-color: white;
   height: 100vh;
   opacity: 0.1;
     background-size: calc(100% + 50px);
-    background:url('../static/kindred.jpg') -60px -60px;
+    background:url('../img/kindred.jpg') -60px -60px;
     -webkit-filter: blur(5px);
 -moz-filter: blur(5px);
 -o-filter: blur(5px);
@@ -1151,7 +1151,7 @@ height: 0px ;
 .input
 {
    width: 500px;
-   height: 200px;
+   
 
 
    position: absolute;
@@ -1620,7 +1620,7 @@ margin-left: 5px;
 }
 .trigger {
   position: absolute !important;
-  bottom: 35px;
+  top: 85px;
   left: 115px;
   z-index: 1000;
   background-color: rgb(255,64,129) !important;
