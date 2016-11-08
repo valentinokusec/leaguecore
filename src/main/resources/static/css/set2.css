@@ -373,6 +373,7 @@
 	transition: transform 0.25s ;
 	-webkit-transition-timing-function: ease-in-out;
 	transition-timing-function: ease-in-out;
+	margin-bottom:0px !important;
 }
 
 .input__label-content--yoshiko {

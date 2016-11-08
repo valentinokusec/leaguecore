@@ -47,7 +47,7 @@ body
 .ip-logo
 {
 position: absolute;
-top: 40%;
+top: 20%;
 left: 41% !important;
 color: #374d5a;
 font-size: 40px;
@@ -78,7 +78,7 @@ font-weight: bold;
 }
 .ele
 {
-position: absolute !important;
+position: fixed !important;
 bottom: 70% !important;
 left: 45% !important;
 color: #374d5a;
@@ -827,7 +827,7 @@ box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75);
 .loader
 
 {
-  position: absolute;
+  position: fixed;
     top: 40%;
     left: 46%;
 
@@ -1360,7 +1360,7 @@ background-color: white;
 {
   position: absolute;
   top: 70%;
-  left:38%;
+  left:33%;
     opacity: 1;
 
 }
@@ -1621,7 +1621,7 @@ margin-left: 5px;
 .trigger {
   position: absolute !important;
   top: 85px;
-  left: 115px;
+  left: 150px;
   z-index: 1000;
   background-color: rgb(255,64,129) !important;
 }

@@ -514,13 +514,13 @@ private JSONArray getMatchRandom(Long matchid, String string) {
 }
 
 @Override
-public JSONArray CheckSummonerName(String name) {
+public String CheckSummonerName(String name) {
 	// TODO Auto-generated method stub
 	try {
 		Summoner summoner = RiotAPI.getSummonerByName(name);
-		return new JSONArray().put("ok");
+		return "ok";
 	} catch (Exception e) {
-		return new JSONArray().put("nope");
+		return "nope";
 	}
 	
 }

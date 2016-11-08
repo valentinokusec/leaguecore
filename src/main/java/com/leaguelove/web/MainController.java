@@ -36,8 +36,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -75,15 +78,15 @@ public class MainController {
         return  mainService.getGeneralData(name).toString();
     }
     
-    @CrossOrigin(origins = "http://leaguecore.com")
-    @RequestMapping("/checkname")
-    public String CheckSummonerName(
-          @RequestParam(value = "name", required = false) String name) throws Exception {
-
-
-      	
-        return  mainService.CheckSummonerName(name).toString();
-    }
+//    @CrossOrigin(origins = "http://leaguecore.com")
+//    @RequestMapping("/checkname")
+//    public String CheckSummonerName(
+//          @RequestParam(value = "name", required = false) String name) throws Exception {
+//
+//
+//      	
+//        return  mainService.CheckSummonerName(name).toString();
+//    }
     @RequestMapping("/index")
     public String Index() throws Exception {
 
@@ -91,7 +94,42 @@ public class MainController {
       	
         return  "index";
     }
-    
+    @RequestMapping("/checkname/{name}")
+    public @ResponseBody String CheckName( @PathVariable(value = "name") String name) throws Exception {
+
+
+    	String check=mainService.CheckSummonerName(name).toString();
+    	if (check.contains("ok")) {
+    		 return  name;
+		}
+    	else
+    	{
+    		return "nope";
+    	}
+    }
+    @RequestMapping("/getdata/{name}")
+    public @ResponseBody String GetData( @PathVariable(value = "name") String name,Model model) throws Exception {
+
+
+    	JSONArray data = livestatsService.getLiveStats(name);
+    	try {
+    		
+    		data.getString(0);
+    		
+    		model.addAttribute("no_game",true);
+    		model.addAttribute("champions",data);
+    		
+    		return data.toString();
+    		
+    		
+		}
+    	catch(Exception e) {
+    		model.addAttribute("champion_profile",data);
+    		
+    		return data.toString();
+		}
+    	
+    }
     @CrossOrigin(origins = "http://leaguecore.com")
     @RequestMapping("/getrandommessage")
     public String getRandomMessage() throws Exception {
@@ -123,14 +161,8 @@ public class MainController {
     public String liveStats(
     		@PathVariable(value="summoner") String summoner, Model model) throws Exception {
       	
-    	ArrayList<SummonerProfile> data = livestatsService.getLiveStats(summoner);
-    	if (data.get(0).getName().contains("game")) {
-    		model.addAttribute("no_game",true);
-    		model.addAttribute("champions",data);
-		}
-    	else {
-    		model.addAttribute("champion_profile",data);
-		}
+
+    	model.addAttribute("name",summoner);
     		
     	
         return  "main";

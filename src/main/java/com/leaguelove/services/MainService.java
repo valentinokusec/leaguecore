@@ -16,6 +16,6 @@ public interface MainService {
 
 	public JSONArray getRandomMessage();
 
-	public JSONArray CheckSummonerName(String name);
+	public String CheckSummonerName(String name);
 
 }

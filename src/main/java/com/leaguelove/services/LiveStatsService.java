@@ -9,5 +9,5 @@ import com.leaguelove.domain.SummonerProfile;
 
 @Service
 public interface LiveStatsService {
-	public ArrayList<SummonerProfile> getLiveStats(String name);
+	public JSONArray getLiveStats(String name);
 } 

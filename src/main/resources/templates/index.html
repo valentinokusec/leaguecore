@@ -2,27 +2,32 @@
 <html>
 <head>
 
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
-		<meta name="viewport" content="width=device-width, initial-scale=1"/> 
-		<title>Page Preloading Effect | Demo 1</title>
-		<meta name="description" content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
-		<meta name="keywords" content="page loading, effect, initial, logo, sliding, web design, css animation, transform" />
-		<meta name="author" content="Codrops" />
-		
-		<link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
-		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../css/component.css" />
-		<link rel="stylesheet" type="text/css" href="../css/style5.css" />
-		<link rel="stylesheet" type="text/css" href="../css/style1.css" />
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css" />
-		<link rel="stylesheet" type="text/css" href="../css/set2.css" />
-	</head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page Preloading Effect | Demo 1</title>
+<meta name="description"
+	content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
+<meta name="keywords"
+	content="page loading, effect, initial, logo, sliding, web design, css animation, transform" />
+<meta name="author" content="Codrops" />
+
+<link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../css/component.css" />
+<link rel="stylesheet" type="text/css" href="../css/style5.css" />
+<link rel="stylesheet" type="text/css" href="../css/style1.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+<link rel="stylesheet" type="text/css" href="../css/set2.css" />
+</head>
 <body>
 
 
@@ -30,448 +35,505 @@
 
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 
 
-<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+	<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
 
-   <!--
+	<!--
 
   Navigation -->
-  <div id="ip-container" class="ip-container">
-    <header class="ip-header">
-      <h1 class="ip-logo">
-        Please wait
-      </h1>
-      <div class="ip-loader">
-        <svg class="ip-inner" width="60px" height="60px" viewBox="0 0 80 80">
-          <path class="ip-loader-circlebg" d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z"/>
-          <path id="ip-loader-circle" class="ip-loader-circle" d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z"/>
+	<div id="ip-container" class="ip-container">
+		<header class="ip-header">
+			<h1 class="ip-logo">Please wait</h1>
+			<div class="ip-loader">
+				<svg class="ip-inner" width="60px" height="60px" viewBox="0 0 80 80">
+          <path class="ip-loader-circlebg"
+						d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z" />
+          <path id="ip-loader-circle" class="ip-loader-circle"
+						d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z" />
         </svg>
-      </div>
-    </header>
-  <div id="toggle_main" class="ip-main1">
+			</div>
+		</header>
+		<div id="toggle_main" class="ip-main1">
 
 
-  <img src="../img/logo.png" class="main_logo toggle_main anim"></img>
-  <div class="index_line  toggle_main_line anim">
-
-  </div>
-  <h1 class="index_banner" style="left:37%;">Welcome to <span style="color:rgb(255,64,129);">leaguecore</span></h1>
-  <h1 class="index_banner"> <br></br> the nicer side of the league <span style="color:rgb(255,64,129);">community!</span></h1>
-  </div>
-<div id="top-image" class="kindred"></div>
-      <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate " ></div>
-      <div class="input_index anim">
-
-
-        <div id="main_input " style="width:800px">
-         
-
-            <span class="input input--yoshiko">
-              <input class="input__field input__field--yoshiko main_input" type="text"  id="sample3" />
-              <label class="input__label input__label--yoshiko" for="sample3">
-                <span class="input__label-content input__label-content--yoshiko" data-content="summoner name">summoner name</span>
-              </label>
-            </span>
-       
-          <button class="kda_text_main kda_text" style="margin-top: 10px;padding-left: 18px;" id="trigger-overlay" >
-                     W
-                 </button>
-          <button class="kda_text_main kda_text" style="margin-top: 10px;padding-left: 18px;" >
-                    <i class="fa fa-search" aria-hidden="true" onlick="myFunction()"></i>
-                 </button>
-          <div class="overlay overlay-hugeinc" id="overlay">
-          <button type="button" class="overlay-close">Close</button>
-                      <div class="overlay-menu">
-                          <ul>
-                              <li> <button class="kda_text_main kda_text"  style="padding-left: 18px;">
-                                  W
-                              </button>
-                            <span style="color:white;"> EU West </span></li>
-
-                          </ul>
-                      </div>
-                  </div>
-        </div>
- 
-        <button  onclick="Toggle()" class="kda_text_main kda_text trigger" style="padding-top:0px !important;"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-
-    </div>
-      <div class="" id="container">
-    <header class="intro">
-
-       <section class="more_details" id="feature">
-
-      <div class="content1"  ng-if='pagi1==0'>
-        <div class="row content_index_row">
-          <div class="col-md-1">
-
-          </div>
-          <div class="col-md-5">
-              <img class="screenshot" src="../static/img/leadboard.png" alt="" />
-          </div>
-          <div class="col-md-4 headlines" >
-            View the most <span style="color:rgb(255,64,129);">popular</span> players. You can try be the <span style="color:rgb(255,64,129);">number one</span>  yourself and get <span style="color:rgb(255,64,129);">rewards!</span>
-          </div>
-
-          </div>
+			<img src="../img/logo.png" class="main_logo toggle_main anim"></img>
+			<div class="index_line  toggle_main_line anim"></div>
+			<h1 class="index_banner" style="left: 37%;">
+				Welcome to <span style="color: rgb(255, 64, 129);">leaguecore</span>
+			</h1>
+			<h1 class="index_banner">
+				<br></br> the nicer side of the league <span
+					style="color: rgb(255, 64, 129);">community!</span>
+			</h1>
+		</div>
+		<div id="top-image" class="kindred"></div>
+		<div id="p2"
+			class="mdl-progress mdl-js-progress mdl-progress__indeterminate "></div>
+		<div class="input_index anim">
 
 
-      </div>
-           <div class="content1"  ng-if='pagi1==1'>
-        <div class="row content_index_row">
-          <div class="col-md-1">
-
-          </div>
-          <div class="col-md-5">
-              <img class="screenshot" src="static/match.png" alt="" />
-          </div>
-           <div class="col-md-4 headlines" >
-           Vote for the players that were really <span style="color:rgb(255,64,129);">nice</span> to you or <span style="color:rgb(255,64,129);">carried</span> you, so that their <span style="color:rgb(255,64,129);">good attitude</span> gets <span style="color:rgb(255,64,129);">rewarded</span>. You can even write a <span style="color:rgb(255,64,129);">message</span> to let them know that their good behaviour gets <span style="color:rgb(255,64,129);">appreciated!</span>
-          </div>
-
-          </div>
+			<div id="main_input " style="width: 800px">
 
 
-      </div>
-           <div class="content1"  ng-if='pagi1==2'>
-        <div class="row content_index_row">
-          <div class="col-md-1">
+				<span class="input input--yoshiko"> <input
+					class="input__field input__field--yoshiko main_input" type="text"
+					id="sample3" /> <label class="input__label input__label--yoshiko"
+					for="sample3"> <span
+						class="input__label-content input__label-content--yoshiko"
+						data-content="summoner name">summoner name</span>
+				</label>
+				</span>
 
-          </div>
-          <div class="col-md-5">
-              <img class="screenshot" src="static/live.png" alt="" />
-          </div>
-          <div class="col-md-4 headlines" >
-           View the most <span style="color:rgb(255,64,129);">important stats</span> in your live game! <br></br>
-           Find out which lane is the <span style="color:rgb(255,64,129);">most critical</span>, what player will have the <span style="color:rgb(255,64,129);">most impact</span>, who is <span style="color:rgb(255,64,129);">smurfing</span> or <span style="color:rgb(255,64,129);">scripting</span>. If they are any <span style="color:rgb(255,64,129);">premades</span>,  <span style="color:rgb(255,64,129);">OTP's</span> or is someone just trying a new champ and <span style="color:rgb(255,64,129);">much more...</span>
-          </div>
+				<button class="kda_text_main kda_text"
+					style="margin-top: 10px; padding-left: 18px;" id="trigger-overlay">
+					W</button>
+				<button class="kda_text_main kda_text" 
+					style="margin-top: 10px; padding-left: 18px;" onclick="CheckName()">
+					<i class="fa fa-search" aria-hidden="true" ></i>
+				</button>
+				<div class="overlay overlay-hugeinc" id="overlay">
+					<button type="button" class="overlay-close">Close</button>
+					<div class="overlay-menu">
+						<ul>
+							<li>
+								<button class="kda_text_main kda_text"
+									style="padding-left: 18px;">W</button> <span
+								style="color: white;"> EU West </span>
+							</li>
 
-          </div>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<button onclick="Toggle()" class="kda_text_main kda_text trigger"
+				style="padding-top: 0px !important;">
+				<i class="fa fa-th-large" aria-hidden="true"></i>
+			</button>
+
+		</div>
+		<div class="" id="container">
+			<header class="intro">
+
+				<section class="more_details" id="feature">
+
+					<div class="content1" ng-if='pagi1==0'>
+						<div class="row content_index_row">
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<img class="screenshot" src="../static/img/leadboard.png" alt="" />
+							</div>
+							<div class="col-md-4 headlines">
+								View the most <span style="color: rgb(255, 64, 129);">popular</span>
+								players. You can try be the <span
+									style="color: rgb(255, 64, 129);">number one</span> yourself
+								and get <span style="color: rgb(255, 64, 129);">rewards!</span>
+							</div>
+
+						</div>
 
 
-      </div>
+					</div>
+					<div class="content1" ng-if='pagi1==1'>
+						<div class="row content_index_row">
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<img class="screenshot" src="static/match.png" alt="" />
+							</div>
+							<div class="col-md-4 headlines">
+								Vote for the players that were really <span
+									style="color: rgb(255, 64, 129);">nice</span> to you or <span
+									style="color: rgb(255, 64, 129);">carried</span> you, so that
+								their <span style="color: rgb(255, 64, 129);">good
+									attitude</span> gets <span style="color: rgb(255, 64, 129);">rewarded</span>.
+								You can even write a <span style="color: rgb(255, 64, 129);">message</span>
+								to let them know that their good behaviour gets <span
+									style="color: rgb(255, 64, 129);">appreciated!</span>
+							</div>
 
-    </section>
-
-
-
-    <div class="pagi_index">
-    <table>
-      <tr>
-        <td>
-          <p id="0"  class="col-md-4 kda_text_more kda_text" style="opacity:0.5;"></p>
-        </td>
-      </tr>
-       <tr>
-        <td>
-          <p id="1"  class="col-md-4 kda_text_more kda_text" style="opacity:0.5;"></p>
-        </td>
-      </tr>
-       <tr>
-        <td>
-          <p id="2"  class="col-md-4 kda_text_more kda_text" style="opacity:0.5;"></p>
-        </td>
-      </tr>
-
-    </table>
+						</div>
 
 
+					</div>
+					<div class="content1" ng-if='pagi1==2'>
+						<div class="row content_index_row">
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<img class="screenshot" src="static/live.png" alt="" />
+							</div>
+							<div class="col-md-4 headlines">
+								View the most <span style="color: rgb(255, 64, 129);">important
+									stats</span> in your live game! <br></br> Find out which lane is the <span
+									style="color: rgb(255, 64, 129);">most critical</span>, what
+								player will have the <span style="color: rgb(255, 64, 129);">most
+									impact</span>, who is <span style="color: rgb(255, 64, 129);">smurfing</span>
+								or <span style="color: rgb(255, 64, 129);">scripting</span>. If
+								they are any <span style="color: rgb(255, 64, 129);">premades</span>,
+								<span style="color: rgb(255, 64, 129);">OTP's</span> or is
+								someone just trying a new champ and <span
+									style="color: rgb(255, 64, 129);">much more...</span>
+							</div>
 
-</div>
+						</div>
 
 
-    </header><!-- /intro -->
+					</div>
+
+				</section>
 
 
 
+				<div class="pagi_index">
+					<table>
+						<tr>
+							<td>
+								<p id="0" class="col-md-4 kda_text_more kda_text"
+									style="opacity: 0.5;"></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p id="1" class="col-md-4 kda_text_more kda_text"
+									style="opacity: 0.5;"></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p id="2" class="col-md-4 kda_text_more kda_text"
+									style="opacity: 0.5;"></p>
+							</td>
+						</tr>
 
-    <!--Work-->
-    </div>
-  </div>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+					</table>
+
+
+
+				</div>
+
+
+			</header>
+			<!-- /intro -->
+
+
+
+
+			<!--Work-->
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 
-    <!-- Scrolling Nav JavaScript -->
-    <script src="../js/jquery.easing.min.js"></script>
-    <script src="../js/scrolling-nav.js"></script>
-    <script src="../js/main.js"></script>
+	<!-- Scrolling Nav JavaScript -->
+	<script src="../js/jquery.easing.min.js"></script>
+	<script src="../js/scrolling-nav.js"></script>
+	<script src="../js/main.js"></script>
 
-    <script src="../js/segment.min.js"></script>
-	<script  src="../js/classie.js"></script>
-	<script  src="../js/pathLoader.js"></script>
-    <script  src="../js/material.js"></script>
-    
-    <script  src="../js/modernizr.custom.js"></script>
-    <script  src="../js/demo1.js"></script>
-    <script>
-    /*<![CDATA[*/
-    var snackbarContainer;
-    setTimeout(function()
-             { 
-snackbarContainer = document.querySelector('#demo-snackbar-example');
-},501);
-var scroll_con=0;
-pagi1=0;
-$("#"+pagi1).addClass("active");
-var interval;
-$(window).bind('mousewheel DOMMouseScroll', function(event){
+	<script src="../js/segment.min.js"></script>
+	<script src="../js/classie.js"></script>
+	<script src="../js/pathLoader.js"></script>
+	<script src="../js/material.js"></script>
 
- if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
-     if (scroll_con==0) {
-       
-         $(".content1").animate({"margin-top": '-=20%',"opacity":"0"});
-           scroll_con=1;
-           setTimeout(function()
-             { 
-                 
-                  $("#"+pagi1).removeClass("active");
-                  if (0== pagi1) {
+	<script src="../js/modernizr.custom.js"></script>
+	<script src="../js/demo1.js"></script>
+	<script>
+		/*<![CDATA[*/
+		           
+		           
+		
+		           
 
-                  pagi1=2;
-                  }
-                   else
-                   {
-                     pagi1--;
-                   }
-                   $("#"+pagi1).addClass("active");
-               
-                console.log(pagi1);
-                 $(".content1").css({"margin-top": "30%","opacity":"1"});
-              
-                 $(".content1").animate({"margin-top": '-=20%'});
-                  scroll_con=0;
+		
+			function CheckName()
+			{
+				console.log("dsd");
+				var data="name=" + $("#sample3").val() + "";
+				$.ajax({
+					type : "GET",
+					contentType : "application/json",
+					url : "checkname/"+$("#sample3").val(),
+					
+					dataType : 'json',
+					timeout : 100000,
+					success : function(data) {
+						console.log("SUCCESS: ", data);
+					
+					},
+					error : function(e) {
+						console.log("ERROR: ", e.responseText);
+						if(e.responseText=="nope")
+							{
+							
+							}
+						else
+							{
+							window.location.replace("/livestats/"+e.responseText);
+							}
+						
+					},
+					done : function(e) {
+						console.log("DONE");
+					}
+				});
+			};
+		
+		var scroll_con = 0;
+		pagi1 = 0;
+		$("#" + pagi1).addClass("active");
+		var interval;
+		$(window).bind(
+				'mousewheel DOMMouseScroll',
+				function(event) {
 
-             },501);
-     }
- }
- else {
-            if (scroll_con==0) {
-       
-         $(".content1").animate({"margin-top": '+=20%',"opacity":"0"});
-           scroll_con=1;
-           setTimeout(function()
-             { 
-                 
-                  $("#"+pagi1).removeClass("active");
-                  if (2== pagi1) {
+					if (event.originalEvent.wheelDelta > 0
+							|| event.originalEvent.detail < 0) {
+						if (scroll_con == 0) {
 
-                  pagi1=0;
-                  }
-                   else
-                   {
-                     pagi1++;
-                   }
-                   $("#"+pagi1).addClass("active");
-                   $apply();
-                console.log(pagi1);
-                 $(".content1").css({"margin-top": "10%","opacity":"1"});
-              
-                 $(".content1").animate({"margin-top": '+=2%'});
-                  scroll_con=0;
+							$(".content1").animate({
+								"margin-top" : '-=20%',
+								"opacity" : "0"
+							});
+							scroll_con = 1;
+							setTimeout(function() {
 
-             },501);
-     }
- }
+								$("#" + pagi1).removeClass("active");
+								if (0 == pagi1) {
 
-});
+									pagi1 = 2;
+								} else {
+									pagi1--;
+								}
+								$("#" + pagi1).addClass("active");
 
- var support = { animations : Modernizr.cssanimations },
-   container = document.getElementById( 'ip-container' ),
-   header = container.querySelector( 'header.ip-header' ),
-   loader = new PathLoader( document.getElementById( 'ip-loader-circle' ) ),
-   animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
-   // animation end event name
-   animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ];
+								console.log(pagi1);
+								$(".content1").css({
+									"margin-top" : "30%",
+									"opacity" : "1"
+								});
 
- function init() {
-   var onEndInitialAnimation = function() {
-     if( support.animations ) {
-       this.removeEventListener( animEndEventName, onEndInitialAnimation );
-     }
+								$(".content1").animate({
+									"margin-top" : '-=20%'
+								});
+								scroll_con = 0;
 
-     startLoading();
-   };
+							}, 501);
+						}
+					} else {
+						if (scroll_con == 0) {
 
-   // disable scrolling
+							$(".content1").animate({
+								"margin-top" : '+=20%',
+								"opacity" : "0"
+							});
+							scroll_con = 1;
+							setTimeout(function() {
 
+								$("#" + pagi1).removeClass("active");
+								if (2 == pagi1) {
 
-   // initial animation
-   classie.add( container, 'loading' );
+									pagi1 = 0;
+								} else {
+									pagi1++;
+								}
+								$("#" + pagi1).addClass("active");
+								$apply();
+								console.log(pagi1);
+								$(".content1").css({
+									"margin-top" : "10%",
+									"opacity" : "1"
+								});
 
-   if( support.animations ) {
-     container.addEventListener( animEndEventName, onEndInitialAnimation );
-   }
-   else {
-     onEndInitialAnimation();
-   }
- }
+								$(".content1").animate({
+									"margin-top" : '+=2%'
+								});
+								scroll_con = 0;
 
- function startLoading() {
-   // simulate loading something..
-   var simulationFn = function(instance) {
-     var progress = 0,
-       interval = setInterval( function() {
-         progress = Math.min( progress + Math.random() * 0.1, 1 );
+							}, 501);
+						}
+					}
 
-         instance.setProgress( progress );
+				});
 
-         // reached the end
-         if( progress === 1 ) {
+		var support = {
+			animations : Modernizr.cssanimations
+		}, container = document.getElementById('ip-container'), header = container
+				.querySelector('header.ip-header'), loader = new PathLoader(
+				document.getElementById('ip-loader-circle')), animEndEventNames = {
+			'WebkitAnimation' : 'webkitAnimationEnd',
+			'OAnimation' : 'oAnimationEnd',
+			'msAnimation' : 'MSAnimationEnd',
+			'animation' : 'animationend'
+		},
+		// animation end event name
+		animEndEventName = animEndEventNames[Modernizr.prefixed('animation')];
+		$(".index_banner").hide();
+		function init() {
+			var onEndInitialAnimation = function() {
+				if (support.animations) {
+					this.removeEventListener(animEndEventName,
+							onEndInitialAnimation);
+				}
 
-         }
-       }, 80 );
-   };
+				startLoading();
+			};
 
-   loader.setProgressFn( simulationFn );
- }
+			// disable scrolling
 
+			// initial animation
+			classie.add(container, 'loading');
 
-   $(".trigger").hide();
- setTimeout(function()
- {
-   console.log("dsad");
-     $(".trigger").fadeIn();
-   $(".ip-container").removeClass("loading");
-     $(".ip-container").addClass("loaded");
-       $(".ip-logo").fadeOut();
- classie.remove( container, 'loading' );
-//  classie.add( container, 'loaded' );
- clearInterval( interval );
+			if (support.animations) {
+				container.addEventListener(animEndEventName,
+						onEndInitialAnimation);
+			} else {
+				onEndInitialAnimation();
+			}
+		}
 
- var onEndHeaderAnimation = function(ev) {
-   if( support.animations ) {
-     if( ev.target !== header ) return;
-     this.removeEventListener( animEndEventName, onEndHeaderAnimation );
-   }
-   console.log("dsad");
-   classie.add( document.body, 'layout-switch' );
-  
- };
+		function startLoading() {
+			// simulate loading something..
+			var simulationFn = function(instance) {
+				var progress = 0, interval = setInterval(function() {
+					progress = Math.min(progress + Math.random() * 0.1, 1);
 
- if( support.animations ) {
-   header.addEventListener( animEndEventName, onEndHeaderAnimation );
- }
- else {
-   onEndHeaderAnimation();
- }
-},4000
-);
- init();
- var container = document.getElementById( 'container' );
+					instance.setProgress(progress);
 
-		var	trigger = container.querySelector( 'button.trigger' );
- 		
+					// reached the end
+					if (progress === 1) {
+
+					}
+				}, 80);
+			};
+
+			loader.setProgressFn(simulationFn);
+		}
+
+		$(".trigger").hide();
+		setTimeout(
+				function() {
+					setTimeout(
+							function() {
+					$(".index_banner").fadeIn();
+							},600);
+					console.log("dsad");
+					$(".trigger").fadeIn();
+					$(".ip-container").removeClass("loading");
+					$(".ip-container").addClass("loaded");
+					$(".ip-logo").fadeOut();
+					classie.remove(container, 'loading');
+					//  classie.add( container, 'loaded' );
+					clearInterval(interval);
+
+					var onEndHeaderAnimation = function(ev) {
+						if (support.animations) {
+							if (ev.target !== header)
+								return;
+							this.removeEventListener(animEndEventName,
+									onEndHeaderAnimation);
+						}
+		
+						classie.add(document.body, 'layout-switch');
+
+					};
+
+					if (support.animations) {
+						header.addEventListener(animEndEventName,
+								onEndHeaderAnimation);
+					} else {
+						onEndHeaderAnimation();
+					}
+				}, 3000);
+		init();
+		var container = document.getElementById('container');
+
+		var trigger = container.querySelector('button.trigger');
+
 		function Toggle() {
-       $(".content1").css({"margin-top": "20%","opacity":"0"});
-      
-          setTimeout(function()
-             { 
-                 
-               $(".content1").animate({"margin-top": '-=10%',"opacity":"1"});
+			$(".content1").css({
+				"margin-top" : "20%",
+				"opacity" : "0"
+			});
 
-             },501);
-     if (  $("#container").attr('class')!="container--open") {
-       console.log(container);
+			setTimeout(function() {
 
-        $("#container").addClass("container--open");
-	         $(".trigger").animate({"top": '44 %'},900);
+				$(".content1").animate({
+					"margin-top" : '-=10%',
+					"opacity" : "1"
+				});
 
-        $(".input_index").addClass("input_line_move");
-        $(".toggle_main_line").addClass("match_line_move");
-        $(".toggle_main").addClass("logo_line_move");
-				
-     }
-     else {
-       $("#container").removeClass("container--open");
+			}, 501);
+			if ($("#container").attr('class') != "container--open") {
+				console.log(container);
 
+				$("#container").addClass("container--open");
+				$(".trigger").animate({
+					"top" : '44 %'
+				}, 900);
 
+				$(".input_index").addClass("input_line_move");
+				$(".toggle_main_line").addClass("match_line_move");
+				$(".toggle_main").addClass("logo_line_move");
 
-        $(".toggle_main_line").removeClass("match_line_move");
-           $(".input_index").removeClass("input_line_move");
-        $(".toggle_main_line").removeClass("match_line_move");
-        $(".toggle_main").removeClass("logo_line_move");
- //   window.removeEventListener( 'scroll', noscroll );
-     }
-				// classie.add( container, 'container--open' );
-				// classie.add( trigger, 'trigger--active' );
-				// window.removeEventListener( 'scroll', noscroll );
+			} else {
+				$("#container").removeClass("container--open");
+
+				$(".toggle_main_line").removeClass("match_line_move");
+				$(".input_index").removeClass("input_line_move");
+				$(".toggle_main_line").removeClass("match_line_move");
+				$(".toggle_main").removeClass("logo_line_move");
+				//   window.removeEventListener( 'scroll', noscroll );
+			}
+			// classie.add( container, 'container--open' );
+			// classie.add( trigger, 'trigger--active' );
+			// window.removeEventListener( 'scroll', noscroll );
 
 		}
 
-
-
 		// reset scrolling position
 
+		var movementStrength = 25;
+		var height = movementStrength / $(window).height();
+		var width = movementStrength / $(window).width();
+		$("#top-image").mousemove(
+				function(e) {
+					var pageX = e.pageX - ($(window).width() / 2);
+					var pageY = e.pageY - ($(window).height() / 2);
+					var newvalueX = width * pageX * -1 - 25;
+					var newvalueY = height * pageY * -1 - 50;
+					$('#top-image').css("background-position",
+							newvalueX + "px     " + newvalueY + "px");
+				});
 
+		$("#content").removeClass("content_main");
+		$("#content").addClass("content_index");
+		className = "overlay";
+		closePicker = function() {
 
- var movementStrength = 25;
- var height = movementStrength / $(window).height();
- var width = movementStrength / $(window).width();
- $("#top-image").mousemove(function(e){
-           var pageX = e.pageX - ($(window).width() / 2);
-           var pageY = e.pageY - ($(window).height() / 2);
-           var newvalueX = width * pageX * -1 - 25;
-           var newvalueY = height * pageY * -1 - 50;
-           $('#top-image').css("background-position", newvalueX+"px     "+newvalueY+"px");
- });
+			document.getElementById("overlay").className = "overlay";
+		}
+		showProgress = function() {
 
+			var json_data = {
+				name : $("#sample3").val()
+			};
+			console.log($("#sample3").val());
 
- $("#content").removeClass("content_main");
- $("#content").addClass("content_index");
- className = "overlay";
- closePicker=function() {
+		}
+		myFunction = function() {
 
-     document.getElementById("overlay").className = "overlay";
- }
- showProgress=function() {
+			className = "overlay open";
 
-var json_data={name:$("#sample3").val()};
-console.log($("#sample3").val());
- CheckName.query(json_data,function(data) {
-       
-        if (data[0]=="ok") {
-          $("#content").addClass("content_main");
-          $("#content").removeClass("content_index");
-          $cookies.put("search",$("#sample3").val());
-          $rootScope.profile_name=$("#sample3").val();
-          $location.path('/match/'+  $("#sample3").val());
+		}
 
-        }
-      else
-      {
-
-
-       var data = {
-       message: 'Summoner not found!',
-       timeout: 4000,
- 
-     };
-     snackbarContainer.MaterialSnackbar.showSnackbar(data);
-  }
-
-
-     
- });
-}
- myFunction=function() {
-
-     className = "overlay open";
-
- }
-
-
-
-
- /*]]>*/
-
+		/*]]>*/
 	</script>
-	</body>
+</body>
 </html>

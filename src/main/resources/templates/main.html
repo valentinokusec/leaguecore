@@ -54,7 +54,7 @@
 		</nav>
 <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p>
 <div class="content_main">
-<!-- h1 class=" ele">
+ <h1 class=" ele">
   Please wait
 </h1>
 <div class="loader">
@@ -95,21 +95,22 @@
            repeatCount="indefinite" />
     </path>
   </svg>
-</div> -->
+</div> 
 </div>
 <!--<div class="toggle_live_buttons" ng-if='loading_data==false && no_game==false'>
   <button  ng-click="toggle_live('champ-panel')" class="mdl-tabs__tab is-active">Champ</button>
   <button  ng-click="toggle_live('main-panel')" class="mdl-tabs__tab">Overall</button>
 </div>-->
+<p id="data" th:text="${name}" hidden="hidden"></p>
 <div class="animate_el">
-<div class="no_game" th:if="${no_game == true}">
+<div class="no_game" id="no_game">
 <div style="margin-bottom:10%;">
     No active game found!
 </div>
 Featured list:
-<div th:each="champion : ${champions}"  class="featured">
+<div id="featured"  class="featured">
  
-  <a class="" th:text="${champion.name}" th:href="@{/livestats/} + ${champion.name}"></a>
+  
 </div>
 </div>
  <!--<div class="right_stats" ng-if='game==true'>
@@ -373,7 +374,56 @@ JUNGLE
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.dropdown.js"></script>
 		<script type="text/javascript">
+		/*<![CDATA[*/
+		$(".no_game").hide();
+		
+		function getData()
+		{
 			
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "/getdata/"+$("#data").text(),
+				
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					$(".ele").fadeOut();
+					$(".loader").fadeOut();
+					console.log("SUCCESS: ", data);
+					if(data[0]=="game"){
+						console.log("sad");
+						for (i = 1; i < data.length; i++) { 
+							$( "#featured" ).append( "<a href='/livestats/"+data[i]+"'>"+data[i]+"</a><br></br>" );
+						}
+						$("#no_game").fadeIn();
+					}
+					else
+						{
+						
+						}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e.responseText);
+					if(e.responseText=="nope")
+						{
+						
+						}
+					else
+						{
+						
+						}
+					
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		};
+		setTimeout(function() {
+			getData();
+			
+		},500);
 			$( function() {
 				
 				$( '#cd-dropdown' ).dropdown( {
@@ -436,6 +486,7 @@ JUNGLE
 				/***** for demo purposes only: don't allow to submit the form *****/
 				morphSearch.querySelector( 'button[type="submit"]' ).addEventListener( 'click', function(ev) { ev.preventDefault(); } );
 			})();
+			/*]]>*/
 		</script>
 	</body>
 </html>
