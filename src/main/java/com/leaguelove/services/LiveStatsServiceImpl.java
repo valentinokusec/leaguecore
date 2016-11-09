@@ -97,9 +97,9 @@ public class LiveStatsServiceImpl implements LiveStatsService{
             	champion.put("deaths_per_game", formatter.format(deaths_per_game));
             	champion.put("assists_per_game", formatter.format(assists_per_game));
             	
-            	champion.put("winrate", winrate);
+            	champion.put("winrate", round(winrate,2));
             	Double loserate=1-winrate;
-            	champion.put("loserate", loserate);
+            	champion.put("loserate", round(loserate,2));
             	champions_list.put(champion);
 			}
         	else if(entry.getValue().getChampion().toString().contains(name)) {
@@ -123,9 +123,9 @@ public class LiveStatsServiceImpl implements LiveStatsService{
             	champion.put("deaths_per_game", formatter.format(deaths_per_game));
             	champion.put("assists_per_game", formatter.format(assists_per_game));
             	
-            	champion.put("winrate", winrate);
+            	champion.put("winrate", round(winrate,2));
             	Double loserate=1-winrate;
-            	champion.put("loserate", loserate);
+            	champion.put("loserate", round(loserate,2));
             	champions_list.put(champion);
 			}
         	
@@ -179,5 +179,12 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 				}
 				return history;
 			}
+		public static double round(double value, int places) {
+		    if (places < 0) throw new IllegalArgumentException();
 
+		    long factor = (long) Math.pow(10, places);
+		    value = value * factor;
+		    long tmp = Math.round(value);
+		    return (double) tmp / factor;
+		}
 }

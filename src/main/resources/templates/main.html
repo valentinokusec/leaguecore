@@ -147,202 +147,12 @@ JUNGLE
 
 
       </tr>-->
-    <tr>
-      <td  th:each="champion,iter : ${champion_profile}" th:unless="${iter.index lt 5}">
-<a class="" th:text="${champion.name}" th:href="@{/livestats/} + ${champion.name}"></a>
-<a class="" th:text="${champion.champion_name}" th:href="@{/livestats/} + ${champion.champion_name}"></a>
-        <div id="team_1_player_1" class="demo-card-wide mdl-card mdl-shadow1--2dp element element_size">
-
-          <div class="mdl-card__title">
-          <img th:src="@{http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/} + ${champion.champion_name} + @{.png}" class="img_card live_stats_size"></img>
-		
-
-          </div>
-
-          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-
-          <table  class="main-panel is-active">
-
-            <tr>
-              <td>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.kills_per_game}"><span class="kdd">/</span></p></div>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.assists_per_game}"><span class="kdd">/</span></p></div>
-              <div class="col-md-3  " style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.deaths_per_game}"></p></div>
-
-              </td>
-
-
-            </tr>
-            <tr>
-                <td>
-              <p class="col-md-5" style="font-weight:bold; margin-top:13px;  color: #374d5a;">
-                Winrate<span class="kdd">:</span>
-              </p>
-              <div class="col-md-5 " style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.winrate}"></p></div>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                  <p class="col-md-5 kda_text_live1" style="font-weight:bold; color: #374d5a;" >
-                    Games played<span class="kdd">:</span>
-                  </p>  <div class="col-md-5" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.games_played}"></p></div>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="" ng-repeat="history in champion.history | limitTo:5">
-                  <div class="col-md-1" style="" ng-if="history.win==true"><p class="kda_text_live_wins kda_text live_win"></p></div>
-                  <div class="col-md-1" style="" ng-if="history.win==false"><p class="kda_text_live_wins kda_text"></p></div>
-                </div>
-              </td>
-            </tr>
-          </table>
-          <!-- <table  class="champ-panel" ng-repeat="general_stats in champion.general_stats | limitTo:1:1">
-
-            <tr>
-              <td>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.kills_per_game}}<span class="kdd">/</span></p></div>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.assists_per_game}}<span class="kdd">/</span></p></div>
-              <div class="col-md-3  " style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.deaths_per_game}}</p></div>
-
-              </td>
-
-
-            </tr>
-            <tr>
-                <td>
-              <p class="col-md-5" style="font-weight:bold; margin-top:13px;  color: #374d5a;">
-                Winrate<span class="kdd">:</span>
-              </p>
-              <div class="col-md-5 " style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.winrate | limitTo:3}}</p></div>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                  <p class="col-md-5 kda_text_live1" style="font-weight:bold; color: #374d5a;" >
-                    Games played<span class="kdd">:</span>
-                  </p>  <div class="col-md-5" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.games_played}}</p></div>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="" ng-repeat="history in champion.history | limitTo:5">
-                  <div class="col-md-1" style="" ng-if="history.win==true"><p class="kda_text_live_wins kda_text live_win"></p></div>
-                  <div class="col-md-1" style="" ng-if="history.win==false"><p class="kda_text_live_wins kda_text"></p></div>
-                </div>
-              </td>
-            </tr>
-          </table> -->
-
-        </div>
-
-        <table>
-
-
-  </table>
-        </div>
-    </td>
+    <tr id="first_row">
+   
 
       </tr>
-     <tr>
-      <td  th:each="champion,iter : ${champion_profile}" th:if="${iter.index lt 5}">
-<a class="" th:text="${champion.name}" th:href="@{/livestats/} + ${champion.name}"></a>
-<a class="" th:text="${champion.champion_name}" th:href="@{/livestats/} + ${champion.champion_name}"></a>
-        <div id="team_1_player_1" class="demo-card-wide mdl-card mdl-shadow1--2dp element element_size">
-
-          <div class="mdl-card__title">
-          <img th:src="@{http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/} + ${champion.champion_name} + @{.png}" class="img_card live_stats_size"></img>
-		
-
-          </div>
-
-          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-
-          <table  class="main-panel is-active">
-
-            <tr>
-              <td>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.kills_per_game}"><span class="kdd">/</span></p></div>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.assists_per_game}"><span class="kdd">/</span></p></div>
-              <div class="col-md-3  " style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.deaths_per_game}"></p></div>
-
-              </td>
-
-
-            </tr>
-            <tr>
-                <td>
-              <p class="col-md-5" style="font-weight:bold; margin-top:13px;  color: #374d5a;">
-                Winrate<span class="kdd">:</span>
-              </p>
-              <div class="col-md-5 " style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.winrate}"></p></div>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                  <p class="col-md-5 kda_text_live1" style="font-weight:bold; color: #374d5a;" >
-                    Games played<span class="kdd">:</span>
-                  </p>  <div class="col-md-5" style="height: 50px !important;"><p class="kda_text_live " th:text="${champion.general_stats.games_played}"></p></div>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="" ng-repeat="history in champion.history | limitTo:5">
-                  <div class="col-md-1" style="" ng-if="history.win==true"><p class="kda_text_live_wins kda_text live_win"></p></div>
-                  <div class="col-md-1" style="" ng-if="history.win==false"><p class="kda_text_live_wins kda_text"></p></div>
-                </div>
-              </td>
-            </tr>
-          </table>
-          <!-- <table  class="champ-panel" ng-repeat="general_stats in champion.general_stats | limitTo:1:1">
-
-            <tr>
-              <td>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.kills_per_game}}<span class="kdd">/</span></p></div>
-              <div class="col-md-3" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.assists_per_game}}<span class="kdd">/</span></p></div>
-              <div class="col-md-3  " style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.deaths_per_game}}</p></div>
-
-              </td>
-
-
-            </tr>
-            <tr>
-                <td>
-              <p class="col-md-5" style="font-weight:bold; margin-top:13px;  color: #374d5a;">
-                Winrate<span class="kdd">:</span>
-              </p>
-              <div class="col-md-5 " style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.winrate | limitTo:3}}</p></div>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                  <p class="col-md-5 kda_text_live1" style="font-weight:bold; color: #374d5a;" >
-                    Games played<span class="kdd">:</span>
-                  </p>  <div class="col-md-5" style="height: 50px !important;"><p class="kda_text_live ">{{general_stats.games_played}}</p></div>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="" ng-repeat="history in champion.history | limitTo:5">
-                  <div class="col-md-1" style="" ng-if="history.win==true"><p class="kda_text_live_wins kda_text live_win"></p></div>
-                  <div class="col-md-1" style="" ng-if="history.win==false"><p class="kda_text_live_wins kda_text"></p></div>
-                </div>
-              </td>
-            </tr>
-          </table> -->
-
-        </div>
-
-        <table>
-
-
-  </table>
-        </div>
-    </td>
+     <tr id="second_row">
+    
 
       </tr>
 
@@ -400,18 +210,129 @@ JUNGLE
 					}
 					else
 						{
-						
+						for (i = 0; i < 5; i++) { 
+							 $( "#first_row" ).append( "<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"+
+
+							         " <div class='mdl-card__title'>"+
+							         " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"+
+									
+
+							         " </div>"+
+
+							         " <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"+
+
+							         " <table  class='main-panel is-active'>"+
+
+							          "  <tr> "+
+							          "    <td> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+
+							         "     </td>"+
+
+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "      <td>"+
+							          "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"+
+							          "      Winrate<span class='kdd'>:</span>"+
+							          "    </p>"+
+							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
+
+							          "      </td>"+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "      <td>"+
+							          "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"+
+							          "          Games played<span class='kdd'>:</span>"+
+							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
+										   "      </td>"+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "    <td>"+
+							          
+							          "    </td>"+
+							          "  </tr>"+
+							          "</table>"+
+
+
+							        "</div>"+
+
+							        "<table>"+
+
+
+							  "</table>"+
+							      "  </div></td>" );
+					
+						}
+						for (i = 5; i < 10; i++) { 
+							 $( "#second_row" ).append( "<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"+
+
+							         " <div class='mdl-card__title'>"+
+							         " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"+
+									
+
+							         " </div>"+
+
+							         " <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"+
+
+							         " <table  class='main-panel is-active'>"+
+
+							          "  <tr> "+
+							          "    <td> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
+
+							         "     </td>"+
+
+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "      <td>"+
+							          "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"+
+							          "      Winrate<span class='kdd'>:</span>"+
+							          "    </p>"+
+							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
+
+							          "      </td>"+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "      <td>"+
+							          "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"+
+							          "          Games played<span class='kdd'>:</span>"+
+							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
+										   "      </td>"+
+							          "  </tr>"+
+							          "  <tr>"+
+							          "    <td>"+
+							          
+							          "    </td>"+
+							          "  </tr>"+
+							          "</table>"+
+
+
+							        "</div>"+
+
+							        "<table>"+
+
+
+							  "</table>"+
+							      "  </div></td>" );
+					
+						}
 						}
 				},
 				error : function(e) {
 					console.log("ERROR: ", e.responseText);
 					if(e.responseText=="nope")
 						{
-						
+					
 						}
 					else
 						{
-						
+					
 						}
 					
 				},
