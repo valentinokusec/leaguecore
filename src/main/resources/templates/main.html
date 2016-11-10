@@ -25,7 +25,7 @@
 		<div class="container">
 				<div class="wrapper"><!-- wrapper needed for scroll -->
 		<nav style="height:50px;padding:17px;" class="main_nav">
-			<a href="/html/">HTML</a>
+			<a href="/html/">LeagueCore</a>
 			<div id="morphsearch" class="morphsearch">
 				<form class="morphsearch-form">
 					<input class="morphsearch-input" type="search" placeholder="Search..."/>
@@ -33,10 +33,10 @@
 				</form>
 				<div class="morphsearch-content">
 					<div class="dummy-column">
-						<h2>People</h2>
-							<span th:each="message : ${category}">
-					        <a class="dummy-media-object" th:text="${message.name}" th:href="@{/category/} + ${message.name}"></a>
-							</span>						
+						<h2>Server</h2>
+					
+					        <p class="dummy-media-object" th:text="@{EU West}"></p>
+							
 						
 					
 					</div>
@@ -45,14 +45,14 @@
 				<span class="morphsearch-close"></span>
 			</div><!-- /morphsearch -->
 			<div style="float:right">
-				<a href="/html/">HTML</a>
+				<p th:text="${name}"></p>
 				<!-- <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form> -->
 				<i class="fa fa-user" aria-hidden="true"></i>
 			</div>
 		</nav>
-<p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p>
+<!-- <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p> -->
 <div class="content_main">
  <h1 class=" ele">
   Please wait
