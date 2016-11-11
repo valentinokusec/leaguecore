@@ -10,8 +10,10 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.robrua.orianna.api.core.RiotAPI;
+import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Season;
 import com.robrua.orianna.type.core.currentgame.CurrentGame;
+import com.robrua.orianna.type.core.league.League;
 import com.robrua.orianna.type.core.match.Participant;
 import com.robrua.orianna.type.core.matchlist.MatchReference;
 import com.robrua.orianna.type.core.staticdata.Champion;
@@ -28,7 +30,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		    	
 		    	if (summoner.getCurrentGame()==null) {
 		    		JSONArray ja=new JSONArray();
-				    ja.put("game");
+
 					for (CurrentGame iterable_element : RiotAPI.getFeaturedGames()) {
 		    			
 						ja.put(iterable_element.getParticipants().iterator().next().getSummonerName());
@@ -71,7 +73,9 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 			}
 	private JSONArray getChampionList(Summoner summoner, String name) {
 		// TODO Auto-generated method stub
-		Map<Champion,ChampionStats> champions=summoner.getRankedStats(Season.SEASON2016);
+		Summoner summoner1 = RiotAPI.getSummonerByName("toysoldier1");
+		Map<Champion,ChampionStats> champions=summoner1.getRankedStats(Season.SEASON2016);
+		
         JSONArray champions_list=new JSONArray();
         for (Map.Entry<Champion,ChampionStats> entry : champions.entrySet())
         {

@@ -1,131 +1,194 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
-		<meta name="viewport" content="width=device-width, initial-scale=1"/> 
-		<title>Page Preloading Effect | Demo 1</title>
-		<meta name="description" content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
-		<meta name="keywords" content="page loading, effect, initial, logo, sliding, web design, css animation, transform" />
-		<meta name="author" content="Codrops" />
-		<link rel="stylesheet" type="text/css" href="../css/app.css" />
-		<link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
-		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../css/component.css" />
-		<link rel="stylesheet" type="text/css" href="../css/style5.css" />
-		
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-	</head>
-	<body class="">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page Preloading Effect | Demo 1</title>
+<meta name="description"
+	content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
+<meta name="keywords"
+	content="page loading, effect, initial, logo, sliding, web design, css animation, transform" />
+<meta name="author" content="Codrops" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+<link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../css/component.css" />
+<link rel="stylesheet" type="text/css" href="../css/style5.css" />
+<link rel="stylesheet" type="text/css" href="../css/tabstyles.css" />
+<link rel="stylesheet" type="text/css" href="../css/tabs.css" />
+<link rel="stylesheet" type="text/css"
+	href="../css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+</head>
+<body class="">
 	<div id="perspective" class="perspective effect-movedown">
 		<div class="container">
-				<div class="wrapper"><!-- wrapper needed for scroll -->
-		<nav style="height:50px;padding:17px;" class="main_nav">
-			<a href="/html/">LeagueCore</a>
-			<div id="morphsearch" class="morphsearch">
-				<form class="morphsearch-form">
-					<input class="morphsearch-input" type="search" placeholder="Search..."/>
-					<button class="morphsearch-submit" style="box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);" type="submit"></button>
-				</form>
-				<div class="morphsearch-content">
-					<div class="dummy-column">
-						<h2>Server</h2>
-					
-					        <p class="dummy-media-object" th:text="@{EU West}"></p>
-							
-						
-					
-					</div>
+			<div class="wrapper">
+				<!-- wrapper needed for scroll -->
+				<nav style="height: 50px; padding: 17px;" class="main_nav">
+					<a href="/html/">LeagueCore</a>
+					<div id="morphsearch" class="morphsearch">
+						<form class="morphsearch-form">
+							<input class="morphsearch-input" type="search"
+								placeholder="Search..." />
+							<button class="morphsearch-submit"
+								style="box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);"
+								type="submit"></button>
+						</form>
+						<div class="morphsearch-content">
+							<div class="dummy-column">
+								<h2>Server</h2>
 
-				</div><!-- /morphsearch-content -->
-				<span class="morphsearch-close"></span>
-			</div><!-- /morphsearch -->
-			<div style="float:right">
-				<p th:text="${name}"></p>
-				<!-- <form th:action="@{/logout}" method="post">
+								<p class="dummy-media-object" th:text="@{EU West}"></p>
+
+
+
+							</div>
+
+						</div>
+						<!-- /morphsearch-content -->
+						<span class="morphsearch-close"></span>
+					</div>
+					<!-- /morphsearch -->
+					<div style="float: right">
+						<p th:text="${name}"></p>
+						<!-- <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form> -->
-				<i class="fa fa-user" aria-hidden="true"></i>
-			</div>
-		</nav>
-<!-- <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p> -->
-<div class="content_main">
- <h1 class=" ele">
-  Please wait
-</h1>
-<div class="loader">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</div>
+				</nav>
+				<!-- <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p> -->
+				<div class="content_main">
+					<h1 class=" ele">Please wait</h1>
+					<div class="loader">
 
-  <svg version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-   <path fill="#ff4081" d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
+						<svg version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							viewBox="0 0 100 100" enable-background="new 0 0 100 100"
+							xml:space="preserve">
+   <path fill="#ff4081"
+								d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
     c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z">
-        <animateTransform
-           attributeName="transform"
-           attributeType="XML"
-           type="rotate"
-           dur="2s"
-           from="0 50 50"
-           to="360 50 50"
-           repeatCount="indefinite" />
+        <animateTransform attributeName="transform" attributeType="XML"
+								type="rotate" dur="2s" from="0 50 50" to="360 50 50"
+								repeatCount="indefinite" />
     </path>
-   <path fill="#ff4081" d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
+   <path fill="#ff4081"
+								d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
     c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z">
-        <animateTransform
-           attributeName="transform"
-           attributeType="XML"
-           type="rotate"
-           dur="1s"
-           from="0 50 50"
-           to="-360 50 50"
-           repeatCount="indefinite" />
+        <animateTransform attributeName="transform" attributeType="XML"
+								type="rotate" dur="1s" from="0 50 50" to="-360 50 50"
+								repeatCount="indefinite" />
     </path>
-   <path fill="#ff4081" d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
+   <path fill="#ff4081"
+								d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
     L82,35.7z">
-        <animateTransform
-           attributeName="transform"
-           attributeType="XML"
-           type="rotate"
-           dur="2s"
-           from="0 50 50"
-           to="360 50 50"
-           repeatCount="indefinite" />
+        <animateTransform attributeName="transform" attributeType="XML"
+								type="rotate" dur="2s" from="0 50 50" to="360 50 50"
+								repeatCount="indefinite" />
     </path>
   </svg>
-</div> 
-</div>
-<!--<div class="toggle_live_buttons" ng-if='loading_data==false && no_game==false'>
+					</div>
+				</div>
+				<!--<div class="toggle_live_buttons" ng-if='loading_data==false && no_game==false'>
   <button  ng-click="toggle_live('champ-panel')" class="mdl-tabs__tab is-active">Champ</button>
   <button  ng-click="toggle_live('main-panel')" class="mdl-tabs__tab">Overall</button>
 </div>-->
-<p id="data" th:text="${name}" hidden="hidden"></p>
-<div class="animate_el">
-<div class="no_game" id="no_game">
-<div style="margin-bottom:10%;">
-    No active game found!
-</div>
-Featured list:
-<div id="featured"  class="featured">
- 
-  
-</div>
-</div>
- <!--<div class="right_stats" ng-if='game==true'>
-  <h1>Important facts</h1>
-  <table>
-    <tr ng-repeat='fact in facts'><td>{{fact.fact}}<span class="kdd">:</span> {{fact.value}}</td></tr>
-   
-  </table>
+				<p id="data" th:text="${name}" hidden="hidden"></p>
+				<div class="animate_el">
+					<div class="no_game" id="no_game">
+						<div style="margin-bottom: 10%;">No active game found!</div>
+						Featured list:
+						<div id="featured" class="featured"></div>
+					</div>
+					<div class="left_stats">
+						<h1>Important facts</h1>
+						<table>
+							<tr>
+								<td>fgfdg <span class="kdd">:</span> sdfds
+								</td>
+							</tr>
+							<tr>
+								<td>fgfdg <span class="kdd">:</span> sdfds
+								</td>
+							</tr>
+							<tr>
+								<td>fgfdg <span class="kdd">:</span> sdfds
+								</td>
+							</tr>
+							<tr>
+								<td>fgfdg <span class="kdd">:</span> sdfds
+								</td>
+							</tr>
 
-</div>-->
-    <div  class="match" id="match" style="margin-top:3%;">
+						</table>
 
-    <table >
+					</div>
+					<div class="right_stats">
+						<h1>Important facts</h1>
+						<section>
+							<div class="tabs tabs-style-underline">
+								<nav>
+									<ul>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+									</ul>
+										<ul>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+										<li><a href="#section-underline-1" class="icon "><img
+												class="tab_img" src="../img/kindred.jpg"></img></a></li>
+									</ul>
+								</nav>
+								<div class="content-wrap">
+									<section id="section-underline-1">
+										<p>1</p>
+									</section>
+									<section id="section-underline-2">
+										<p>2</p>
+									</section>
+									<section id="section-underline-3">
+										<p>3</p>
+									</section>
+									<section id="section-underline-4">
+										<p>4</p>
+									</section>
+									<section id="section-underline-5">
+										<p>5</p>
+									</section>
+								</div>
+								<!-- /content -->
+							</div>
+							<!-- /tabs -->
+						</section>
 
-  <!--  <tr class="role">
+					</div>
+					<div class="match" id="match" style="margin-top: 3%;">
+
+						<table>
+
+							<!--  <tr class="role">
       <td >
       TOP
       </td>
@@ -147,267 +210,316 @@ JUNGLE
 
 
       </tr>-->
-    <tr id="first_row">
-   
-
-      </tr>
-     <tr id="second_row">
-    
-
-      </tr>
-
-    </table>
-        </div>
-
-  </div>
-</div>
-
-</div>
-</div>
+							<tr id="first_row">
 
 
-<div class="overlay"></div>
+							</tr>
+							<tr id="second_row">
+
+
+							</tr>
+
+						</table>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="overlay"></div>
 	<nav class="outer-nav top horizontal">
-				<a href="#" class="">Home</a>
-				<a href="#" class="">News</a>
-				<a href="#" class="">Images</a>
-				<a href="#" class="">Uploads</a>
-				<a href="#" class="">Favorites</a>
-				<a href="#" class="">Messages</a>
-				<a href="#" class="">Security</a>
-			</nav>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="../js/classie.js"></script>
-		<script src="../js/pathLoader.js"></script>
-
-		<script src="../js/menu.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.dropdown.js"></script>
-		<script type="text/javascript">
+		<a href="#" class="">Home</a> <a href="#" class="">News</a> <a
+			href="#" class="">Images</a> <a href="#" class="">Uploads</a> <a
+			href="#" class="">Favorites</a> <a href="#" class="">Messages</a> <a
+			href="#" class="">Security</a>
+	</nav>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="../js/classie.js"></script>
+	<script src="../js/pathLoader.js"></script>
+	<script src="../js/modernizr.custom.js"></script>
+	<script src="../js/cbpFWTabs.js"></script>
+	<script src="../js/menu.js"></script>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.dropdown.js"></script>
+	<script type="text/javascript">
 		/*<![CDATA[*/
 		$(".no_game").hide();
-		
-		function getData()
-		{
-			
-			$.ajax({
-				type : "GET",
-				contentType : "application/json",
-				url : "/getdata/"+$("#data").text(),
-				
-				dataType : 'json',
-				timeout : 100000,
-				success : function(data) {
-					$(".ele").fadeOut();
-					$(".loader").fadeOut();
-					console.log("SUCCESS: ", data);
-					if(data[0]=="game"){
-						console.log("sad");
-						for (i = 1; i < data.length; i++) { 
-							$( "#featured" ).append( "<a href='/livestats/"+data[i]+"'>"+data[i]+"</a><br></br>" );
+
+		function getData() {
+
+			$
+					.ajax({
+						type : "GET",
+						contentType : "application/json",
+						url : "/getdata/" + $("#data").text(),
+
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							$(".ele").fadeOut();
+							$(".loader").fadeOut();
+							console.log("SUCCESS: ", data);
+							if (data[0] == "game") {
+								console.log("sad");
+								for (i = 1; i < data.length; i++) {
+									$("#featured")
+											.append(
+													"<a href='/livestats/"+data[i]+"'>"
+															+ data[i]
+															+ "</a><br></br>");
+								}
+								$("#no_game").fadeIn();
+							} else {
+								for (i = 0; i < 5; i++) {
+									$("#first_row")
+											.append(
+													"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+															+
+
+															" <div class='mdl-card__title'>"
+															+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"
+															+
+
+															" </div>"
+															+
+
+															" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+															+
+
+															" <table  class='main-panel is-active'>"
+															+
+
+															"  <tr> "
+															+ "    <td> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+
+
+															"     </td>"
+															+
+
+															"  </tr>"
+															+ "  <tr>"
+															+ "      <td>"
+															+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
+															+ "      Winrate<span class='kdd'>:</span>"
+															+ "    </p>"
+															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].winrate
+															+ "</p></div>"
+															+
+
+															"      </td>"
+															+ "  </tr>"
+															+ "  <tr>"
+															+ "      <td>"
+															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
+															+ "          Games played<span class='kdd'>:</span>"
+															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].winrate
+															+ "</p></div>"
+															+ "      </td>"
+															+ "  </tr>"
+															+ "  <tr>"
+															+ "    <td>"
+															+
+
+															"    </td>"
+															+ "  </tr>"
+															+ "</table>"
+															+
+
+															"</div>"
+															+
+
+															"<table>"
+															+
+
+															"</table>"
+															+ "  </div></td>");
+
+								}
+								for (i = 5; i < 10; i++) {
+									$("#second_row")
+											.append(
+													"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+															+
+
+															" <div class='mdl-card__title'>"
+															+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"
+															+
+
+															" </div>"
+															+
+
+															" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+															+
+
+															" <table  class='main-panel is-active'>"
+															+
+
+															"  <tr> "
+															+ "    <td> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].assists_per_game
+															+ "<span class='kdd'>/</span></p></div> "
+															+
+
+															"     </td>"
+															+
+
+															"  </tr>"
+															+ "  <tr>"
+															+ "      <td>"
+															+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
+															+ "      Winrate<span class='kdd'>:</span>"
+															+ "    </p>"
+															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].winrate
+															+ "</p></div>"
+															+
+
+															"      </td>"
+															+ "  </tr>"
+															+ "  <tr>"
+															+ "      <td>"
+															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
+															+ "          Games played<span class='kdd'>:</span>"
+															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
+															+ data[0].players[i].general_stats[0].winrate
+															+ "</p></div>"
+															+ "      </td>"
+															+ "  </tr>"
+															+ "  <tr>"
+															+ "    <td>"
+															+
+
+															"    </td>"
+															+ "  </tr>"
+															+ "</table>"
+															+
+
+															"</div>"
+															+
+
+															"<table>"
+															+
+
+															"</table>"
+															+ "  </div></td>");
+
+								}
+							}
+						},
+						error : function(e) {
+							console.log("ERROR: ", e.responseText);
+							if (e.responseText == "nope") {
+
+							} else {
+
+							}
+
+						},
+						done : function(e) {
+							console.log("DONE");
 						}
-						$("#no_game").fadeIn();
-					}
-					else
-						{
-						for (i = 0; i < 5; i++) { 
-							 $( "#first_row" ).append( "<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"+
-
-							         " <div class='mdl-card__title'>"+
-							         " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"+
-									
-
-							         " </div>"+
-
-							         " <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"+
-
-							         " <table  class='main-panel is-active'>"+
-
-							          "  <tr> "+
-							          "    <td> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-
-							         "     </td>"+
-
-
-							          "  </tr>"+
-							          "  <tr>"+
-							          "      <td>"+
-							          "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"+
-							          "      Winrate<span class='kdd'>:</span>"+
-							          "    </p>"+
-							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
-
-							          "      </td>"+
-							          "  </tr>"+
-							          "  <tr>"+
-							          "      <td>"+
-							          "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"+
-							          "          Games played<span class='kdd'>:</span>"+
-							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
-										   "      </td>"+
-							          "  </tr>"+
-							          "  <tr>"+
-							          "    <td>"+
-							          
-							          "    </td>"+
-							          "  </tr>"+
-							          "</table>"+
-
-
-							        "</div>"+
-
-							        "<table>"+
-
-
-							  "</table>"+
-							      "  </div></td>" );
-					
-						}
-						for (i = 5; i < 10; i++) { 
-							 $( "#second_row" ).append( "<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"+
-
-							         " <div class='mdl-card__title'>"+
-							         " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"+
-									
-
-							         " </div>"+
-
-							         " <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"+
-
-							         " <table  class='main-panel is-active'>"+
-
-							          "  <tr> "+
-							          "    <td> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-							          "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"+ data[0].players[i].general_stats[0].assists_per_game+"<span class='kdd'>/</span></p></div> "+
-
-							         "     </td>"+
-
-
-							          "  </tr>"+
-							          "  <tr>"+
-							          "      <td>"+
-							          "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"+
-							          "      Winrate<span class='kdd'>:</span>"+
-							          "    </p>"+
-							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
-
-							          "      </td>"+
-							          "  </tr>"+
-							          "  <tr>"+
-							          "      <td>"+
-							          "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"+
-							          "          Games played<span class='kdd'>:</span>"+
-							          "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"+data[0].players[i].general_stats[0].winrate+"</p></div>"+
-										   "      </td>"+
-							          "  </tr>"+
-							          "  <tr>"+
-							          "    <td>"+
-							          
-							          "    </td>"+
-							          "  </tr>"+
-							          "</table>"+
-
-
-							        "</div>"+
-
-							        "<table>"+
-
-
-							  "</table>"+
-							      "  </div></td>" );
-					
-						}
-						}
-				},
-				error : function(e) {
-					console.log("ERROR: ", e.responseText);
-					if(e.responseText=="nope")
-						{
-					
-						}
-					else
-						{
-					
-						}
-					
-				},
-				done : function(e) {
-					console.log("DONE");
-				}
-			});
+					});
 		};
 		setTimeout(function() {
 			getData();
-			
-		},500);
-			$( function() {
-				
-				$( '#cd-dropdown' ).dropdown( {
-					gutter : 5,
-					stack : false,
-					slidingIn : 100
-				} );
 
+		}, 500);
+		$(function() {
+
+			$('#cd-dropdown').dropdown({
+				gutter : 5,
+				stack : false,
+				slidingIn : 100
 			});
-			(function() {
-				var morphSearch = document.getElementById( 'morphsearch' ),
-					input = morphSearch.querySelector( 'input.morphsearch-input' ),
-					ctrlClose = morphSearch.querySelector( 'span.morphsearch-close' ),
-					isOpen = isAnimating = false,
-					// show/hide search area
-					toggleSearch = function(evt) {
+
+		});
+		(function() {
+			var morphSearch = document.getElementById('morphsearch'), input = morphSearch
+					.querySelector('input.morphsearch-input'), ctrlClose = morphSearch
+					.querySelector('span.morphsearch-close'), isOpen = isAnimating = false,
+			// show/hide search area
+			toggleSearch = function(evt) {
+				console.log("dsa");
+				// return if open and the input gets focused
+
+				console.log("dsa");
+				var offsets = morphsearch.getBoundingClientRect();
+				if (isOpen) {
 					console.log("dsa");
-						// return if open and the input gets focused
-						
-						console.log("dsa");
-						var offsets = morphsearch.getBoundingClientRect();
-						if( isOpen ) {
-							console.log("dsa");
-							classie.remove( morphSearch, 'open' );
+					classie.remove(morphSearch, 'open');
 
-							// trick to hide input text once the search overlay closes 
-							// todo: hardcoded times, should be done after transition ends
-							if( input.value !== '' ) {
-								setTimeout(function() {
-									classie.add( morphSearch, 'hideInput' );
-									setTimeout(function() {
-										classie.remove( morphSearch, 'hideInput' );
-										input.value = '';
-									}, 300 );
-								}, 500);
-							}
-							
-							input.blur();
-						}
-						else {
-							console.log("dsa");
-							classie.add( morphSearch, 'open' );
-						}
-						isOpen = !isOpen;
-					};
-
-				// events
-				input.addEventListener( 'focus', toggleSearch );
-				ctrlClose.addEventListener( 'click', toggleSearch );
-				// esc key closes search overlay
-				// keyboard navigation events
-				document.addEventListener( 'keydown', function( ev ) {
-					var keyCode = ev.keyCode || ev.which;
-					if( keyCode === 27  ) {
-						toggleSearch(ev);
+					// trick to hide input text once the search overlay closes 
+					// todo: hardcoded times, should be done after transition ends
+					if (input.value !== '') {
+						setTimeout(function() {
+							classie.add(morphSearch, 'hideInput');
+							setTimeout(function() {
+								classie.remove(morphSearch, 'hideInput');
+								input.value = '';
+							}, 300);
+						}, 500);
 					}
-				} );
 
+					input.blur();
+				} else {
+					console.log("dsa");
+					classie.add(morphSearch, 'open');
+				}
+				isOpen = !isOpen;
+			};
 
-				/***** for demo purposes only: don't allow to submit the form *****/
-				morphSearch.querySelector( 'button[type="submit"]' ).addEventListener( 'click', function(ev) { ev.preventDefault(); } );
-			})();
-			/*]]>*/
-		</script>
-	</body>
+			// events
+			input.addEventListener('focus', toggleSearch);
+			ctrlClose.addEventListener('click', toggleSearch);
+			// esc key closes search overlay
+			// keyboard navigation events
+			document.addEventListener('keydown', function(ev) {
+				var keyCode = ev.keyCode || ev.which;
+				if (keyCode === 27) {
+					toggleSearch(ev);
+				}
+			});
+
+			/***** for demo purposes only: don't allow to submit the form *****/
+			morphSearch.querySelector('button[type="submit"]')
+					.addEventListener('click', function(ev) {
+						ev.preventDefault();
+					});
+		})();
+
+		(function() {
+
+			[].slice.call(document.querySelectorAll('.tabs')).forEach(
+					function(el) {
+						new CBPFWTabs(el);
+					});
+
+		})();
+
+		/*]]>*/
+	</script>
+</body>
 </html>
