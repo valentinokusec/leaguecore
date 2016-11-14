@@ -23,6 +23,9 @@ body {
 	transition-duration: 0.5s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	border-radius: 57px 57px 57px 57px;
+    -moz-border-radius: 57px 57px 57px 57px;
+    -webkit-border-radius: 57px 57px 57px 57px;
 }
 
 .morphsearch.open {

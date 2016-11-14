@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Page Preloading Effect | Demo 1</title>
+<title>LeagueCore</title>
 <meta name="description"
 	content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
 <meta name="keywords"
@@ -28,11 +28,11 @@
 </head>
 <body class="">
 	<div id="perspective" class="perspective effect-movedown">
-		<div class="container">
+		<div class="container" style="padding:0px">
 			<div class="wrapper">
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
-					<a href="/html/">LeagueCore</a>
+					<a href="/html/" style="color: white;">LeagueCore</a>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
@@ -45,7 +45,7 @@
 							<div class="dummy-column">
 								<h2>Server</h2>
 
-								<p class="dummy-media-object" th:text="@{EU West}"></p>
+								<p class="dummy-media-object" th:text="@{EU West}" ></p>
 
 
 
@@ -57,7 +57,7 @@
 					</div>
 					<!-- /morphsearch -->
 					<div style="float: right">
-						<p th:text="${name}"></p>
+						<p th:text="${name}" style="color: white;"></p>
 						<!-- <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form> -->
@@ -106,9 +106,12 @@
 					<div class="no_game" id="no_game">
 						<div style="margin-bottom: 10%;">No active game found!</div>
 						Featured list:
-						<div id="featured" class="featured"></div>
+						<table id="featured" class="featured" style=" margin: 60px;">
+						
+						
+						</table>
 					</div>
-					<div class="left_stats">
+			<!-- 		<div class="left_stats">
 						<h1>Important facts</h1>
 						<table>
 							<tr>
@@ -130,60 +133,15 @@
 
 						</table>
 
-					</div>
-					<div class="right_stats">
+					</div> -->
+				<!-- 	<div class="right_stats">
 						<h1>Important facts</h1>
 						<section>
-							<div class="tabs tabs-style-underline">
-								<nav>
-									<ul>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-									</ul>
-										<ul>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-										<li><a href="#section-underline-1" class="icon "><img
-												class="tab_img" src="../img/kindred.jpg"></img></a></li>
-									</ul>
-								</nav>
-								<div class="content-wrap">
-									<section id="section-underline-1">
-										<p>1</p>
-									</section>
-									<section id="section-underline-2">
-										<p>2</p>
-									</section>
-									<section id="section-underline-3">
-										<p>3</p>
-									</section>
-									<section id="section-underline-4">
-										<p>4</p>
-									</section>
-									<section id="section-underline-5">
-										<p>5</p>
-									</section>
-								</div>
-								<!-- /content -->
-							</div>
-							<!-- /tabs -->
+						
+							/tabs
 						</section>
 
-					</div>
+					</div> -->
 					<div class="match" id="match" style="margin-top: 3%;">
 
 						<table>
@@ -264,14 +222,15 @@ JUNGLE
 							$(".ele").fadeOut();
 							$(".loader").fadeOut();
 							console.log("SUCCESS: ", data);
-							if (data[0] == "game") {
+						
+							if (data[5] == "no_game") {
 								console.log("sad");
 								for (i = 1; i < data.length; i++) {
 									$("#featured")
 											.append(
-													"<a href='/livestats/"+data[i]+"'>"
+													"<tr><td><a href='/livestats/"+data[i]+"'>"
 															+ data[i]
-															+ "</a><br></br>");
+															+ "</a></td></tr>");
 								}
 								$("#no_game").fadeIn();
 							} else {
@@ -297,13 +256,13 @@ JUNGLE
 															"  <tr> "
 															+ "    <td> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
+															+ data[0].players[i].general_stats[0].kills_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
 															+ data[0].players[i].general_stats[0].assists_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
+															+ data[0].players[i].general_stats[0].deaths_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+
 
@@ -328,7 +287,7 @@ JUNGLE
 															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
 															+ "          Games played<span class='kdd'>:</span>"
 															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].winrate
+															+ data[0].players[i].general_stats[0].games_played	
 															+ "</p></div>"
 															+ "      </td>"
 															+ "  </tr>"
@@ -373,13 +332,13 @@ JUNGLE
 															"  <tr> "
 															+ "    <td> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
+															+ data[0].players[i].general_stats[0].kills_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
 															+ data[0].players[i].general_stats[0].assists_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
+															+ data[0].players[i].general_stats[0].deaths_per_game
 															+ "<span class='kdd'>/</span></p></div> "
 															+
 
@@ -404,7 +363,7 @@ JUNGLE
 															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
 															+ "          Games played<span class='kdd'>:</span>"
 															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].winrate
+															+ data[0].players[i].general_stats[0].games_played
 															+ "</p></div>"
 															+ "      </td>"
 															+ "  </tr>"
@@ -427,10 +386,36 @@ JUNGLE
 															+ "  </div></td>");
 
 								}
+								for (i = 0; i < 10; i++) {
+									
+									//getHistory(data[0].players[i].name);
+									
+								}
 							}
+						
+							
+						},
+				
+						done : function(e) {
+							console.log("DONE");
+						}
+					});
+		};
+		function getHistory(name) {
+			
+			$
+					.ajax({
+						type : "GET",
+						contentType : "application/json",
+						url : "/gethistory/" + name,
+
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							console.log(data);
 						},
 						error : function(e) {
-							console.log("ERROR: ", e.responseText);
+							console.log("ERROR: ", e);
 							if (e.responseText == "nope") {
 
 							} else {

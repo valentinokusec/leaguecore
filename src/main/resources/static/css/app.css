@@ -974,7 +974,7 @@ border: 0px solid #000000;
 {
   position: absolute;
   left: 5%;
-  top: 85%;
+  top: 15%;
 
 }
 .right_stats
@@ -1586,7 +1586,7 @@ margin-left: 5px !important;
 .element tr
 {
 
-border-bottom: 1px solid white;
+
 margin-left: 5px;
 
 }
@@ -1629,8 +1629,8 @@ margin-left: 5px;
   border-bottom: 2px solid rgb(255,64,129);
 }
 .element_size {
-  height: 299px !important;
-
+/*   height: 299px !important;
+ */
 }
 .up {
 
@@ -2390,7 +2390,7 @@ a:hover, a:focus {
 
 p {
 	text-align: center;
-	padding: 1em;
+	
 }
 
 /* Header */

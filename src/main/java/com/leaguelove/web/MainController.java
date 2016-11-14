@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainController {
 	
-    private static final String API_KEY="172d9054-b070-449d-bb68-cbbe94f29e7c";
+    
    
     @Autowired
 	private MainService mainService;
@@ -116,15 +116,32 @@ public class MainController {
     		
     		data.getString(0);
     		
-    		model.addAttribute("no_game",true);
-    		model.addAttribute("champions",data);
-    		
+    		data.put("no_game");
     		return data.toString();
     		
     		
 		}
     	catch(Exception e) {
-    		model.addAttribute("champion_profile",data);
+    		
+    		return data.toString();
+		}
+    	
+    }
+    @RequestMapping("/gethistory/{name}")
+    public @ResponseBody String GetHistory( @PathVariable(value = "name") String name,Model model) throws Exception {
+
+
+    	JSONArray data = livestatsService.getHistory(name);
+    	try {
+    		
+    		data.getString(0);
+    		
+    		data.put("no_game");
+    		return data.toString();
+    		
+    		
+		}
+    	catch(Exception e) {
     		
     		return data.toString();
 		}

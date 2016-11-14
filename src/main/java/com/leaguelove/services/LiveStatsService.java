@@ -10,4 +10,5 @@ import com.leaguelove.domain.SummonerProfile;
 @Service
 public interface LiveStatsService {
 	public JSONArray getLiveStats(String name);
+	public JSONArray getHistory(String name);
 } 

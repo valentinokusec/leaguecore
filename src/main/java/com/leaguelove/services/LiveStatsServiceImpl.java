@@ -95,7 +95,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
             	Double kills_per_game=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
             	Double deaths_per_game=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
             	Double assists_per_game=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed())*100;
             	
             	champion.put("kills_per_game", formatter.format(kills_per_game));
             	champion.put("deaths_per_game", formatter.format(deaths_per_game));
@@ -121,7 +121,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
             	Double kills_per_game=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
             	Double deaths_per_game=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
             	Double assists_per_game=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed())*100;
             	
             	champion.put("kills_per_game", formatter.format(kills_per_game));
             	champion.put("deaths_per_game", formatter.format(deaths_per_game));
@@ -148,7 +148,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 				
 				List<MatchReference> listmatch=summoner.getMatchList();
 		        JSONArray history=new JSONArray();
-		        for (int i = 0; i < 10; i++) {
+		        for (int i = 0; i < 5; i++) {
 		        	int counter=0;
 		        	for (Participant users:RiotAPI.getMatch(listmatch.get(i).getID()).getParticipants()) {
 		        		counter++;
@@ -190,5 +190,47 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		    value = value * factor;
 		    long tmp = Math.round(value);
 		    return (double) tmp / factor;
+		}
+
+		@Override
+		public JSONArray getHistory(String name) {
+			// TODO Auto-generated method stub
+			Summoner summoner = RiotAPI.getSummonerByName(name);
+			List<MatchReference> listmatch=summoner.getMatchList();
+	        JSONArray history=new JSONArray();
+	        for (int i = 0; i < 5; i++) {
+	        	int counter=0;
+	        	for (Participant users:RiotAPI.getMatch(listmatch.get(i).getID()).getParticipants()) {
+	        		counter++;
+					if (users.getSummonerName().contains(summoner.getName())) {
+						JSONObject stats=new JSONObject();
+						
+						if (counter<=5) {
+							stats.put("win", RiotAPI.getMatch(listmatch.get(i).getID()).getTeams().get(0).getWinner());
+							
+						}
+						else {
+							stats.put("win", RiotAPI.getMatch(listmatch.get(i).getID()).getTeams().get(1).getWinner());
+						}
+						
+						stats.put("matchid", String.valueOf(listmatch.get(i).getID()));			
+						stats.put("champion", users.getChampion());					
+						stats.put("assists", users.getStats().getAssists());
+						stats.put("deaths", users.getStats().getDeaths());
+						stats.put("kills", users.getStats().getKills());
+					   
+						stats.put("item_0", users.getStats().getItem0ID());
+						stats.put("item_1", users.getStats().getItem1ID());
+						stats.put("item_2", users.getStats().getItem2ID());
+						stats.put("item_3", users.getStats().getItem3ID());
+						stats.put("item_4", users.getStats().getItem4ID());
+						stats.put("item_5", users.getStats().getItem5ID());
+						
+						history.put(stats);
+					}
+				}
+				
+			}
+			return history;
 		}
 }
