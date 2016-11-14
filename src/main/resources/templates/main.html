@@ -28,7 +28,7 @@
 </head>
 <body class="">
 	<div id="perspective" class="perspective effect-movedown">
-		<div class="container" style="padding:0px">
+		<div class="container" style="padding: 0px">
 			<div class="wrapper">
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
@@ -45,7 +45,7 @@
 							<div class="dummy-column">
 								<h2>Server</h2>
 
-								<p class="dummy-media-object" th:text="@{EU West}" ></p>
+								<p class="dummy-media-object" th:text="@{EU West}"></p>
 
 
 
@@ -106,12 +106,12 @@
 					<div class="no_game" id="no_game">
 						<div style="margin-bottom: 10%;">No active game found!</div>
 						Featured list:
-						<table id="featured" class="featured" style=" margin: 60px;">
-						
-						
+						<table id="featured" class="featured" style="margin: 60px;">
+
+
 						</table>
 					</div>
-			<!-- 		<div class="left_stats">
+					<!-- 		<div class="left_stats">
 						<h1>Important facts</h1>
 						<table>
 							<tr>
@@ -134,7 +134,7 @@
 						</table>
 
 					</div> -->
-				<!-- 	<div class="right_stats">
+					<!-- 	<div class="right_stats">
 						<h1>Important facts</h1>
 						<section>
 						
@@ -176,8 +176,16 @@ JUNGLE
 
 
 							</tr>
-
+							
 						</table>
+			<form action='#' id="check">
+  <div class='field position'>
+    <input id='checkme' style="outline: none" type='checkbox'/>
+   
+  </div>
+
+</form>
+<div id='output'></div>
 					</div>
 
 				</div>
@@ -206,8 +214,20 @@ JUNGLE
 	<script type="text/javascript" src="../js/jquery.dropdown.js"></script>
 	<script type="text/javascript">
 		/*<![CDATA[*/
-		$(".no_game").hide();
+		var show_stats=0;
+		var choices = $('#switch .choice'), text = $('#switch .or')
 
+		choices.on('click', function() {
+			choices.toggleClass('on')
+
+			text.addClass('flip')
+			setTimeout(function() {
+				text.removeClass('flip')
+			}, 1000)
+		})
+		$(".no_game").hide();
+		$("#check").css({"opacity":0});
+		var gen_data;
 		function getData() {
 
 			$
@@ -222,211 +242,86 @@ JUNGLE
 							$(".ele").fadeOut();
 							$(".loader").fadeOut();
 							console.log("SUCCESS: ", data);
-						
+							gen_data = data;
+							console.log(gen_data);
 							if (data[5] == "no_game") {
 								console.log("sad");
 								for (i = 1; i < data.length; i++) {
-									$("#featured")
-											.append(
-													"<tr><td><a href='/livestats/"+data[i]+"'>"
-															+ data[i]
-															+ "</a></td></tr>");
+									$("#featured").append(
+											"<tr><td><a href='/livestats/"+data[i]+"'>"
+													+ data[i]
+													+ "</a></td></tr>");
 								}
 								$("#no_game").fadeIn();
 							} else {
-								for (i = 0; i < 5; i++) {
-									$("#first_row")
-											.append(
-													"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
-															+
+								$( "#check" ).animate({
+								    opacity: 1,
+								    bottom: "+=50px"
+								    
+								  }, 1000);
+								populateData(gen_data,show_stats);
+								getHistory(data[0]);
 
-															" <div class='mdl-card__title'>"
-															+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"
-															+
-
-															" </div>"
-															+
-
-															" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
-															+
-
-															" <table  class='main-panel is-active'>"
-															+
-
-															"  <tr> "
-															+ "    <td> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].kills_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].deaths_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+
-
-															"     </td>"
-															+
-
-															"  </tr>"
-															+ "  <tr>"
-															+ "      <td>"
-															+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
-															+ "      Winrate<span class='kdd'>:</span>"
-															+ "    </p>"
-															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].winrate
-															+ "</p></div>"
-															+
-
-															"      </td>"
-															+ "  </tr>"
-															+ "  <tr>"
-															+ "      <td>"
-															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
-															+ "          Games played<span class='kdd'>:</span>"
-															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].games_played	
-															+ "</p></div>"
-															+ "      </td>"
-															+ "  </tr>"
-															+ "  <tr>"
-															+ "    <td>"
-															+
-
-															"    </td>"
-															+ "  </tr>"
-															+ "</table>"
-															+
-
-															"</div>"
-															+
-
-															"<table>"
-															+
-
-															"</table>"
-															+ "  </div></td>");
-
-								}
-								for (i = 5; i < 10; i++) {
-									$("#second_row")
-											.append(
-													"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
-															+
-
-															" <div class='mdl-card__title'>"
-															+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_name + ".png' class='img_card live_stats_size'></img>"
-															+
-
-															" </div>"
-															+
-
-															" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
-															+
-
-															" <table  class='main-panel is-active'>"
-															+
-
-															"  <tr> "
-															+ "    <td> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].kills_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].assists_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+ "    <div class='col-md-3' style='height: 50px !important;''><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].deaths_per_game
-															+ "<span class='kdd'>/</span></p></div> "
-															+
-
-															"     </td>"
-															+
-
-															"  </tr>"
-															+ "  <tr>"
-															+ "      <td>"
-															+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
-															+ "      Winrate<span class='kdd'>:</span>"
-															+ "    </p>"
-															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].winrate
-															+ "</p></div>"
-															+
-
-															"      </td>"
-															+ "  </tr>"
-															+ "  <tr>"
-															+ "      <td>"
-															+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
-															+ "          Games played<span class='kdd'>:</span>"
-															+ "    <div class='col-md-5' style='height: 50px !important;'><p class='kda_text_live '>"
-															+ data[0].players[i].general_stats[0].games_played
-															+ "</p></div>"
-															+ "      </td>"
-															+ "  </tr>"
-															+ "  <tr>"
-															+ "    <td>"
-															+
-
-															"    </td>"
-															+ "  </tr>"
-															+ "</table>"
-															+
-
-															"</div>"
-															+
-
-															"<table>"
-															+
-
-															"</table>"
-															+ "  </div></td>");
-
-								}
-								for (i = 0; i < 10; i++) {
-									
-									//getHistory(data[0].players[i].name);
-									
-								}
 							}
-						
-							
+
 						},
-				
+
 						done : function(e) {
 							console.log("DONE");
 						}
 					});
 		};
-		function getHistory(name) {
-			
-			$
-					.ajax({
-						type : "GET",
-						contentType : "application/json",
-						url : "/gethistory/" + name,
+		$("#check").click(function() {
+			if(show_stats==0)
+				{
+				show_stats=1;
+				}
+			else
+				{
+				show_stats=0;
+				}
+			$( ".switch_div" ).animate({
+			    opacity: 0,
+			    bottom: "+=10px"
+			    
+			  }, 200);
+			setTimeout(function(){
+				console.log(gen_data);
+				populateData(gen_data,show_stats);
+				$( ".switch_div" ).animate({bottom:"-=20px"},1);
+				 $( ".switch_div" ).animate({
+				    opacity: 1,
+				    bottom: "+=10px"
+				    
+				  }, 200);  
+				}, 
+					200);
+		});
+		var iter = 0;
+		function getHistory(data) {
 
-						dataType : 'json',
-						timeout : 100000,
-						success : function(data) {
-							console.log(data);
-						},
-						error : function(e) {
-							console.log("ERROR: ", e);
-							if (e.responseText == "nope") {
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "/gethistory/" + data.players[iter].name,
 
-							} else {
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					iter++;
+					if (iter < 10) {
+						getHistory(get_data[0]);
+					}
 
-							}
-
-						},
-						done : function(e) {
-							console.log("DONE");
-						}
-					});
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
 		};
 		setTimeout(function() {
 			getData();
@@ -441,6 +336,166 @@ JUNGLE
 			});
 
 		});
+		function populateData(data,show_stats)
+		{
+			console.log(data);
+			console.log(show_stats);
+			$("#first_row").text( "" );
+			$("#second_row").text( "" );
+			for (i = 0; i < 5; i++) {
+				$("#first_row")
+						.append(
+								"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+										+
+
+										" <div class='mdl-card__title'>"
+										+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+
+
+										" </div>"
+										+
+
+										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+										+
+
+										" <table  class='main-panel is-active'>"
+										+
+
+										"  <tr> "
+										+ "    <td> "
+										+ "    <div  class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].kills_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].assists_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].deaths_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+
+
+										"     </td>"
+										+
+
+										"  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
+										+ "      Winrate<span class='kdd'>:</span>"
+										+ "    </p>"
+										+ "    <div class='col-md-5 switch_div' style='height: 50px !important;'><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].winrate
+										+ "</p></div>"
+										+
+
+										"      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
+										+ "          Games played<span class='kdd'>:</span>"
+										+ "    <div class='col-md-5 switch_div' style='height: 50px !important;'><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].games_played
+										+ "</p></div>"
+										+ "      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "    <td>"
+										+
+
+										"    </td>"
+										+ "  </tr>"
+										+ "</table>"
+										+
+
+										"</div>"
+										+
+
+										"<table>"
+										+
+
+										"</table>"
+										+ "  </div></td>");
+
+			}
+			for (i = 5; i < 10; i++) {
+				$("#second_row")
+						.append(
+								"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+										+
+
+										" <div class='mdl-card__title'>"
+										+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+
+
+										" </div>"
+										+
+
+										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+										+
+
+										" <table  class='main-panel is-active'>"
+										+
+
+										"  <tr> "
+										+ "    <td> "
+										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].kills_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].assists_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].deaths_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+
+
+										"     </td>"
+										+
+
+										"  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: #374d5a;'>"
+										+ "      Winrate<span class='kdd'>:</span>"
+										+ "    </p>"
+										+ "    <div class='col-md-5 switch_div' style='height: 50px !important;'><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].winrate
+										+ "</p></div>"
+										+
+
+										"      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: #374d5a;' >"
+										+ "          Games played<span class='kdd'>:</span>"
+										+ "    <div class='col-md-5 switch_div' style='height: 50px !important;'><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].games_played
+										+ "</p></div>"
+										+ "      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "    <td>"
+										+
+
+										"    </td>"
+										+ "  </tr>"
+										+ "</table>"
+										+
+
+										"</div>"
+										+
+
+										"<table>"
+										+
+
+										"</table>"
+										+ "  </div></td>");
+
+			}
+
+		}
 		(function() {
 			var morphSearch = document.getElementById('morphsearch'), input = morphSearch
 					.querySelector('input.morphsearch-input'), ctrlClose = morphSearch
@@ -503,7 +558,28 @@ JUNGLE
 					});
 
 		})();
-
+		(function () {
+		    var $switch;
+		    if (Modernizr.touch) {
+		        $('#output').text('Touch device');
+		        $switch = $('input[type=\'checkbox\']');
+		        $switch.on('click', function (event) {
+		            event.preventDefault();
+		            return event.stopPropagation();
+		        });
+		        $switch.on('touchend', function (event) {
+		            var $this;
+		            event.preventDefault();
+		            event.stopPropagation();
+		            $this = $(this);
+		            if ($this.is(':checked')) {
+		                return $this.prop('checked', false);
+		            } else {
+		                return $this.prop('checked', true);
+		            }
+		        });
+		    }
+		}.call(this));
 		/*]]>*/
 	</script>
 </body>
