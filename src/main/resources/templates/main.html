@@ -111,29 +111,18 @@
 
 						</table>
 					</div>
-					<!-- 		<div class="left_stats">
+					 		<div class="left_stats">
 						<h1>Important facts</h1>
-						<table>
-							<tr>
+						<table id="stats">
+						<!-- 	<tr>
 								<td>fgfdg <span class="kdd">:</span> sdfds
 								</td>
-							</tr>
-							<tr>
-								<td>fgfdg <span class="kdd">:</span> sdfds
-								</td>
-							</tr>
-							<tr>
-								<td>fgfdg <span class="kdd">:</span> sdfds
-								</td>
-							</tr>
-							<tr>
-								<td>fgfdg <span class="kdd">:</span> sdfds
-								</td>
-							</tr>
+							</tr> -->
+							
 
 						</table>
 
-					</div> -->
+					</div> 
 					<!-- 	<div class="right_stats">
 						<h1>Important facts</h1>
 						<section>
@@ -226,6 +215,7 @@ JUNGLE
 			}, 1000)
 		})
 		$(".no_game").hide();
+		$(".left_stats").hide();
 		$("#check").css({"opacity":0});
 		var gen_data;
 		function getData() {
@@ -243,9 +233,9 @@ JUNGLE
 							$(".loader").fadeOut();
 							console.log("SUCCESS: ", data);
 							gen_data = data;
-							console.log(gen_data);
+						
 							if (data[5] == "no_game") {
-								console.log("sad");
+							
 								for (i = 1; i < data.length; i++) {
 									$("#featured").append(
 											"<tr><td><a href='/livestats/"+data[i]+"'>"
@@ -254,14 +244,30 @@ JUNGLE
 								}
 								$("#no_game").fadeIn();
 							} else {
+								
 								$( "#check" ).animate({
 								    opacity: 1,
 								    bottom: "+=50px"
 								    
 								  }, 1000);
 								populateData(gen_data,show_stats);
+								setTimeout(function(){
+								$( ".left_stats" ).fadeIn();
+								
+								$( ".left_stats" ).animate({
+								   	opacity:1,
+								    bottom: "+=10px"
+								    
+								  }, 500);
+								
+									$("#stats").append(
+											"<tr><td>Highest KDA<span class='kdd'>:</span>"+data[0].stats.highest_kda+"</td>"
+													
+													+ "</tr>");
+								},500);
+								
 								getHistory(data[0]);
-
+								
 							}
 
 						},

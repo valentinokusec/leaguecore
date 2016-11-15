@@ -72,10 +72,40 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 				}
 		    	
 		    	live_stats.put("players", players);
+		    	
+		    	JSONObject stats=getStats(players);
+		    
+		    	live_stats.put("stats", stats);
+		    	
+		    	
 		    	live_stats_array.put(live_stats);
 		    	
 				return live_stats_array;
 			}
+	private JSONObject getStats(JSONArray players) {
+		JSONObject stats=new JSONObject();
+		String highest_kda_name="";
+    	Double highest_kda=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+    	String lowest_kda_name="";
+    	Double lowest_kda=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");;
+    	for (int i = 0; i < players.length(); i++) {
+			if (highest_kda<players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
+				highest_kda=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+				highest_kda_name=players.getJSONObject(i).getString("name");
+			}
+			if (lowest_kda>players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
+				lowest_kda=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+				lowest_kda_name=players.getJSONObject(i).getString("name");
+			}
+			
+		}
+    	stats.put("highest_kda", highest_kda);
+    	stats.put("highest_kda_name", highest_kda_name);
+    	stats.put("lowest_kda", lowest_kda);
+    	stats.put("lowest_kda_name", lowest_kda_name);
+		return stats;
+	}
+
 	private JSONArray getChampionList(Summoner summoner, String name) {
 		// TODO Auto-generated method stub
 		Map<Champion,ChampionStats> champions;
@@ -96,7 +126,6 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	champion.put("deaths", entry.getValue().getStats().getTotalDeaths());
 		            	champion.put("loses", entry.getValue().getStats().getTotalLosses());
 		            	champion.put("wins", entry.getValue().getStats().getTotalWins());
-		            	
 		            	NumberFormat formatter = new DecimalFormat("#0.0"); 
 		            	NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 		            	
@@ -104,7 +133,8 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	Double deaths_per_game=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
 		            	Double assists_per_game=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
 		            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed())*100;
-		            	
+		             	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
+				           
 		            	champion.put("kills_per_game", formatter.format(kills_per_game));
 		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
 		            	champion.put("assists_per_game", formatter.format(assists_per_game));
@@ -196,7 +226,8 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	Double deaths_per_game=(double) (entry.getValue().getAggregatedStats().getTotalDeaths())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
 		            	Double assists_per_game=(double) (entry.getValue().getAggregatedStats().getTotalAssists())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
 		            	Double winrate=(double) (entry.getValue().getAggregatedStats().getTotalWins())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed())*100;
-		            	
+		            	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
+					       
 		            	champion.put("kills_per_game", formatter.format(kills_per_game));
 		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
 		            	champion.put("assists_per_game", formatter.format(assists_per_game));
