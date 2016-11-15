@@ -61,8 +61,8 @@ a:hover, a:visited, a:link, a:active
 {
   text-align: center;
 margin-bottom: 10%;
-position: absolute;
-top: 80%;
+position: fixed;
+top: 20%;
 left: 36%;
 color: #374d5a;
 font-size: 40px;
@@ -980,7 +980,7 @@ border: 0px solid #000000;
 #table_stats
 {
 	position: fixed;
-    top: 15%;
+    top: 10%;
     left: 20%;
 }
 .right_stats

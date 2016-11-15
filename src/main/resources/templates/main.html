@@ -105,7 +105,7 @@
 					<div class="no_game" id="no_game">
 						<div style="margin-bottom: 10%;">No active game found!</div>
 						Featured list:
-						<table id="featured" class="featured" style="margin: 60px;">
+						<table id="featured" class="featured" style="margin: 60px;    margin-left: 100px;">
 
 
 						</table>
@@ -242,14 +242,11 @@ JUNGLE
 								for (i = 0; i < data.length - 1; i += 3) {
 									$("#featured")
 											.append(
-													"<tr><td colspan='2'><p href='' onclick='expandTier("
-															+ data[i]
-															+ ")'>"
-															+ data[i]
-															+ "</p></td></tr>"
+													"<tr><td colspan='2'><a style='font-size: 30px;' href='/livestats/"+data[i]+"'>"+data[i]+"</a>"
+															+"</td></tr>"
 															+ "<tr id='"+data[i]+"'style='height:0px'><td  class='"+data[i]+"_td extra_feat'><p style='font-size: 30px;'>"+data[i+1]+"</p>"
-															+ "View Game"
-															+ "</td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><p style='font-size: 30px;'>"+data[i+2]+"</p></td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><a style='font-size: 30px;' href='/livestats/"+data[i]+"'></a></td></tr>");
+															+ ""
+															+ "</td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><p style='font-size: 30px;'>"+data[i+2]+"</p></td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><a style='font-size: 30px;' href='/livestats/"+data[i]+"'>View game</a></td></tr>");
 								}
 								$("#no_game").fadeIn();
 								$(".extra_feat").hide();
@@ -257,7 +254,7 @@ JUNGLE
 
 								$("#check").animate({
 									opacity : 1,
-									bottom : "+=50px"
+									bottom : "+=10px"
 
 								}, 1000);
 
@@ -284,8 +281,14 @@ JUNGLE
 															"<tr><td>Highest KDA<span class='kdd'> : </span>"
 																	+ data[0].stats.highest_kda
 																	+ "<span class='kdd'> by     </span><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ "</tr>"
+																	+"<tr><td>Lowest KDA<span class='kdd'> : </span>"
+																	+ data[0].stats.lowest_kda
+																	+ "<span class='kdd'> by     </span><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
-																	+ "</tr>");
+																	+ "</tr>"
+													
+													);
 										}, 500);
 
 								getHistory(data[0]);
