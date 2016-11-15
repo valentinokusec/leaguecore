@@ -19,8 +19,7 @@
 <link rel="stylesheet" type="text/css" href="../css/style5.css" />
 <link rel="stylesheet" type="text/css" href="../css/tabstyles.css" />
 <link rel="stylesheet" type="text/css" href="../css/tabs.css" />
-<link rel="stylesheet" type="text/css"
-	href="../css/font-awesome.min.css" />
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/effect1.css" />
@@ -111,18 +110,18 @@
 
 						</table>
 					</div>
-					 		<div class="left_stats">
+					<div class="left_stats">
 						<h1>Important facts</h1>
 						<table id="stats">
-						<!-- 	<tr>
+							<!-- 	<tr>
 								<td>fgfdg <span class="kdd">:</span> sdfds
 								</td>
 							</tr> -->
-							
+
 
 						</table>
 
-					</div> 
+					</div>
 					<!-- 	<div class="right_stats">
 						<h1>Important facts</h1>
 						<section>
@@ -131,11 +130,11 @@
 						</section>
 
 					</div> -->
-					<div class="match" id="match" style="margin-top: 3%;">
 
-						<table>
 
-							<!--  <tr class="role">
+					<table id="table_stats">
+
+						<!--  <tr class="role">
       <td >
       TOP
       </td>
@@ -157,25 +156,25 @@ JUNGLE
 
 
       </tr>-->
-							<tr id="first_row">
+						<tr id="first_row">
 
 
-							</tr>
-							<tr id="second_row">
+						</tr>
+						<tr id="second_row">
 
 
-							</tr>
-							
-						</table>
-			<form action='#' id="check">
-  <div class='field position'>
-    <input id='checkme' style="outline: none" type='checkbox'/>
-   
-  </div>
+						</tr>
 
-</form>
-<div id='output'></div>
-					</div>
+					</table>
+					<form action='#' id="check">
+						<div class='field position'>
+							<input id='checkme' style="outline: none" type='checkbox' />
+
+						</div>
+
+					</form>
+					<div id='output'></div>
+
 
 				</div>
 			</div>
@@ -197,13 +196,13 @@ JUNGLE
 	<script src="../js/pathLoader.js"></script>
 	<script src="../js/modernizr.custom.js"></script>
 	<script src="../js/cbpFWTabs.js"></script>
-	<script src="../js/menu.js"></script>
+
 	<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.dropdown.js"></script>
+
 	<script type="text/javascript">
 		/*<![CDATA[*/
-		var show_stats=0;
+		var show_stats = 0;
 		var choices = $('#switch .choice'), text = $('#switch .or')
 
 		choices.on('click', function() {
@@ -214,9 +213,13 @@ JUNGLE
 				text.removeClass('flip')
 			}, 1000)
 		})
+		$("#table_stats").hide();
 		$(".no_game").hide();
+		var last_table = "";
 		$(".left_stats").hide();
-		$("#check").css({"opacity":0});
+		$("#check").css({
+			"opacity" : 0
+		});
 		var gen_data;
 		function getData() {
 
@@ -233,41 +236,60 @@ JUNGLE
 							$(".loader").fadeOut();
 							console.log("SUCCESS: ", data);
 							gen_data = data;
-						
-							if (data[5] == "no_game") {
-							
-								for (i = 1; i < data.length; i++) {
-									$("#featured").append(
-											"<tr><td><a href='/livestats/"+data[i]+"'>"
-													+ data[i]
-													+ "</a></td></tr>");
+
+							if (data[15] == "no_game") {
+
+								for (i = 0; i < data.length - 1; i += 3) {
+									$("#featured")
+											.append(
+													"<tr><td colspan='2'><p href='' onclick='expandTier("
+															+ data[i]
+															+ ")'>"
+															+ data[i]
+															+ "</p></td></tr>"
+															+ "<tr id='"+data[i]+"'style='height:0px'><td  class='"+data[i]+"_td extra_feat'><p style='font-size: 30px;'>"+data[i+1]+"</p>"
+															+ "View Game"
+															+ "</td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><p style='font-size: 30px;'>"+data[i+2]+"</p></td><td style='padding-top: 15px;' class='"+data[i]+"_td extra_feat'><a style='font-size: 30px;' href='/livestats/"+data[i]+"'></a></td></tr>");
 								}
 								$("#no_game").fadeIn();
+								$(".extra_feat").hide();
 							} else {
-								
-								$( "#check" ).animate({
-								    opacity: 1,
-								    bottom: "+=50px"
-								    
-								  }, 1000);
-								populateData(gen_data,show_stats);
-								setTimeout(function(){
-								$( ".left_stats" ).fadeIn();
-								
-								$( ".left_stats" ).animate({
-								   	opacity:1,
-								    bottom: "+=10px"
-								    
-								  }, 500);
-								
-									$("#stats").append(
-											"<tr><td>Highest KDA<span class='kdd'>:</span>"+data[0].stats.highest_kda+"</td>"
-													
-													+ "</tr>");
-								},500);
-								
+
+								$("#check").animate({
+									opacity : 1,
+									bottom : "+=50px"
+
+								}, 1000);
+
+								populateData(gen_data, show_stats);
+								$("#table_stats").fadeIn();
+								$("#table_stats").animate({
+									opacity : 1,
+									bottom : "-=50px"
+
+								}, 500);
+
+								setTimeout(
+										function() {
+											$(".left_stats").fadeIn();
+
+											$(".left_stats").animate({
+												opacity : 1,
+												bottom : "+=10px"
+
+											}, 500);
+
+											$("#stats")
+													.append(
+															"<tr><td>Highest KDA<span class='kdd'> : </span>"
+																	+ data[0].stats.highest_kda
+																	+ "<span class='kdd'> by     </span><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+
+																	+ "</tr>");
+										}, 500);
+
 								getHistory(data[0]);
-								
+
 							}
 
 						},
@@ -278,32 +300,65 @@ JUNGLE
 					});
 		};
 		$("#check").click(function() {
-			if(show_stats==0)
-				{
-				show_stats=1;
-				}
-			else
-				{
-				show_stats=0;
-				}
-			$( ".switch_div" ).animate({
-			    opacity: 0,
-			    bottom: "+=10px"
-			    
-			  }, 200);
-			setTimeout(function(){
+			if (show_stats == 0) {
+				show_stats = 1;
+			} else {
+				show_stats = 0;
+			}
+			$(".switch_div").animate({
+				opacity : 0,
+				bottom : "+=10px"
+
+			}, 200);
+			setTimeout(function() {
 				console.log(gen_data);
-				populateData(gen_data,show_stats);
-				$( ".switch_div" ).animate({bottom:"-=20px"},1);
-				 $( ".switch_div" ).animate({
-				    opacity: 1,
-				    bottom: "+=10px"
-				    
-				  }, 200);  
-				}, 
-					200);
+				populateData(gen_data, show_stats);
+				$(".switch_div").animate({
+					bottom : "-=20px"
+				}, 1);
+				$(".switch_div").animate({
+					opacity : 1,
+					bottom : "+=10px"
+
+				}, 200);
+			}, 200);
 		});
 		var iter = 0;
+		function expandTier(data) {
+			
+			if (last_table == "") {
+				$("#" + data.id).animate({
+
+					height : "+=50px"
+
+				}, 200);
+				setTimeout(function(){
+					$("."+data.id+"_td").fadeIn();	
+				},200);
+				
+				last_table = data.id;
+			} else {
+				$("#" + data.id).animate({
+
+					height : "+=50px"
+
+				}, 200);
+				setTimeout(function(){				
+				$("."+data.id+"_td").fadeIn();	
+				},200);
+				$("."+last_table+"_td").fadeOut();	
+				setTimeout(function(){		
+					console.log(last_table);
+				$("#" + last_table).animate({
+
+					height : "-=250px"
+
+				}, 500);
+				},300);
+				last_table = data.id;
+			}
+
+		}
 		function getHistory(data) {
 
 			$.ajax({
@@ -342,12 +397,11 @@ JUNGLE
 			});
 
 		});
-		function populateData(data,show_stats)
-		{
+		function populateData(data, show_stats) {
 			console.log(data);
 			console.log(show_stats);
-			$("#first_row").text( "" );
-			$("#second_row").text( "" );
+			$("#first_row").text("");
+			$("#second_row").text("");
 			for (i = 0; i < 5; i++) {
 				$("#first_row")
 						.append(
@@ -369,15 +423,15 @@ JUNGLE
 
 										"  <tr> "
 										+ "    <td> "
-										+ "    <div  class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div  class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].kills_per_game
 										+ "<span class='kdd'>/</span></p></div> "
-										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].assists_per_game
 										+ "<span class='kdd'>/</span></p></div> "
-										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].deaths_per_game
-										+ "<span class='kdd'>/</span></p></div> "
+										+ "</p></div> "
 										+
 
 										"     </td>"
@@ -404,24 +458,15 @@ JUNGLE
 										+ data[0].players[i].general_stats[show_stats].games_played
 										+ "</p></div>"
 										+ "      </td>"
-										+ "  </tr>"
-										+ "  <tr>"
-										+ "    <td>"
-										+
+										+ "  </tr>" + "  <tr>" + "    <td>" +
 
-										"    </td>"
-										+ "  </tr>"
-										+ "</table>"
-										+
+										"    </td>" + "  </tr>" + "</table>" +
 
-										"</div>"
-										+
+										"</div>" +
 
-										"<table>"
-										+
+										"<table>" +
 
-										"</table>"
-										+ "  </div></td>");
+										"</table>" + "  </div></td>");
 
 			}
 			for (i = 5; i < 10; i++) {
@@ -445,13 +490,13 @@ JUNGLE
 
 										"  <tr> "
 										+ "    <td> "
-										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].kills_per_game
 										+ "<span class='kdd'>/</span></p></div> "
-										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].assists_per_game
 										+ "<span class='kdd'>/</span></p></div> "
-										+ "    <div class='col-md-3 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].deaths_per_game
 										+ "<span class='kdd'>/</span></p></div> "
 										+
@@ -480,24 +525,15 @@ JUNGLE
 										+ data[0].players[i].general_stats[show_stats].games_played
 										+ "</p></div>"
 										+ "      </td>"
-										+ "  </tr>"
-										+ "  <tr>"
-										+ "    <td>"
-										+
+										+ "  </tr>" + "  <tr>" + "    <td>" +
 
-										"    </td>"
-										+ "  </tr>"
-										+ "</table>"
-										+
+										"    </td>" + "  </tr>" + "</table>" +
 
-										"</div>"
-										+
+										"</div>" +
 
-										"<table>"
-										+
+										"<table>" +
 
-										"</table>"
-										+ "  </div></td>");
+										"</table>" + "  </div></td>");
 
 			}
 
@@ -564,27 +600,27 @@ JUNGLE
 					});
 
 		})();
-		(function () {
-		    var $switch;
-		    if (Modernizr.touch) {
-		        $('#output').text('Touch device');
-		        $switch = $('input[type=\'checkbox\']');
-		        $switch.on('click', function (event) {
-		            event.preventDefault();
-		            return event.stopPropagation();
-		        });
-		        $switch.on('touchend', function (event) {
-		            var $this;
-		            event.preventDefault();
-		            event.stopPropagation();
-		            $this = $(this);
-		            if ($this.is(':checked')) {
-		                return $this.prop('checked', false);
-		            } else {
-		                return $this.prop('checked', true);
-		            }
-		        });
-		    }
+		(function() {
+			var $switch;
+			if (Modernizr.touch) {
+				$('#output').text('Touch device');
+				$switch = $('input[type=\'checkbox\']');
+				$switch.on('click', function(event) {
+					event.preventDefault();
+					return event.stopPropagation();
+				});
+				$switch.on('touchend', function(event) {
+					var $this;
+					event.preventDefault();
+					event.stopPropagation();
+					$this = $(this);
+					if ($this.is(':checked')) {
+						return $this.prop('checked', false);
+					} else {
+						return $this.prop('checked', true);
+					}
+				});
+			}
 		}.call(this));
 		/*]]>*/
 	</script>

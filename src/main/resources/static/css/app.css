@@ -972,10 +972,16 @@ border: 0px solid #000000;
 }
 .left_stats
 {
-  position: absolute;
-  left: 5%;
+  position: fixed;
+  left: 1%;
   top: 15%;
 
+}
+#table_stats
+{
+	position: fixed;
+    top: 15%;
+    left: 20%;
 }
 .right_stats
 {
@@ -998,6 +1004,10 @@ border: 0px solid #000000;
 { color: #374d5a !important;
   font-size: 20px;
   font-weight: bolder;
+}
+.left_stats td:hover
+{
+cursor: pointer;
 }
 .left_stats h1
 {
@@ -2020,8 +2030,15 @@ border: 0px solid #000000;
 {
   width: 70px;
   height: 70px;
-  margin: auto;
-  margin-left: 20%;
+
+
+}
+.live_stats_size_side
+{
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+
 }
 .img_card_match
 {
