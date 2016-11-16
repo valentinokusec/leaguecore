@@ -182,7 +182,19 @@ JUNGLE
 		</div>
 	</div>
 
+	<div class="overlay1 overlay-hugeinc" id="extra_data">
+					<button type="button" class="overlay-close" id="close_extra">Close</button>
+					<div class="overlay-menu">
+						<ul>
+							<li>
+								<button class="kda_text_main kda_text"
+									style="padding-left: 18px;">W</button> <span
+								style="color: white;"> EU West </span>
+							</li>
 
+						</ul>
+					</div>
+				</div>
 	<div class="overlay"></div>
 	<nav class="outer-nav top horizontal">
 		<a href="#" class="">Home</a> <a href="#" class="">News</a> <a
@@ -278,13 +290,13 @@ JUNGLE
 
 											$("#stats")
 													.append(
-															"<tr><td>Highest KDA<span class='kdd'> : </span>"
+															"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.highest_kda
-																	+ "<span class='kdd'> by     </span><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 																	+ "</tr>"
-																	+"<tr><td>Lowest KDA<span class='kdd'> : </span>"
+																	+"<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.lowest_kda
-																	+ "<span class='kdd'> by     </span><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
 																	+ "</tr>"
 													
@@ -314,7 +326,7 @@ JUNGLE
 
 			}, 200);
 			setTimeout(function() {
-				console.log(gen_data);
+		
 				populateData(gen_data, show_stats);
 				$(".switch_div").animate({
 					bottom : "-=20px"
@@ -373,12 +385,16 @@ JUNGLE
 				timeout : 100000,
 				success : function(data) {
 					console.log(data);
+					iter++;
+					if (iter < 10) {
+						getHistory(gen_data[0]);
+					}
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
 					iter++;
 					if (iter < 10) {
-						getHistory(get_data[0]);
+						getHistory(gen_data[0]);
 					}
 
 				},
@@ -408,14 +424,17 @@ JUNGLE
 			for (i = 0; i < 5; i++) {
 				$("#first_row")
 						.append(
-								"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+								"<td>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover'>"
+							       +" More Details"
+							        +"</p> "
 										+
-
+										
 										" <div class='mdl-card__title'>"
-										+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-										+
-
-										" </div>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+"<p style='height: 80px;padding-top: 10px;font-weight: bold;color:#374d5a;'>"+data[0].players[i].name+"<br></br>"
+										+data[0].players[i].tier+"</p></div>"
+										+" </div>"
 										+
 
 										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
@@ -469,20 +488,43 @@ JUNGLE
 
 										"<table>" +
 
-										"</table>" + "  </div></td>");
-
+										"</table>"
+										
+									
+								        +"</div></td>");
+				$("#"+data[0].players[i].id+"_hover").hover(function () {
+				
+					var showID = $(this).attr("ID");
+					console.log(showID);
+					  $("#"+showID+"_toggle").slideToggle("fast");
+					});
+				$("#"+data[0].players[i].id+"_hover_toggle").click(function () {
+					
+					var showID = $(this).attr("ID");
+					
+					  $("#extra_data").slideToggle("fast");
+					});
+				$("#close_extra").click(function () {
+					
+					var showID = $(this).attr("ID");
+					
+					  $("#extra_data").slideToggle("fast");
+					});
 			}
 			for (i = 5; i < 10; i++) {
 				$("#second_row")
 						.append(
-								"<td>  <div id='team_1_player_1' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+								"<td>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover'>"
+							       +" More Details"
+							        +"</p> "
 										+
-
+										
 										" <div class='mdl-card__title'>"
-										+ " <img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-										+
-
-										" </div>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+"<p style='height: 80px;padding-top: 10px;font-weight: bold;color:#374d5a;'>"+data[0].players[i].name+"<br></br>"
+										+data[0].players[i].tier+"</p></div>"
+										+" </div>"
 										+
 
 										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
@@ -493,7 +535,7 @@ JUNGLE
 
 										"  <tr> "
 										+ "    <td> "
-										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
+										+ "    <div  class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].kills_per_game
 										+ "<span class='kdd'>/</span></p></div> "
 										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
@@ -501,7 +543,7 @@ JUNGLE
 										+ "<span class='kdd'>/</span></p></div> "
 										+ "    <div class='col-md-4 switch_div' style='height: 50px !important;''><p class='kda_text_live '>"
 										+ data[0].players[i].general_stats[show_stats].deaths_per_game
-										+ "<span class='kdd'>/</span></p></div> "
+										+ "</p></div> "
 										+
 
 										"     </td>"
@@ -536,8 +578,16 @@ JUNGLE
 
 										"<table>" +
 
-										"</table>" + "  </div></td>");
-
+										"</table>"
+										
+									
+								        +"</div></td>");
+				$("#"+data[0].players[i].id+"_hover").hover(function () {
+				
+					var showID = $(this).attr("ID");
+					console.log(showID);
+					  $("#"+showID+"_toggle").slideToggle("fast");
+					});
 			}
 
 		}

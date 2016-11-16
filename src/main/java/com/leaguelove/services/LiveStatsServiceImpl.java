@@ -8,8 +8,11 @@ import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.leaguelove.dao.MatchDao;
+import com.leaguelove.domain.Match;
 import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Season;
@@ -26,6 +29,9 @@ import com.robrua.orianna.type.core.summoner.Summoner;
 @Service
 public class LiveStatsServiceImpl implements LiveStatsService{
 
+	@Autowired
+	MatchDao matchdao;
+	
 	@Override
 	public JSONArray getLiveStats(String name) {
 			    	
@@ -33,7 +39,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		    	
 		    	if (summoner.getCurrentGame()==null) {
 		    		JSONArray ja=new JSONArray();
-
+		    		
 					for (CurrentGame iterable_element : RiotAPI.getFeaturedGames()) {
 						Long min=iterable_element.getLength()/60;
 						Long sec=iterable_element.getLength()%60;
@@ -71,11 +77,20 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		    		
 		    		JSONObject player_stats=new JSONObject();
 		    		player_stats.put("name", player.getSummonerName());
+		    		player_stats.put("id", player.getSummonerID());
 		    		player_stats.put("champion_name", player.getChampion().getName());
 		    		Champion ch= RiotAPI.getChampionByName(player.getChampion().getName());
 		    		player_stats.put("champion_key", ch.getKey());
-		        	
-		    		
+		    		String tier;
+		    		try
+	    			{
+	    			 tier=RiotAPI.getLeagueEntriesBySummonerName(player.getSummonerName()).get(0).getTier()+" "+RiotAPI.getLeagueEntriesBySummonerName(player.getSummonerName()).get(0).getEntries().iterator().next().getDivision();
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				tier="Unranked";
+	    			}
+		    		player_stats.put("tier", tier);
 		    		player_stats.put("general_stats",getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),player.getChampion().getName()));
 		    		
 		    //		player_stats.put("history",getHistory(RiotAPI.getSummonerByName(player.getSummonerName())));
@@ -347,6 +362,8 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 	        JSONArray history=new JSONArray();
 	        for (int i = 0; i < 5; i++) {
 	        	int counter=0;
+	        	try
+	        	{
 	        	for (Participant users:RiotAPI.getMatch(listmatch.get(i).getID()).getParticipants()) {
 	        		counter++;
 					if (users.getSummonerName().contains(summoner.getName())) {
@@ -376,7 +393,11 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 						history.put(stats);
 					}
 				}
-				
+	        	}
+	        	catch(Exception e)
+	        	{
+	        		System.out.println(e);
+	        	}
 			}
 			return history;
 		}
