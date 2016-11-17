@@ -1878,7 +1878,17 @@ input:-webkit-autofill {
 	display: inline-block;
 	margin:10px;
 }
-
+.live_stats_border {
+	    width: 180px;
+    height: 240px;
+    position: absolute;
+    left: 0;
+    opacity: 0.1;
+    z-index: 99;
+	
+	
+	
+}
 .live_stats_size_side {
 	width: 40px;
 	height: 40px;
@@ -1938,7 +1948,7 @@ input:-webkit-autofill {
    display:none;
     position:absolute;
     bottom:285px;
-    padding-top: 25px;
+    padding-top: 10px;
     font-size:20px;
     font-weight:bolder;
     text-align:center;
@@ -1953,7 +1963,7 @@ input:-webkit-autofill {
    display:none;
     position:absolute;
    z-index:99;
-    padding-top: 25px;
+ 
     font-size:20px;
     font-weight:bolder;
     text-align:center;

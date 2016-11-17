@@ -81,6 +81,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		    		player_stats.put("champion_name", player.getChampion().getName());
 		    		Champion ch= RiotAPI.getChampionByName(player.getChampion().getName());
 		    		player_stats.put("champion_key", ch.getKey());
+		    		player_stats.put("icon", player.getProfileIconID());
 		    		String tier;
 		    		try
 	    			{
@@ -119,6 +120,9 @@ public class LiveStatsServiceImpl implements LiveStatsService{
     	Double lowest_kda=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
     	String lowest_kda_key="";
     	for (int i = 0; i < players.length(); i++) {
+    		if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				
+		
 			if (highest_kda<players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
 				highest_kda=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
 				highest_kda_name=players.getJSONObject(i).getString("name");
@@ -129,7 +133,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 				lowest_kda_name=players.getJSONObject(i).getString("name");
 				lowest_kda_key=players.getJSONObject(i).getString("champion_key");
 			}
-			
+    		}
 		}
     	stats.put("highest_kda", highest_kda);
     	stats.put("highest_kda_name", highest_kda_name);
@@ -200,7 +204,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	champion.put("kills_per_game", formatter.format(kills_per_game));
 		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
 		            	champion.put("assists_per_game", formatter.format(assists_per_game));
-		            	
+		            	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
 		            	champion.put("winrate", round(winrate,2));
 		            	Double loserate=1-winrate;
 		            	champion.put("loserate", round(loserate,2));
@@ -246,7 +250,7 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		        	
 				 JSONObject champion=new JSONObject();
 		        	if (entry.getKey().toString().contains("Unranked")) {
-		        		
+		        		champion.put("name","unranked");
 		        		champion.put("games_played", entry.getValue().getAggregatedStats().getTotalGamesPlayed());
 		            	champion.put("kills", round(entry.getValue().getAggregatedStats().getTotalKills(),1));
 		            	champion.put("assists", round(entry.getValue().getAggregatedStats().getTotalAssists(),1));

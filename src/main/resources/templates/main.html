@@ -513,11 +513,13 @@ JUNGLE
 						.append(
 								"<td>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
 								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:10px'>"
-							       +" More Details"
+							       +"	<button type='button' style='padding-left: 24px; background-color:#374d5a;' class='kda_text_main kda_text' ><i class='fa fa-info' ></i></button>"
 							        +"</p> "
-							        +"<p id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
-								       +" More Details"
-								        +"</p> "
+							        +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'><img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_name+"_0.jpg' class=' live_stats_border'></img>"
+								       +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
+								 
+									+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>"
+								
 										+
 										
 										" <div class='mdl-card__title'>"
