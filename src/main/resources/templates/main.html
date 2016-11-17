@@ -422,7 +422,7 @@ JUNGLE
 				$("#first_row")
 						.append(
 								"<td>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
-								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover'>"
+								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:285px'>"
 							       +" More Details"
 							        +"</p> "
 										+
@@ -512,9 +512,12 @@ JUNGLE
 				$("#second_row")
 						.append(
 								"<td>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
-								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover'>"
+								+"<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:10px'>"
 							       +" More Details"
 							        +"</p> "
+							        +"<p id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
+								       +" More Details"
+								        +"</p> "
 										+
 										
 										" <div class='mdl-card__title'>"
@@ -522,6 +525,7 @@ JUNGLE
 										+"<p style='height: 80px;padding-top: 10px;font-weight: bold;color:#374d5a;'>"+data[0].players[i].name+"<br></br>"
 										+data[0].players[i].tier+"</p></div>"
 										+" </div>"
+										
 										+
 
 										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
@@ -584,6 +588,7 @@ JUNGLE
 					var showID = $(this).attr("ID");
 					console.log(showID);
 					  $("#"+showID+"_toggle").slideToggle("fast");
+					  $("#"+showID+"_toggle1").slideToggle("fast");
 					});
 			}
 

@@ -1934,15 +1934,30 @@ input:-webkit-autofill {
 .hide_hover{ 
     background:white;
     width:180px; 
-    height:80px; 
+    height:70px; 
    display:none;
     position:absolute;
-    opacity:0.9;
+    bottom:285px;
     padding-top: 25px;
     font-size:20px;
     font-weight:bolder;
     text-align:center;
-    border-bottom: 2px solid rgb(255, 64, 129);
+    
+    z-index:100;
+    
+}
+.hide_hover1{ 
+    background:#374d5a;
+    width:180px; 
+    height:180px; 
+   display:none;
+    position:absolute;
+   z-index:99;
+    padding-top: 25px;
+    font-size:20px;
+    font-weight:bolder;
+    text-align:center;
+   
     
 }
 .hide_hover:hover
