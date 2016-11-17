@@ -2032,6 +2032,27 @@ input:-webkit-autofill {
 	transition: opacity .35s, visibility .35s, height .35s;
 	overflow: auto;
 }
+.extra_class
+{
+	position: absolute;
+
+	background: #374d5a;
+	top: 30%;
+	border: 0;
+	left: 20%;
+
+
+
+}
+.extra_class td
+{
+	color:white;
+	font-weight:bolder;
+	font-size:30px;
+	padding:10px;
+
+
+}
 .overlay1 {
 	position: absolute;
 	display: block;
@@ -2044,8 +2065,7 @@ input:-webkit-autofill {
 	height: 100%;
 	opacity: 0.95;
 	display:none;
-	-webkit-transition: opacity .35s, visibility .35s, height .35s;
-	transition: opacity .35s, visibility .35s, height .35s;
+
 	overflow: auto;
 }
 .overlay.open {

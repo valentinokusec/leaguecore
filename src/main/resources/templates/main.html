@@ -182,18 +182,15 @@ JUNGLE
 		</div>
 	</div>
 
-	<div class="overlay1 overlay-hugeinc" id="extra_data">
-					<button type="button" class="overlay-close" id="close_extra">Close</button>
-					<div class="overlay-menu">
-						<ul>
-							<li>
-								<button class="kda_text_main kda_text"
-									style="padding-left: 18px;">W</button> <span
-								style="color: white;"> EU West </span>
-							</li>
-
-						</ul>
-					</div>
+	<div class="overlay1" id="extra_data">
+					<table class="extra_class">
+					<tr><td colspan="3"><img   src= "http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/Irelia.png" class="img_card live_stats_size" style="margin-left: 40%;"></img></td></tr>
+					<tr><td><p>name</p></td>
+					<td><p>unranekd</p></td>
+					<td><p>k/d/a</p></td></tr>
+					</table>
+					<button type="button" style="padding-left: 19px" class="kda_text_main kda_text" id="close_extra"><i class="fa fa-times" aria-hidden="true"></i></button>
+			
 				</div>
 	<div class="overlay"></div>
 	<nav class="outer-nav top horizontal">
@@ -502,13 +499,13 @@ JUNGLE
 					
 					var showID = $(this).attr("ID");
 					
-					  $("#extra_data").slideToggle("fast");
+					  $("#extra_data").toggle("fast");
 					});
 				$("#close_extra").click(function () {
 					
 					var showID = $(this).attr("ID");
 					
-					  $("#extra_data").slideToggle("fast");
+					  $("#extra_data").fadeOut();
 					});
 			}
 			for (i = 5; i < 10; i++) {
