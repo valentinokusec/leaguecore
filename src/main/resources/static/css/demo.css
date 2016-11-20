@@ -31,7 +31,7 @@ border: 0px solid #969696 !important;
 	width:100%;
 	background-color:white;
 	height:80%;
-
+	position:absolute;
 
 	}
 .details_main
@@ -53,8 +53,16 @@ border: 0px solid #969696 !important;
 	}
 .main_nav
 {
+	z-index:100;
 	background-color:#374d5a;
 	border-bottom:1px solid #969696;
+	 height: 50px;
+    padding: 17px;
+    z-index: 10000 !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
 }
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 .clearfix:before, .clearfix:after {display: table;  content: ''; }

@@ -94,8 +94,10 @@ a:hover, a:visited, a:link, a:active {
 	color: #374d5a;
 	font-size: 40px;
 	font-weight: bold;
+	opacity:0;
 	width: 300px !important;
 	opacity: 1 !important;
+	z-index:1000;
 }
 
 .main_input {
@@ -485,6 +487,10 @@ textarea:focus, input:focus {
 .data_table:hover {
 	transform: scale(1.1);
 }
+.scale
+{
+	transform: scale(1.1);
+}
 
 .hovicon.effect-2.sub-a:hover, .hovicon.effect-2.sub-a:hover i {
 	color: #eea303;
@@ -773,6 +779,8 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
 	position: fixed;
 	top: 40%;
 	left: 46%;
+	opacity:0;
+	z-index:1000;
 }
 
 .pagination {
@@ -910,7 +918,7 @@ svg {
 
 #table_stats {
 	position: fixed;
-	top: 10%;
+	top: 8%;
 	left: 20%;
 }
 
@@ -945,14 +953,14 @@ svg {
 }
 
 .kda_text_live {
-	margin-top: 10px;
-	width: 35px !important;
-	height: 35px !important;
-	color: #374d5a;
-	text-align: center;
-	padding-top: 7px !important;
+	
+
+	color: white;
+	
+
 	font-size: 25px;
 	font-family: 'Lato', sans-serif !important;
+	margin-bottom: 0px;
 }
 
 .kdd {
@@ -1489,9 +1497,17 @@ input:-webkit-autofill {
 
 .demo-card-wide.mdl-card {
 	width: 180px;
-
+background-color: #374d5a;
 	border: 0px solid #000000;
-	border-bottom: 2px solid rgb(255, 64, 129);
+	
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+border-radius: 18px 18px 18px 18px;
+-moz-border-radius: 18px 18px 18px 18px;
+-webkit-border-radius: 18px 18px 18px 18px;
+border: 0px solid #000000;
+border-bottom: 2px solid rgb(255, 64, 129);
 }
 
 .element_size {
@@ -1500,6 +1516,9 @@ input:-webkit-autofill {
 
 }
 
+.element_size:hover {
+transform: scale(1.02);
+}
 .up {
 	z-index: 1000;
 }
@@ -1874,18 +1893,51 @@ input:-webkit-autofill {
 .live_stats_size {
 	width: 70px;
 	height: 70px;
-	float: left;
+
 	display: inline-block;
 	margin:10px;
 }
 .live_stats_border {
 	    width: 180px;
-    height: 240px;
+    height: 265px;
     position: absolute;
-    left: 0;
+    border-radius: 18px 18px 18px 18px;
+-moz-border-radius: 18px 18px 18px 18px;
+-webkit-border-radius: 18px 18px 18px 18px;
+border: 0px solid #000000;
     opacity: 0.1;
     z-index: 99;
 	
+	
+	
+}
+.live_stats_back {
+	    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    
+  	background-color:white;
+    z-index: 99;
+	
+	
+	
+}
+.live_stats_back_op {
+	    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    
+    opacity: 0.5;
+    z-index: -99;
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
 	
 	
 }
@@ -1942,18 +1994,22 @@ input:-webkit-autofill {
 	display: none;
 }
 .hide_hover{ 
-    background:white;
-    width:180px; 
-    height:70px; 
-   display:none;
-    position:absolute;
-    bottom:285px;
+        background: white;
+    width: 100px;
+    height: 50px;
+    display: none;
+    position: absolute;
+    bottom: 285px;
     padding-top: 10px;
-    font-size:20px;
-    font-weight:bolder;
-    text-align:center;
-    
-    z-index:100;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    z-index: 100;
+    border-radius: 65px 65px 65px 65px;
+    -moz-border-radius: 65px 65px 65px 65px;
+    -webkit-border-radius: 65px 65px 65px 65px;
+    border: 0px solid #000000;
+    margin-left: 40px;
     
 }
 .hide_hover1{ 
@@ -2062,7 +2118,31 @@ input:-webkit-autofill {
 	position: absolute;
 
 	background: #374d5a;
-	top: 30%;
+	top: 20%;
+	border: 0;
+	left: 5%;
+
+
+
+}
+.extra_class_stats
+{
+	position: absolute;
+
+	background: #374d5a;
+	top: 20%;
+	border: 0;
+	left: 20%;
+
+
+
+}
+.extra_class_stats_his
+{
+	position: absolute;
+
+	background: #374d5a;
+	bottom: 5%;
 	border: 0;
 	left: 20%;
 
@@ -2075,6 +2155,24 @@ input:-webkit-autofill {
 	font-weight:bolder;
 	font-size:30px;
 	padding:10px;
+
+
+}
+.extra_class_stats td
+{
+	color:white;
+	font-weight:bolder;
+	font-size:30px;
+	padding:20px;
+
+
+}
+.extra_class_stats_his td
+{
+	color:white;
+	font-weight:bolder;
+	font-size:30px;
+	padding-left:20px;
 
 
 }
