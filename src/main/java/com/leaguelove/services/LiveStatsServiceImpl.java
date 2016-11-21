@@ -17,6 +17,7 @@ import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Season;
 import com.robrua.orianna.type.core.currentgame.CurrentGame;
+import com.robrua.orianna.type.core.game.Game;
 import com.robrua.orianna.type.core.league.League;
 import com.robrua.orianna.type.core.match.Participant;
 import com.robrua.orianna.type.core.matchlist.MatchReference;
@@ -362,41 +363,35 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		public JSONArray getHistory(String name) {
 			// TODO Auto-generated method stub
 			Summoner summoner = RiotAPI.getSummonerByName(name);
+			List<Game> games = RiotAPI.getRecentGames(summoner);
 			List<MatchReference> listmatch=summoner.getMatchList();
 	        JSONArray history=new JSONArray();
-	        for (int i = 0; i < 5; i++) {
+	        for (int i = 0; i < 10; i++) {
 	        	int counter=0;
 	        	try
 	        	{
-	        	for (Participant users:RiotAPI.getMatch(listmatch.get(i).getID()).getParticipants()) {
-	        		counter++;
-					if (users.getSummonerName().contains(summoner.getName())) {
+	        	
+	        
 						JSONObject stats=new JSONObject();
-						
-						if (counter<=5) {
-							stats.put("win", RiotAPI.getMatch(listmatch.get(i).getID()).getTeams().get(0).getWinner());
-							
-						}
-						else {
-							stats.put("win", RiotAPI.getMatch(listmatch.get(i).getID()).getTeams().get(1).getWinner());
-						}
+						stats.put("win", games.get(i).getStats().getWin());
+					
 						
 						stats.put("matchid", String.valueOf(listmatch.get(i).getID()));			
-						stats.put("champion", users.getChampion());					
-						stats.put("assists", users.getStats().getAssists());
-						stats.put("deaths", users.getStats().getDeaths());
-						stats.put("kills", users.getStats().getKills());
+						stats.put("champion", games.get(i).getChampion());					
+						stats.put("assists",games.get(i).getStats().getAssists());
+						stats.put("deaths", games.get(i).getStats().getDeaths());
+						stats.put("kills", games.get(i).getStats().getKills());
 					   
-						stats.put("item_0", users.getStats().getItem0ID());
-						stats.put("item_1", users.getStats().getItem1ID());
-						stats.put("item_2", users.getStats().getItem2ID());
-						stats.put("item_3", users.getStats().getItem3ID());
-						stats.put("item_4", users.getStats().getItem4ID());
-						stats.put("item_5", users.getStats().getItem5ID());
+						stats.put("item_0", games.get(i).getStats().getItem0ID());
+						stats.put("item_1", games.get(i).getStats().getItem1ID());
+						stats.put("item_2", games.get(i).getStats().getItem2ID());
+						stats.put("item_3", games.get(i).getStats().getItem3ID());
+						stats.put("item_4", games.get(i).getStats().getItem4ID());
+						stats.put("item_5", games.get(i).getStats().getItem5ID());
 						
 						history.put(stats);
-					}
-				}
+					
+				
 	        	}
 	        	catch(Exception e)
 	        	{
