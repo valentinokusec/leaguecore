@@ -244,15 +244,15 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	NumberFormat formatter = new DecimalFormat("#0.0"); 
 		            	NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 		            	
-		            	Double kills_per_game=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-		            	Double deaths_per_game=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-		            	Double assists_per_game=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double killsPerGame=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double deathsPerGame=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double assistsPerGame=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
 		            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed())*100;
-		             	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
+		             	champion.put("kda", round((killsPerGame+assistsPerGame)/deathsPerGame,2));
 				           
-		            	champion.put("kills_per_game", formatter.format(kills_per_game));
-		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
-		            	champion.put("assists_per_game", formatter.format(assists_per_game));
+		            	champion.put("kills_per_game", formatter.format(killsPerGame));
+		            	champion.put("deaths_per_game", formatter.format(deathsPerGame));
+		            	champion.put("assists_per_game", formatter.format(assistsPerGame));
 		            	
 		            	champion.put("winrate", round(winrate,2));
 		            	Double loserate=1-winrate;
@@ -272,15 +272,15 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	NumberFormat formatter = new DecimalFormat("#0.0"); 
 		            	NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 		            	
-		            	Double kills_per_game=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-		            	Double deaths_per_game=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
-		            	Double assists_per_game=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double killsPerGame=(double) (entry.getValue().getStats().getTotalKills())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double deathsPerGame=(double) (entry.getValue().getStats().getTotalDeaths())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
+		            	Double assistsPerGame=(double) (entry.getValue().getStats().getTotalAssists())/(double)(entry.getValue().getStats().getTotalGamesPlayed());
 		            	Double winrate=(double) (entry.getValue().getStats().getTotalWins())/(double)(entry.getValue().getStats().getTotalGamesPlayed())*100;
-		            	
-		            	champion.put("kills_per_game", formatter.format(kills_per_game));
-		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
-		            	champion.put("assists_per_game", formatter.format(assists_per_game));
-		            	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
+		             	champion.put("kda", round((killsPerGame+assistsPerGame)/deathsPerGame,2));
+				           
+		            	champion.put("kills_per_game", formatter.format(killsPerGame));
+		            	champion.put("deaths_per_game", formatter.format(deathsPerGame));
+		            	champion.put("assists_per_game", formatter.format(assistsPerGame));
 		            	champion.put("winrate", round(winrate,2));
 		            	Double loserate=1-winrate;
 		            	champion.put("loserate", round(loserate,2));
@@ -337,15 +337,15 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 		            	NumberFormat formatter = new DecimalFormat("#0.0"); 
 		            	NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 		            	
-		            	Double kills_per_game=(double) (entry.getValue().getAggregatedStats().getTotalKills())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-		            	Double deaths_per_game=(double) (entry.getValue().getAggregatedStats().getTotalDeaths())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-		            	Double assists_per_game=(double) (entry.getValue().getAggregatedStats().getTotalAssists())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+		            	Double killsPerGame=(double) (entry.getValue().getAggregatedStats().getTotalKills())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+		            	Double deathsPerGame=(double) (entry.getValue().getAggregatedStats().getTotalDeaths())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+		            	Double assistsPerGame=(double) (entry.getValue().getAggregatedStats().getTotalAssists())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed());
 		            	Double winrate=(double) (entry.getValue().getAggregatedStats().getTotalWins())/(double)(entry.getValue().getAggregatedStats().getTotalGamesPlayed())*100;
-		            	champion.put("kda", round((kills_per_game+assists_per_game)/deaths_per_game,2));
+		            	champion.put("kda", round((killsPerGame+assistsPerGame)/deathsPerGame,2));
 					       
-		            	champion.put("kills_per_game", formatter.format(kills_per_game));
-		            	champion.put("deaths_per_game", formatter.format(deaths_per_game));
-		            	champion.put("assists_per_game", formatter.format(assists_per_game));
+		            	champion.put("kills_per_game", formatter.format(killsPerGame));
+		            	champion.put("deaths_per_game", formatter.format(deathsPerGame));
+		            	champion.put("assists_per_game", formatter.format(assistsPerGame));
 		            	
 		            	champion.put("winrate", round(winrate,2));
 		            	Double loserate=1-winrate;
