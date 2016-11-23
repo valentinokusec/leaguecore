@@ -29,16 +29,32 @@
 	<div id="perspective" class="perspective effect-movedown">
 		<div class="container" style="padding: 0px">
 			<h1 class=" ele">Please wait</h1>
-				<div class="loader">
+			<div class="loader">
 
-				<svg width='196px' height='196px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ripple">
-<rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><g> <animate attributeName="opacity" dur="2s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="1;1;0">
-</animate><circle cx="50" cy="50" r="40" stroke="#afafb7" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="r" dur="2s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="0;22;44">
-</animate></circle></g><g><animate attributeName="opacity" dur="2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.33;1" values="1;1;0">
-</animate><circle cx="50" cy="50" r="40" stroke="#ff4081" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="r" dur="2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.33;1" values="0;22;44">
+				<svg width='196px' height='196px' xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+					class="uil-ripple">
+<rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
+					<g> <animate attributeName="opacity" dur="2s"
+						repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1"
+						values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#afafb7" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="0s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+					<g>
+					<animate attributeName="opacity" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#ff4081" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="0;22;44">
 </animate></circle></g>
 </svg>
-				</div>
+			</div>
 			<div class="wrapper">
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
@@ -68,12 +84,12 @@
 					<!-- /morphsearch -->
 					<div style="float: right">
 						<p th:text="${name}" style="color: white;"></p>
-		
+
 					</div>
 				</nav>
 				<!-- <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p> -->
 
-			
+
 
 
 				<p id="data" th:text="${name}" hidden="hidden"></p>
@@ -112,7 +128,7 @@
 						src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Braum_0.jpg"
 						class=" live_stats_back_op"></img>
 					<div class=" live_stats_back"></div>
-					<table id="table_stats" style="    width: 85%;">
+					<table id="table_stats" style="width: 85%;">
 
 						<!--  <tr class="role">
       <td >
@@ -136,13 +152,13 @@ JUNGLE
 
 
       </tr>-->
-						<tr >
-						<td id="first_row"></td>
+						<tr>
+							<td id="first_row"></td>
 
 
 						</tr>
 						<tr>
-						<td id="second_row"></td>
+							<td id="second_row"></td>
 
 						</tr>
 
@@ -188,32 +204,7 @@ JUNGLE
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</button></td>
 				</tr>
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
 			</table>
 			<table style="float: left;">
@@ -225,32 +216,7 @@ JUNGLE
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</button></td>
 				</tr>
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
 			</table>
 			<table style="float: left;">
@@ -262,61 +228,10 @@ JUNGLE
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</button></td>
 				</tr>
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
 
 			</table>
 			<table style="float: left;">
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-
-				<tr>
-					<td><p>KDA</p></td>
-					<td><p>1</p></td>
-					<td><button type="button" style="padding-left: 19px"
-							class="kda_text_main kda_text" id="close_extra">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button></td>
-				</tr>
-
 				<tr>
 					<td><p>KDA</p></td>
 					<td><p>1</p></td>
@@ -334,25 +249,16 @@ JUNGLE
 						class="kda_text_main kda_text" id="close_extra">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button></td>
-				<td><button type="button" style="padding-left: 19px"
-						class="kda_text_main kda_text" id="close_extra">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</button></td>
-				<td><button type="button" style="padding-left: 19px"
-						class="kda_text_main kda_text" id="close_extra">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</button></td>
+
 
 			</tr>
 			<tr>
 				<td><p>1</p></td>
-				<td><p>1</p></td>
-				<td><p>1</p></td>
+
 			</tr>
 			<tr>
 				<td><p>11</p></td>
-				<td><p>11</p></td>
-				<td><p>11</p></td>
+
 			</tr>
 
 
@@ -384,7 +290,7 @@ JUNGLE
 	<script type="text/javascript">
 		/*<![CDATA[*/
 		var show_stats = 0;
-	
+
 		//	$("#table_stats").hide();
 		$(".no_game").hide();
 
@@ -392,6 +298,7 @@ JUNGLE
 		$(".left_stats").hide();
 		$("#check").hide();
 		var gen_data;
+		var general_data;
 		function getData() {
 
 			$
@@ -407,6 +314,7 @@ JUNGLE
 							$(".loader").hide();
 							console.log("SUCCESS: ", data);
 							gen_data = data;
+							general_data = data[0].general_stats;
 
 							if (data[15] == "no_game") {
 								$(".live_stats_back").stop().animate({
@@ -594,6 +502,122 @@ JUNGLE
 			for (i = 0; i < 5; i++) {
 				$("#first_row")
 						.append(
+								"<div class='col-md-2'>  <div id='"+i+"_"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
+										+ "<p id='"+i+"_"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:00px'>"
+										+ "	Info"
+										+ "</p> "
+										/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
+										      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
+										
+										+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
+
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_name+"_0.jpg' class=' live_stats_border'></img>"
+
+										+ " <div class='mdl-card__title'>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+ "<button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 10px;' class='kda_text_main kda_text' >1</i></button>"
+										+ "<p style='font-weight: bold;color:white;'>"
+										+ data[0].players[i].tier
+										+ "</p></div>"
+										+ " </div>"
+
+										+
+
+										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+										+
+
+										" <table  class='main-panel is-active'>"
+										+
+
+										"  <tr> "
+										+ "    <td> "
+										+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].kills_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].assists_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].deaths_per_game
+										+ "</p></div> "
+										+
+
+										"     </td>"
+										+
+
+										"  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: white'>"
+										+ "      Winrate<span class='kdd'>:</span>"
+										+ "    </p>"
+										+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:13px;  color: white'>"
+										+ data[0].players[i].general_stats[show_stats].winrate
+										+ "</p>"
+										+
+
+										"      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
+										+ "          Games played<span style='    padding-left: 10px;' class='kdd'>:</span>"
+										+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:13px;  color: white'>"
+										+ data[0].players[i].general_stats[show_stats].games_played
+										+ "</p>"
+										+ "      </td>"
+										+ "  </tr>"
+										+ "  <tr>" + "    <td>" +
+
+										"    </td>" + "  </tr>" + "</table>" +
+
+										"</div>" +
+
+										"<table>" +
+
+										"</table>"
+
+										+ "</div></div>");
+				$("#" +i+"_"+ data[0].players[i].id + "_hover").hover(function() {
+
+					var showID = $(this).attr("ID");
+					console.log(i);
+					console.log("#" + showID + "_toggle");
+					/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
+
+					$("#"  + showID + "_toggle").animate({
+						opacity : 1,
+						bottom : "+=10px"
+
+					}, 200);
+				}, function() {
+					var showID = $(this).attr("ID");
+					console.log(showID);
+					$("#"  + showID + "_toggle").animate({
+						opacity : 0,
+						bottom : "-=10px"
+
+					}, 200);
+				});
+				$("#" +i+"_"+ data[0].players[i].id + "_hover_toggle").click(
+						function() {
+
+							var showID = $(this).attr("ID");
+							populateExtraData(general_data,showID.charAt(0));
+							$("#extra_data").toggle("fast");
+						});
+
+			
+				$("#close_extra").click(function() {
+
+					var showID = $(this).attr("ID");
+
+					$("#extra_data").fadeOut();
+				});
+			}
+			for (i = 5; i < 10; i++) {
+				$("#second_row")
+						.append(
 								"<div class='col-md-2'>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
 										+ "<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:00px'>"
 										+ "	Info"
@@ -674,152 +698,125 @@ JUNGLE
 
 					var showID = $(this).attr("ID");
 					console.log(showID);
-				/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
-		
+					/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
+
 					$("#" + showID + "_toggle").animate({
-						opacity: 1,
+						opacity : 1,
 						bottom : "+=10px"
 
 					}, 200);
-				},
-				 function() {
+				}, function() {
 					var showID = $(this).attr("ID");
 					console.log(showID);
 					$("#" + showID + "_toggle").animate({
-						opacity: 0,
+						opacity : 0,
 						bottom : "-=10px"
 
 					}, 200);
-				  });
-				$("#" + data[0].players[i].id + "_hover_toggle").click(
+				});
+				$("#" +i+"_"+ data[0].players[i].id + "_hover_toggle").click(
 						function() {
 
 							var showID = $(this).attr("ID");
-
+							populateExtraData();
 							$("#extra_data").toggle("fast");
 						});
-				$("#close_extra").click(function() {
 
-					var showID = $(this).attr("ID");
-
-					$("#extra_data").fadeOut();
-				});
 			}
-			for (i = 5; i < 10; i++) {
-				$("#second_row")
-				.append(
-						"<div class='col-md-2'>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
-								+ "<p id='"+data[0].players[i].id+"_hover_toggle' class='hide_hover' style='bottom:00px'>"
-								+ "	Info"
-								+ "</p> "
-								/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
-								      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
-								
-								+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
-
-								+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_name+"_0.jpg' class=' live_stats_border'></img>"
-
-								+ " <div class='mdl-card__title'>"
-								+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-								+ "<button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 10px;' class='kda_text_main kda_text' >1</i></button>"
-								+ "<p style='font-weight: bold;color:white;'>"
-								+ data[0].players[i].tier
-								+ "</p></div>"
-								+ " </div>"
-
-								+
-
-								" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
-								+
-
-								" <table  class='main-panel is-active'>"
-								+
-
-								"  <tr> "
-								+ "    <td> "
-								+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-								+ data[0].players[i].general_stats[show_stats].kills_per_game
-								+ "<span class='kdd'>/</span></p></div> "
-								+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-								+ data[0].players[i].general_stats[show_stats].assists_per_game
-								+ "<span class='kdd'>/</span></p></div> "
-								+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-								+ data[0].players[i].general_stats[show_stats].deaths_per_game
-								+ "</p></div> "
-								+
-
-								"     </td>"
-								+
-
-								"  </tr>"
-								+ "  <tr>"
-								+ "      <td>"
-								+ "    <p class='col-md-5' style='font-weight:bold; margin-top:13px;  color: white'>"
-								+ "      Winrate<span class='kdd'>:</span>"
-								+ "    </p>"
-								+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:13px;  color: white'>"
-								+ data[0].players[i].general_stats[show_stats].winrate
-								+ "</p>"
-								+
-
-								"      </td>"
-								+ "  </tr>"
-								+ "  <tr>"
-								+ "      <td>"
-								+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
-								+ "          Games played<span style='    padding-left: 10px;' class='kdd'>:</span>"
-								+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:13px;  color: white'>"
-								+ data[0].players[i].general_stats[show_stats].games_played
-								+ "</p>"
-								+ "      </td>"
-								+ "  </tr>"
-								+ "  <tr>" + "    <td>" +
-
-								"    </td>" + "  </tr>" + "</table>" +
-
-								"</div>" +
-
-								"<table>" +
-
-								"</table>"
-
-								+ "</div></div>");
-		$("#" + data[0].players[i].id + "_hover").hover(function() {
-
-			var showID = $(this).attr("ID");
-			console.log(showID);
-		/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
-
-			$("#" + showID + "_toggle").animate({
-				opacity: 1,
-				bottom : "+=10px"
-
-			}, 200);
-		},
-		 function() {
-			var showID = $(this).attr("ID");
-			console.log(showID);
-			$("#" + showID + "_toggle").animate({
-				opacity: 0,
-				bottom : "-=10px"
-
-			}, 200);
-		  });
-		$("#" + data[0].players[i].id + "_hover_toggle").click(
-				function() {
-
-					var showID = $(this).attr("ID");
-
-					$("#extra_data").toggle("fast");
-				});
-		$("#close_extra").click(function() {
-
-			var showID = $(this).attr("ID");
-
-			$("#extra_data").fadeOut();
-		});
-
 		}
+		function populateExtraData(data, player_id) {
+			console.log(data);
+			console.log(player_id);
+			$("#extra_data").text("");
+
+			$("#extra_data")
+					.append(
+							"<table class='extra_class'>"
+									+ "<tr>"
+									+ "<td colspan='3'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"+data[player_id].champion+".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
+									+ "</tr>"
+									+ "<tr>"
+									+ "	<td><p>"+data[player_id].name+"</p></td>"
+									+ "</tr>"
+									+ "<tr>"
+									+ "	<td><p>"+data[player_id].tier+"</p></td>"
+									+ "</tr>"
+
+									+ "</table>"
+									+ "<div class='extra_class_stats'>"
+									+ "	<table style='float: left;'>"
+									+ "		<tr>"
+									+ "			<td><p>KDA</p></td>"
+									+ "			<td><p>1</p></td>"
+									+ "			<td><button type='button' style='padding-left: 19px'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "			</button></td>"
+									+ "	</tr>"
+
+									+ "</table>"
+									+ "	<table style='float: left;'>"
+									+ "	<tr>"
+									+ "		<td><p>KDA</p></td>"
+									+ "		<td><p>1</p></td>"
+									+ "		<td><button type='button' style='padding-left: 19px'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "			</button></td>"
+									+ "	</tr>"
+
+									+ "</table>"
+									+ "<table style='float: left;'>"
+									+ "	<tr>"
+									+ "	<td><p>KDA</p></td>"
+									+ "	<td><p>1</p></td>"
+									+ "	<td><button type='button' style='padding-left: 19px' class='kda_text_main kda_text' id=''>"
+									+ "		<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "		</button></td>"
+									+ "</tr>"
+
+									+ "</table>"
+									+ "<table style='float: left;'>"
+									+ "	<tr>"
+									+ "		<td><p>KDA</p></td>"
+									+ "		<td><p>1</p></td>"
+									+ "		<td><button type='button' style='padding-left: 19px'"
+									+"			class='kda_text_main kda_text' id=''>"
+									+ "			<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "		</button></td>"
+									+ "	</tr>"
+
+									+ "</table>"
+									+ "</div>"
+									+ "<table class='extra_class_stats_his ' style='float: left;'>"
+									+ "<tr>"
+									+ "	<td><button type='button' style='padding-left: 19px'"
+									+"			class='kda_text_main kda_text' id=''>"
+									+ "			<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "		</button></td>"
+
+									+ "</tr>"
+									+ "<tr>"
+									+ "	<td><p>1</p></td>"
+
+									+ "	</tr>"
+									+ "<tr>"
+									+ "	<td><p>11</p></td>"
+
+									+ "	</tr>"
+
+									+ "</table>"
+									+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
+									+"	class='kda_text_main kda_text' id='close_extra'>"
+									+ "	<i class='fa fa-times' aria-hidden='true'></i>"
+									+ "</button>"
+
+					);
+
+			$("#close_extra").click(function() {
+
+				$("#extra_data").fadeOut();
+			});
 		}
 		(function() {
 			var morphSearch = document.getElementById('morphsearch'), input = morphSearch

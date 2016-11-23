@@ -44,17 +44,17 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 					for (CurrentGame iterable_element : RiotAPI.getFeaturedGames()) {
 						Long min=iterable_element.getLength()/60;
 						Long sec=iterable_element.getLength()%60;
-		    			String sum_name=iterable_element.getParticipants().iterator().next().getSummonerName();
+		    			String sumName=iterable_element.getParticipants().iterator().next().getSummonerName();
 		    			String tier;
 		    			try
 		    			{
-		    			 tier=RiotAPI.getLeagueEntriesBySummonerName(sum_name).get(0).getTier()+" "+RiotAPI.getLeagueEntriesBySummonerName(sum_name).get(0).getEntries().iterator().next().getDivision();
+		    			 tier=RiotAPI.getLeagueEntriesBySummonerName(sumName).get(0).getTier()+" "+RiotAPI.getLeagueEntriesBySummonerName(sumName).get(0).getEntries().iterator().next().getDivision();
 		    			}
 		    			catch(Exception e)
 		    			{
 		    				tier="Unranked";
 		    			}
-		    			ja.put(sum_name);
+		    			ja.put(sumName);
 						ja.put(tier);
 						ja.put(min+":"+sec);
 		    			
@@ -69,20 +69,20 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 
 	private JSONArray getLiveStatsFromSummoner(Summoner summoner) {
 				
-				JSONArray live_stats_array=new JSONArray();
-				JSONObject live_stats=new JSONObject();
-				live_stats.put("game_mode", summoner.getCurrentGame().getQueueType());
+				JSONArray liveStatsArray=new JSONArray();
+				JSONObject liveStats=new JSONObject();
+				liveStats.put("game_mode", summoner.getCurrentGame().getQueueType());
 		    	
 		    	JSONArray players=new JSONArray();
 		    	for (com.robrua.orianna.type.core.currentgame.Participant player:summoner.getCurrentGame().getParticipants()) {
 		    		
-		    		JSONObject player_stats=new JSONObject();
-		    		player_stats.put("name", player.getSummonerName());
-		    		player_stats.put("id", player.getSummonerID());
-		    		player_stats.put("champion_name", player.getChampion().getName());
+		    		JSONObject playerStats=new JSONObject();
+		    		playerStats.put("name", player.getSummonerName());
+		    		playerStats.put("id", player.getSummonerID());
+		    		playerStats.put("champion_name", player.getChampion().getName());
 		    		Champion ch= RiotAPI.getChampionByName(player.getChampion().getName());
-		    		player_stats.put("champion_key", ch.getKey());
-		    		player_stats.put("icon", player.getProfileIconID());
+		    		playerStats.put("champion_key", ch.getKey());
+		    		playerStats.put("icon", player.getProfileIconID());
 		    		String tier;
 		    		try
 	    			{
@@ -92,56 +92,131 @@ public class LiveStatsServiceImpl implements LiveStatsService{
 	    			{
 	    				tier="Unranked";
 	    			}
-		    		player_stats.put("tier", tier);
-		    		player_stats.put("general_stats",getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),player.getChampion().getName()));
+		    		playerStats.put("tier", tier);
+		    		playerStats.put("general_stats",getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),player.getChampion().getName()));
 		    		
-		    //		player_stats.put("history",getHistory(RiotAPI.getSummonerByName(player.getSummonerName())));
-		    //		player_stats.put("history_for_champion",getHistoryForChampion(summoner,player.getChampion().getName()));
+		    //		playerStats.put("history",getHistory(RiotAPI.getSummonerByName(player.getSummonerName())));
+		    //		playerStats.put("history_for_champion",getHistoryForChampion(summoner,player.getChampion().getName()));
 		    		
-		    		players.put(player_stats);
+		    		players.put(playerStats);
 				}
 		    	
-		    	live_stats.put("players", players);
+		    	liveStats.put("players", players);
 		    	
 		    	JSONObject stats=getStats(players);
 		    
-		    	live_stats.put("stats", stats);
+		    	liveStats.put("stats", stats);
 		    	
+		    	JSONArray generalInfo= getGeneralInfo(players);
 		    	
-		    	live_stats_array.put(live_stats);
+		    	liveStats.put("general_stats",generalInfo);
 		    	
-				return live_stats_array;
+		    	liveStatsArray.put(liveStats);
+		    	
+				return liveStatsArray;
 			}
+	private JSONArray getGeneralInfo(JSONArray players) {
+		// TODO Auto-generated method stub
+		JSONArray generalInfo=new JSONArray();
+		for (int i = 0; i < players.length(); i++) {
+	   		if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				
+	   			JSONObject user= new JSONObject();
+	   			user.put("name", players.getJSONObject(i).getString("name"));
+	   			user.put("tier", players.getJSONObject(i).getString("tier"));
+	   			user.put("champion", players.getJSONObject(i).getString("champion_key"));
+	   			user.put("champion_name", players.getJSONObject(i).getString("champion_name"));
+	   			Double kills=Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("kills_per_game").replace(",","."));
+	   			int counter=1;
+	   			for (int k = 0; k < players.length(); k++) {
+	   		   		if (players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				if (kills<Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("kills_per_game").replace(",","."))) {
+					counter++;
+				}
+				
+	   		   		}
+	   		   		
+	   			}
+	   			Double assists=Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("assists_per_game").replace(",","."));
+	   			int counter_assists=1;
+	   			for (int k = 0; k < players.length(); k++) {
+	   		   		if (players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				if (kills<Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("assists_per_game").replace(",","."))) {
+					counter_assists++;
+				}
+		
+	   		   		}
+	   		   		
+	   			}
+	   			Double deaths=Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("deaths_per_game").replace(",","."));
+	   			int counter_deaths=1;
+	   			for (int k = 0; k < players.length(); k++) {
+	   		   		if (players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				if (kills<Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("deaths_per_game").replace(",","."))) {
+					counter_deaths++;
+				}
+		
+	   		   		}
+	   		   		
+	   			}
+	   			Double winrate=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("winrate");
+	   			int counter_winrate=1;
+	   			for (int k = 0; k < players.length(); k++) {
+	   		   		if (players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
+				if (kills<players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("winrate")) {
+					counter_winrate++;
+				}
+	
+	   		   		}
+	   		   		
+	   			}
+	   		
+	   			user.put("kills_per_game", kills);
+	   			user.put("kills", counter);
+	   			user.put("assists_per_game", assists);
+	   			user.put("assists", counter_assists);
+	   			user.put("deaths_per_game", deaths);
+	   			user.put("deaths", counter_deaths);
+	   			user.put("winrate_c", counter_winrate);
+	   			user.put("winrate", winrate);
+	   			generalInfo.put(user);
+	    		}
+	   		
+		
+		}
+		return generalInfo;
+	}
+
 	private JSONObject getStats(JSONArray players) {
 		JSONObject stats=new JSONObject();
-		String highest_kda_name="";
-		String highest_kda_key="";
-    	Double highest_kda=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
-    	String lowest_kda_name="";
-    	Double lowest_kda=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
-    	String lowest_kda_key="";
+		String highestKDAName="";
+		String highestKDAKey="";
+    	Double highestKDA=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+    	String lowestKDAName="";
+    	Double lowestKDA=players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+    	String lowestKDAKey="";
     	for (int i = 0; i < players.length(); i++) {
     		if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
 				
 		
-			if (highest_kda<players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
-				highest_kda=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
-				highest_kda_name=players.getJSONObject(i).getString("name");
-				highest_kda_key=players.getJSONObject(i).getString("champion_key");
+			if (highestKDA<players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
+				highestKDA=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+				highestKDAName=players.getJSONObject(i).getString("name");
+				highestKDAKey=players.getJSONObject(i).getString("champion_key");
 			}
-			if (lowest_kda>players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
-				lowest_kda=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
-				lowest_kda_name=players.getJSONObject(i).getString("name");
-				lowest_kda_key=players.getJSONObject(i).getString("champion_key");
+			if (lowestKDA>players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda")) {
+				lowestKDA=players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+				lowestKDAName=players.getJSONObject(i).getString("name");
+				lowestKDAKey=players.getJSONObject(i).getString("champion_key");
 			}
     		}
 		}
-    	stats.put("highest_kda", highest_kda);
-    	stats.put("highest_kda_name", highest_kda_name);
-    	stats.put("highest_kda_key", highest_kda_key);
-    	stats.put("lowest_kda", lowest_kda);
-    	stats.put("lowest_kda_name", lowest_kda_name);
-    	stats.put("lowest_kda_key", lowest_kda_key);
+    	stats.put("highest_kda", highestKDA);
+    	stats.put("highest_kda_name", highestKDAName);
+    	stats.put("highest_kda_key", highestKDAKey);
+    	stats.put("lowest_kda", lowestKDA);
+    	stats.put("lowest_kda_name", lowestKDAName);
+    	stats.put("lowest_kda_key", lowestKDAKey);
 		
 		return stats;
 	}
