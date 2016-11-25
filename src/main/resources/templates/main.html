@@ -463,10 +463,16 @@ JUNGLE
 				timeout : 100000,
 				success : function(data) {
 					console.log(data);
-					iter++;
+					
 					if (iter < 10) {
+						console.log(general_data[iter].history);
+						general_data[iter].history=data;
+						console.log(general_data[iter].history);
+						console.log(general_data);
 						getHistory(gen_data[0]);
+						$("#loading_history").append("");
 					}
+					iter++;
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
@@ -746,64 +752,117 @@ JUNGLE
 									+ "<div class='extra_class_stats'>"
 									+ "	<table style='float: left;'>"
 									+ "		<tr>"
-									+ "			<td><p>KDA</p></td>"
-									+ "			<td><p>1</p></td>"
-									+ "			<td><button type='button' style='padding-left: 19px'"
-									+"				class='kda_text_main kda_text' id=''>"
-									+ "				<i class='fa fa-times' aria-hidden='true'></i>"
-									+ "			</button></td>"
+									+ "			<td colspan='3'><p>Most played</p></td><tr>"
+									+ "			<tr><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"+data[player_id].preffered_champions[0]+".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"+data[player_id].preffered_champions[1]+".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"+data[player_id].preffered_champions[2]+".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
+								
 									+ "	</tr>"
 
 									+ "</table>"
 									+ "	<table style='float: left;'>"
 									+ "	<tr>"
-									+ "		<td><p>KDA</p></td>"
-									+ "		<td><p>1</p></td>"
-									+ "		<td><button type='button' style='padding-left: 19px'"
+									+ "		<td><p>"+data[player_id].general_info[0].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[0].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
 									+"				class='kda_text_main kda_text' id=''>"
-									+ "				<i class='fa fa-times' aria-hidden='true'></i>"
-									+ "			</button></td>"
+									+ "				"+data[player_id].general_info[0].counter+"</i>"
+									+ "			</p></td>"
 									+ "	</tr>"
-
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[1].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[1].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[1].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[2].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[2].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[2].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[3].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[3].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[3].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[4].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[4].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[4].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
 									+ "</table>"
 									+ "<table style='float: left;'>"
 									+ "	<tr>"
-									+ "	<td><p>KDA</p></td>"
-									+ "	<td><p>1</p></td>"
-									+ "	<td><button type='button' style='padding-left: 19px' class='kda_text_main kda_text' id=''>"
-									+ "		<i class='fa fa-times' aria-hidden='true'></i>"
-									+ "		</button></td>"
-									+ "</tr>"
-
-									+ "</table>"
-									+ "<table style='float: left;'>"
+									+ "		<td><p>"+data[player_id].general_info[0].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[0].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[0].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
 									+ "	<tr>"
-									+ "		<td><p>KDA</p></td>"
-									+ "		<td><p>1</p></td>"
-									+ "		<td><button type='button' style='padding-left: 19px'"
-									+"			class='kda_text_main kda_text' id=''>"
-									+ "			<i class='fa fa-times' aria-hidden='true'></i>"
-									+ "		</button></td>"
+									+ "		<td><p>"+data[player_id].general_info[1].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[1].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[1].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[2].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[2].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[2].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[3].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[3].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[3].counter+"</i>"
+									+ "			</p></td>"
+									+ "	</tr>"
+									+ "	<tr>"
+									+ "		<td><p>"+data[player_id].general_info[4].label+"</p></td>"
+									+ "		<td><p>"+data[player_id].general_info[4].stat+"</p></td>"
+									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+"				class='kda_text_main kda_text' id=''>"
+									+ "				"+data[player_id].general_info[4].counter+"</i>"
+									+ "			</p></td>"
 									+ "	</tr>"
 
+									+ "</table>"
+									+ "<table style='float: left;' id='loading_history'>"
+									+ "	<tr>"
+									+ "		<td><p></p></td>"
+													
+									+ "	</tr>"
+									+ "	<tr>"
+							
+									+ "		<td><p>Loading data...</p></td>"								
+									+ "	</tr>"
 									+ "</table>"
 									+ "</div>"
 									+ "<table class='extra_class_stats_his ' style='float: left;'>"
-									+ "<tr>"
-									+ "	<td><button type='button' style='padding-left: 19px'"
-									+"			class='kda_text_main kda_text' id=''>"
-									+ "			<i class='fa fa-times' aria-hidden='true'></i>"
-									+ "		</button></td>"
-
+									+ "<tr id='pro_his'>"
+									
 									+ "</tr>"
-									+ "<tr>"
-									+ "	<td><p>1</p></td>"
+									+ "<tr id='kda_his'>"
+									
 
 									+ "	</tr>"
-									+ "<tr>"
-									+ "	<td><p>11</p></td>"
-
-									+ "	</tr>"
+								
 
 									+ "</table>"
 									+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
@@ -812,7 +871,49 @@ JUNGLE
 									+ "</button>"
 
 					);
-
+					if(data[player_id].history!="None")
+						{
+						$("#loading_history").text("");
+						$("#kda_his").text("");
+						$("#pro_his").text("");
+						
+						$("#loading_history").append( ""
+					    +"	<tr style='height:105px;'>"
+						+ "		<td><p>KDA</p></td>"
+						+ "		<td><p>"+data[player_id].history[10].kda+"</p></td>"					
+						+ "	</tr>"
+						+"	<tr style='height:105px;'>"
+						+ "		<td><p>KDA</p></td>"
+						+ "		<td><p>"+data[player_id].history[10].kills+"</p></td>"					
+						+ "	</tr>"
+						+"	<tr style='height:105px;'>"
+						+ "		<td><p>KDA</p></td>"
+						+ "		<td><p>"+data[player_id].history[10].deaths+"</p></td>"					
+						+ "	</tr>"
+						+"	<tr style='height:105px;'>"
+						+ "		<td><p>KDA</p></td>"
+						+ "		<td><p>"+data[player_id].history[10].assists+"</p></td>"					
+						+ "	</tr>"
+						+"	<tr style='height:105px;'>"
+						+ "		<td><p>KDA</p></td>"
+						+ "		<td><p>"+data[player_id].history[10].winrate+"</p></td>"					
+						+ "	</tr>");
+						
+						for (i = 0; i < 10; i++) {
+							$("#pro_his")
+									.append(
+											"<td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"+data[player_id].history[i].champion+".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
+											);
+							$("#kda_his")
+							.append(
+									"<td><p>"+data[player_id].history[i].kda+"</p></td>"
+									);
+						}
+				
+				
+			
+						
+						}
 			$("#close_extra").click(function() {
 
 				$("#extra_data").fadeOut();

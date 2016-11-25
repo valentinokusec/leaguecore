@@ -136,6 +136,19 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		user.put("tier", players.getJSONObject(i).getString("tier"));
 		user.put("champion", players.getJSONObject(i).getString("champion_key"));
 		user.put("champion_name", players.getJSONObject(i).getString("champion_name"));
+		JSONArray prefferChamps=new JSONArray();
+		try
+		{
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(0).getString("name"));
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(1).getString("name"));
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(2).getString("name"));
+		}
+		catch(Exception e)
+		{
+			
+		}
+		user.put("preffered_champions", prefferChamps);
+		user.put("history", "None");
 		if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("name").contains("all")) {
 			user.put("general_info", getUserInfo(players, i, 0));
 			user.put("champion_info", getUserInfo(players, i, 1));
@@ -152,10 +165,27 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		int counter_assists = 10;
 		int counter_deaths = 10;
 		int counter_winrate = 10;
+		int counterKDA = 10;
 		Double winrate = 0d;
 		Double kills = 0d;
 		Double deaths = 0d;
 		Double assists = 0d;
+		Double kda = 0d;
+		try {
+			kda = Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
+					.getString("kda").replace(",", "."));
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (kda > Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getString("kda").replace(",", "."))) {
+					counterKDA--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
 		try {
 			kills = Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
 					.getString("kills_per_game").replace(",", "."));
@@ -224,19 +254,24 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject assistsInfo = new JSONObject();
 		JSONObject deathsInfo = new JSONObject();
 		JSONObject winrateInfo = new JSONObject();
-
-		killsInfo.put("kills_per_game", kills);
-		killsInfo.put("kills", counter);
+		JSONObject kdaInfo = new JSONObject();
+		
+		kdaInfo.put("stat", kda);
+		kdaInfo.put("counter", counterKDA);
+		kdaInfo.put("label", "KDA");
+		killsInfo.put("stat", kills);
+		killsInfo.put("counter", counter);
 		killsInfo.put("label", "Kills");
-		assistsInfo.put("assists_per_game", assists);
-		assistsInfo.put("assists", counter_assists);
+		assistsInfo.put("stat", assists);
+		assistsInfo.put("counter", counter_assists);
 		assistsInfo.put("label", "Assists");
-		deathsInfo.put("deaths_per_game", deaths);
-		deathsInfo.put("deaths", counter_deaths);
+		deathsInfo.put("stat", deaths);
+		deathsInfo.put("counter", counter_deaths);
 		deathsInfo.put("label", "Assists");
-		winrateInfo.put("winrate_c", counter_winrate);
-		winrateInfo.put("winrate", winrate);
+		winrateInfo.put("counter", counter_winrate);
+		winrateInfo.put("stat", winrate);
 		winrateInfo.put("label", "winrate");
+		userInfo.put(kdaInfo);
 		userInfo.put(killsInfo);
 		userInfo.put(assistsInfo);
 		userInfo.put(deathsInfo);
@@ -522,6 +557,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		List<Game> games = RiotAPI.getRecentGames(summoner);
 		List<MatchReference> listmatch = summoner.getMatchList();
 		JSONArray history = new JSONArray();
+		int kills=0;
+		int assists=0;
+		int deaths=0;
+		int wins=0;
+		
+		
 		for (int i = 0; i < 10; i++) {
 			int counter = 0;
 			try {
@@ -534,20 +575,154 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				stats.put("assists", games.get(i).getStats().getAssists());
 				stats.put("deaths", games.get(i).getStats().getDeaths());
 				stats.put("kills", games.get(i).getStats().getKills());
-
+				stats.put("kda", round((double)(games.get(i).getStats().getKills() + games.get(i).getStats().getAssists()) /  (double)games.get(i).getStats().getDeaths(), 2));
+				
 				stats.put("item_0", games.get(i).getStats().getItem0ID());
 				stats.put("item_1", games.get(i).getStats().getItem1ID());
 				stats.put("item_2", games.get(i).getStats().getItem2ID());
 				stats.put("item_3", games.get(i).getStats().getItem3ID());
 				stats.put("item_4", games.get(i).getStats().getItem4ID());
 				stats.put("item_5", games.get(i).getStats().getItem5ID());
-
+				
 				history.put(stats);
+				
+				kills+=games.get(i).getStats().getKills();
+				assists+=games.get(i).getStats().getAssists();
+				deaths+=games.get(i).getStats().getDeaths();
+				if (games.get(i).getStats().getWin()) {
+					wins++;
+				}
 
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
+		Double kda=round((double)(kills+assists)/deaths,2);
+		Double killsPer=(double) kills/10;
+		Double daethsPer=(double) deaths/10;
+		Double assistsPer=(double) assists/10;
+		Double winrate=(double) wins/10;
+		winrate=winrate*100;
+		JSONObject historyInfo=new JSONObject();
+		historyInfo.put("kda", kda);
+		historyInfo.put("kills_per_game", killsPer);
+		historyInfo.put("assists_per_game", daethsPer);
+		historyInfo.put("deaths_per_game", assistsPer);
+		historyInfo.put("winrate", winrate);
+	
+		history.put(historyInfo);
+		
 		return history;
+	}
+	private JSONArray getHistoryInfo(JSONObject players) {
+		int counter = 10;
+		int counter_assists = 10;
+		int counter_deaths = 10;
+		int counter_winrate = 10;
+		int counterKDA = 10;
+		Double winrate = 0d;
+		Double kills = 0d;
+		Double deaths = 0d;
+		Double assists = 0d;
+		Double kda = 0d;
+		try {
+			kda = Double.parseDouble(players.getString("kda").replace(",", "."));
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (kda > Double.parseDouble(players.getString("kda").replace(",", "."))) {
+					counterKDA--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			kills = Double.parseDouble(players.getString("kills_per_game").replace(",", "."));
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (kills > Double.parseDouble(players.getString("kills_per_game").replace(",", "."))) {
+					counter--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			assists = Double.parseDouble(players.getString("assists_per_game").replace(",", "."));
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (assists > Double.parseDouble(players.getString("assists_per_game").replace(",", "."))) {
+					counter_assists--;
+
+				}
+
+			}
+		} catch (Exception e) {
+			
+		}
+		try {
+			deaths = Double.parseDouble(players.getString("deaths_per_game").replace(",", "."));
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (deaths > Double.parseDouble(players.getString("deaths_per_game").replace(",", "."))) {
+					counter_deaths--;
+
+				}
+
+			}
+		} catch (Exception e) {
+			
+		}
+		try {
+
+			winrate = players.getDouble("winrate");
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (winrate > players.getDouble("winrate")) {
+					counter_winrate--;
+
+				}
+
+			}
+		} catch (Exception e) {
+			
+		}
+		JSONArray userInfo = new JSONArray();
+		JSONObject killsInfo = new JSONObject();
+		JSONObject assistsInfo = new JSONObject();
+		JSONObject deathsInfo = new JSONObject();
+		JSONObject winrateInfo = new JSONObject();
+		JSONObject kdaInfo = new JSONObject();
+		
+		kdaInfo.put("stat", kda);
+		kdaInfo.put("counter", counterKDA);
+		kdaInfo.put("label", "KDA");
+		killsInfo.put("stat", kills);
+		killsInfo.put("counter", counter);
+		killsInfo.put("label", "Kills");
+		assistsInfo.put("stat", assists);
+		assistsInfo.put("counter", counter_assists);
+		assistsInfo.put("label", "Assists");
+		deathsInfo.put("stat", deaths);
+		deathsInfo.put("counter", counter_deaths);
+		deathsInfo.put("label", "Assists");
+		winrateInfo.put("counter", counter_winrate);
+		winrateInfo.put("stat", winrate);
+		winrateInfo.put("label", "winrate");
+		userInfo.put(kdaInfo);
+		userInfo.put(killsInfo);
+		userInfo.put(assistsInfo);
+		userInfo.put(deathsInfo);
+		userInfo.put(winrateInfo);
+		return userInfo;
 	}
 }
