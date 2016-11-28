@@ -97,6 +97,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			playerStats.put("tier", tier);
 			playerStats.put("general_stats", getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),
 					player.getChampion().getName()));
+			
 
 			// playerStats.put("history",getHistory(RiotAPI.getSummonerByName(player.getSummonerName())));
 			// playerStats.put("history_for_champion",getHistoryForChampion(summoner,player.getChampion().getName()));
@@ -109,6 +110,10 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject stats = getStats(players);
 
 		liveStats.put("stats", stats);
+		
+		JSONArray roles = getRolesStats(players);
+
+		liveStats.put("roles", roles);
 
 		JSONArray generalInfo = getGeneralInfo(players);
 
@@ -117,6 +122,102 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		liveStatsArray.put(liveStats);
 
 		return liveStatsArray;
+	}
+
+	private JSONArray getRolesStats(JSONArray players) {
+		JSONObject roles=new JSONObject();
+		JSONArray rolesArray=new JSONArray();
+		
+		for (int i = 0; i < 5; i++) {
+			JSONObject users=new JSONObject();
+			users.put("user_1", players.getJSONObject(i).getString("champion_name"));
+			users.put("user_2", players.getJSONObject(i+5).getString("champion_name"));
+			
+			JSONArray generalStats=new JSONArray();
+			for (int j = 0; j < 2; j++) {
+				
+			
+			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getInt("games_played")>players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getInt("games_played")) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
+				data.put("higher", true);
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
+				data.put("higher", false);
+				generalStats.put(data);
+			}
+			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
+				data.put("higher", true);
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
+				data.put("higher", false);
+				generalStats.put(data);
+			}
+			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game").replace(",", "."))) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
+				data.put("higher", true);
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
+				data.put("higher", false);
+				generalStats.put(data);
+			}
+			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game").replace(",", "."))) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
+				data.put("higher", true);
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
+				data.put("higher", false);
+				generalStats.put(data);
+			}
+			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate")>players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate")) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
+				data.put("higher", true);
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
+				data.put("higher", false);
+				generalStats.put(data);
+			}
+		}
+			users.put("general_stats",generalStats);
+			rolesArray.put(users);
+		}
+		
+		return rolesArray;
 	}
 
 	private JSONArray getGeneralInfo(JSONArray players) {

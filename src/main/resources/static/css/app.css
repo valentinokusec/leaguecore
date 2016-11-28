@@ -815,6 +815,34 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
 	-webkit-animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
 	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
 }
+.fa-role
+{
+	    color: black !important;
+    padding-right: 5px;
+}
+.roles
+{
+	background: white;
+    width: 100px;
+    height: 50px;
+   
+ 
+   margin-right: 70px;
+    padding: 10px;
+
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+   
+    border-radius: 65px 65px 65px 65px;
+    -moz-border-radius: 65px 65px 65px 65px;
+    -webkit-border-radius: 65px 65px 65px 65px;
+    border: 0px solid #000000;
+    margin-left: 40px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
 .pagination {
 	padding: 5px;
 	height: 70px;
@@ -2152,10 +2180,34 @@ border: 0px solid #000000;
 	background: #374d5a;
 	top: 20%;
 	border: 0;
+	width: 400px;
+
 	
 
+}
+.roles_vs
+{
+	padding:10px;
+	background:white;
+	color:#374d5a;
+	border-radius: 200px 200px 200px 200px;
+-moz-border-radius: 200px 200px 200px 200px;
+-webkit-border-radius: 200px 200px 200px 200px;
+border: 0px solid #000000;
+}
+.extra_class_roles
+{
+	position: absolute;
 
-
+	background: #374d5a;
+	top: 10%;
+	left:40%;
+	border: 0;
+	
+}
+.extra_class_roles td
+{
+	width:100px;	
 }
 .extra_class_stats
 {
@@ -2168,6 +2220,25 @@ border: 0px solid #000000;
 
 
 
+}
+.extra_class_stats_roles
+{
+	position: absolute;
+
+	background: #374d5a;
+	top: 20%;
+	border: 0;
+	left: 10%;
+
+
+
+}
+.extra_class_stats_roles p
+{
+color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    
 }
 .extra_class_heading
 {
