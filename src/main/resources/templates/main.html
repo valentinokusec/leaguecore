@@ -472,7 +472,7 @@
 
 		}
 		function getHistory(data) {
-
+		
 			$.ajax({
 				type : "GET",
 				contentType : "application/json",
@@ -481,17 +481,50 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
+					iter++;
 					console.log(data);
-
+					console.log(iter);
 					if (iter < 10) {
-						console.log(general_data[iter].history);
+						
 						general_data[iter].history = data;
-						console.log(general_data[iter].history);
-						console.log(general_data);
+						
 						getHistory(gen_data[0]);
 						$("#loading_history").append("");
 					}
+					if(iter==1)
+						{
+							console.log(general_data);
+							populateHistoryRoles(general_data);
+						}
+					
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
 					iter++;
+					if (iter < 10) {
+						getHistory(gen_data[0]);
+					}
+
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		};
+		function populateHistoryRoles(data) {
+			var data_send={"get_data":data};
+			$.ajax({
+				type : "POST",
+				//contentType : "application/json",
+				url : "/gethistoryroles/",
+				data:JSON.stringify(data_send),
+
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					console.log(data);
+
+					
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
@@ -794,13 +827,98 @@
 						
 
 							+ "</table>"
+							+ "	<table style='float: left;'>"
+							+ "		<tr>"
+							+ "			<td colspan='' id='fitin'><p class='kda_text_main kda_text'>"+data[player_id].general_stats[0].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[0].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[0].user_2_stat+"</p></td>"		
 							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[1].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[1].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[1].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[2].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[2].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[2].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[3].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[3].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[3].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[4].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[4].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[4].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+					
+						
+
+							+ "</table>"
+							+ "</table>"
+							+ "	<table style='float: left;'>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[5].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[5].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[5].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[6].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[6].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[6].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[7].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[7].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[7].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[8].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[8].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[8].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[9].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[9].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[9].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+					
+						
+
+							+ "</table>"
+							+ "<table style='float: left;' id='loading_history'>"
+							+ "	<tr>"
+							+ "		<td><p></p></td>"
+
+							+ "	</tr>"
+							+ "	<tr>"
+
+							+ "		<td><p>Loading data...</p></td>"
+							+ "	</tr>"
+							+ "</table>"
 							+"</div>"
 							+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
 							+"	class='kda_text_main kda_text' id='close_extra'>"
 							+ "	<i class='fa fa-times' aria-hidden='true'></i>"
 							+ "</button>"
 							);
+			
+			    
+			if (data[player_id].roles.history != "None") {
+				$("#loading_history").text("");
+			}
 			$("#close_extra").click(function() {
 
 				$("#extra_data").fadeOut();

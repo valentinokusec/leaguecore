@@ -80,7 +80,16 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				.getParticipants()) {
 
 			JSONObject playerStats = new JSONObject();
+			
 			playerStats.put("name", player.getSummonerName());
+			if (player.getSummonerName().contains(summoner.getName())) {
+				playerStats.put("owner_team", player.getTeam());
+				playerStats.put("owner", true);
+			}
+			else{
+				playerStats.put("owner", false);
+			}
+			playerStats.put("team", player.getTeam().toString());
 			playerStats.put("id", player.getSummonerID());
 			playerStats.put("champion_name", player.getChampion().getName());
 			Champion ch = RiotAPI.getChampionByName(player.getChampion().getName());
@@ -127,7 +136,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 	private JSONArray getRolesStats(JSONArray players) {
 		JSONObject roles=new JSONObject();
 		JSONArray rolesArray=new JSONArray();
-		
+		String ownerTeam="";
+		for (int i = 0; i < 10; i++) {
+			if (players.getJSONObject(i).getBoolean("owner")) {
+				ownerTeam=players.getJSONObject(i).getString("team");
+			}
+		}
 		for (int i = 0; i < 5; i++) {
 			JSONObject users=new JSONObject();
 			users.put("user_1", players.getJSONObject(i).getString("champion_name"));
@@ -141,7 +155,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
-				data.put("higher", true);
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
 				generalStats.put(data);
 			}
 			else
@@ -149,14 +169,27 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getInt("games_played"));
-				data.put("higher", false);
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
+				
 				generalStats.put(data);
 			}
 			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))) {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
-				data.put("higher", true);
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
 				generalStats.put(data);
 			}
 			else
@@ -164,14 +197,26 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
-				data.put("higher", false);
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
 				generalStats.put(data);
 			}
 			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game").replace(",", "."))) {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
-				data.put("higher", true);
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
 				generalStats.put(data);
 			}
 			else
@@ -179,14 +224,26 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("deaths_per_game"));
-				data.put("higher", false);
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
 				generalStats.put(data);
 			}
 			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game").replace(",", "."))) {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
-				data.put("higher", true);
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
 				generalStats.put(data);
 			}
 			else
@@ -194,14 +251,26 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("assists_per_game"));
-				data.put("higher", false);
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
 				generalStats.put(data);
 			}
 			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate")>players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate")) {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
-				data.put("higher", true);
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
 				generalStats.put(data);
 			}
 			else
@@ -209,7 +278,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
 				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("winrate"));
-				data.put("higher", false);
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
 				generalStats.put(data);
 			}
 		}
@@ -462,13 +537,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				NumberFormat formatter = new DecimalFormat("#0.0");
 				NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 
-				champion.put("kills_per_game", 0);
-				champion.put("deaths_per_game", 0);
-				champion.put("assists_per_game", 0);
+				champion.put("kills_per_game", Integer.toString(0));
+				champion.put("deaths_per_game", Integer.toString(0));
+				champion.put("assists_per_game", Integer.toString(0));
 
-				champion.put("winrate", 0);
+				champion.put("winrate", Integer.toString(0));
 
-				champion.put("loserate", 0);
+				champion.put("loserate", Integer.toString(0));
 				championList.put(champion);
 			}
 			
@@ -490,13 +565,28 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 					NumberFormat formatter = new DecimalFormat("#0.0");
 					NumberFormat formatter_winrate = new DecimalFormat("#0.00");
-
-					Double killsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalKills())
-							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-					Double deathsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalDeaths())
-							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-					Double assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
-							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+					Double killsPerGame;
+					Double deathsPerGame;
+					Double assistsPerGame;
+					if (entry.getValue().getAggregatedStats().getTotalGamesPlayed()==0) {
+						 killsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalKills())
+								/ (double) (1);
+						 deathsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalDeaths())
+								/ (1);
+						 assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
+								/ (double) (1);
+					}
+					else
+					{
+						 killsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalKills())
+								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+						 deathsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalDeaths())
+								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+						 assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
+								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+					}
+				
+					
 					Double winrate = (double) (entry.getValue().getAggregatedStats().getTotalWins())
 							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed()) * 100;
 					champion.put("kda", round((killsPerGame + assistsPerGame) / deathsPerGame, 2));
@@ -520,13 +610,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			champion1.put("loses", 0);
 			champion1.put("wins", 0);
 
-			champion1.put("kills_per_game", 0);
-			champion1.put("deaths_per_game", 0);
-			champion1.put("assists_per_game", 0);
+			champion1.put("kills_per_game", Integer.toString(0));
+			champion1.put("deaths_per_game", Integer.toString(0));
+			champion1.put("assists_per_game", Integer.toString(0));
 
-			champion1.put("winrate", 0);
+			champion1.put("winrate", Integer.toString(0));
 
-			champion1.put("loserate", 0);
+			champion1.put("loserate", Integer.toString(0));
 			championList.put(champion1);
 		}
 		

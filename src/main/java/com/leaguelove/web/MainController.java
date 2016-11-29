@@ -147,6 +147,26 @@ public class MainController {
 		}
     	
     }
+    @RequestMapping(value="/gethistoryroles",method=RequestMethod.POST)
+    public @ResponseBody String GetHistoryRoles( @RequestBody String get_data ,Model model) throws Exception {
+
+
+    	JSONArray data_get = livestatsService.getHistory(get_data);
+//    	try {
+//    		
+//    		data.getString(0);
+//    		
+//    		data.put("no_game");
+//    		return data.toString();
+//    		
+//    		
+//		}
+//    	catch(Exception e) {
+//    		
+    		return get_data.toString();
+		
+    	
+    }
     @CrossOrigin(origins = "http://leaguecore.com")
     @RequestMapping("/getrandommessage")
     public String getRandomMessage() throws Exception {
