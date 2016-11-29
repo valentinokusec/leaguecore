@@ -150,7 +150,13 @@ public class MainController {
     @RequestMapping(value="/gethistoryroles",method=RequestMethod.POST)
     public @ResponseBody String GetHistoryRoles( @RequestBody String get_data ,Model model) throws Exception {
 
-
+    	String data=get_data.replaceAll("%7B", "{");
+    	data=data.replaceAll("%22", "\"");
+    	data=data.replaceAll("%22", ":");
+    	data=data.replaceAll("%5B", "[");
+    	data=data.replaceAll("%5D", "]");
+    	data=data.replaceAll("%7C", "}");
+    	data=data.replaceAll("%2C", "'");
     	JSONArray data_get = livestatsService.getHistory(get_data);
 //    	try {
 //    		
