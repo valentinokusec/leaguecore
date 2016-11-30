@@ -179,6 +179,33 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				
 				generalStats.put(data);
 			}
+			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("kda")>players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("kda")) {
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("kda"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("kda"));
+				if (players.getJSONObject(i).getString("team").contains(ownerTeam)) {
+					data.put("higher", "true_true");
+				}
+				else
+				{
+					data.put("higher", "true_false");
+				}
+				generalStats.put(data);
+			}
+			else
+			{
+				JSONObject data=new JSONObject();
+				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getDouble("kda"));
+				data.put("user_2_stat", players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getDouble("kda"));
+				if (players.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+					data.put("higher", "false_true");
+				}
+				else
+				{
+					data.put("higher", "false_false");
+				}
+				generalStats.put(data);
+			}
 			if (Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))>Double.parseDouble(players.getJSONObject(i+5).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game").replace(",", "."))) {
 				JSONObject data=new JSONObject();
 				data.put("user_1_stat", players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(j).getString("kills_per_game"));
@@ -289,6 +316,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			}
 		}
 			users.put("general_stats",generalStats);
+			users.put("history","None");
 			rolesArray.put(users);
 		}
 		
@@ -310,6 +338,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject user = new JSONObject();
 		user.put("name", players.getJSONObject(i).getString("name"));
 		user.put("tier", players.getJSONObject(i).getString("tier"));
+		user.put("team", players.getJSONObject(i).getString("team"));
+		user.put("owner", players.getJSONObject(i).getBoolean("owner"));
 		user.put("champion", players.getJSONObject(i).getString("champion_key"));
 		user.put("champion_name", players.getJSONObject(i).getString("champion_name"));
 		JSONArray prefferChamps=new JSONArray();
@@ -533,7 +563,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				champion.put("deaths", 0);
 				champion.put("loses", 0);
 				champion.put("wins", 0);
-
+				champion.put("kda", 0);
 				NumberFormat formatter = new DecimalFormat("#0.0");
 				NumberFormat formatter_winrate = new DecimalFormat("#0.00");
 
@@ -795,7 +825,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		Double winrate=(double) wins/10;
 		winrate=winrate*100;
 		JSONObject historyInfo=new JSONObject();
-		historyInfo.put("kda", kda);
+		historyInfo.put("kda", round(kda,2));
 		historyInfo.put("kills_per_game", killsPer);
 		historyInfo.put("assists_per_game", daethsPer);
 		historyInfo.put("deaths_per_game", assistsPer);
@@ -915,5 +945,287 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		userInfo.put(deathsInfo);
 		userInfo.put(winrateInfo);
 		return userInfo;
+	}
+
+	@Override
+	public JSONArray getHistoryRoles(JSONObject data_get) {
+		JSONArray data=data_get.getJSONArray("get_data");
+		JSONArray rolesArray=new JSONArray();
+		String ownerTeam="";
+		for (int i = 0; i < 10; i++) {
+			if (data.getJSONObject(i).getBoolean("owner")) {
+				ownerTeam=data.getJSONObject(i).getString("team");
+			}
+		}
+			for (int i = 0; i < 1; i++) {
+				JSONObject users=new JSONObject();
+				
+				
+				JSONArray generalStats=new JSONArray();
+				
+				
+				
+				if (data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kda")>data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kda")) {
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kda"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kda"));
+					if (data.getJSONObject(i).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "true_true");
+					}
+					else
+					{
+						data1.put("higher", "true_false");
+					}
+					generalStats.put(data1);
+				}
+				else
+				{
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kda"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kda"));
+					if (data.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "false_true");
+					}
+					else
+					{
+						data1.put("higher", "false_false");
+					}
+					generalStats.put(data1);
+				}
+				if (data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game")>data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game")) {
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game"));
+					if (data.getJSONObject(i).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "true_true");
+					}
+					else
+					{
+						data1.put("higher", "true_false");
+					}
+					generalStats.put(data1);
+				}
+				else
+				{
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game"));
+					if (data.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "false_true");
+					}
+					else
+					{
+						data1.put("higher", "false_false");
+					}
+					generalStats.put(data1);
+				}
+				if (data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game")>data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game")) {
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game"));
+					if (data.getJSONObject(i).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "true_true");
+					}
+					else
+					{
+						data1.put("higher", "true_false");
+					}
+					generalStats.put(data1);
+				}
+				else
+				{
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game"));
+					if (data.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "false_true");
+					}
+					else
+					{
+						data1.put("higher", "false_false");
+					}
+					generalStats.put(data1);
+				}
+				if (data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game")>data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game")) {
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game"));
+					if (data.getJSONObject(i).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "true_true");
+					}
+					else
+					{
+						data1.put("higher", "true_false");
+					}
+					generalStats.put(data1);
+				}
+				else
+				{
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game"));
+					if (data.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "false_true");
+					}
+					else
+					{
+						data1.put("higher", "false_false");
+					}
+					generalStats.put(data1);
+				}
+				if (data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("winrate")>data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("winrate")) {
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("winrate"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("winrate"));
+					if (data.getJSONObject(i).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "true_true");
+					}
+					else
+					{
+						data1.put("higher", "true_false");
+					}
+					generalStats.put(data1);
+				}
+				else
+				{
+					JSONObject data1=new JSONObject();
+					data1.put("user_1_stat", data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("winrate"));
+					data1.put("user_2_stat", data.getJSONObject(i+1).getJSONArray("history").getJSONObject(10).getDouble("winrate"));
+					if (data.getJSONObject(i+5).getString("team").contains(ownerTeam)) {
+						data1.put("higher", "false_true");
+					}
+					else
+					{
+						data1.put("higher", "false_false");
+					}
+					generalStats.put(data1);
+				}
+			
+				users.put("history_stats",generalStats);
+				
+				rolesArray.put(users);
+			}
+			
+			rolesArray.put(getHistoyStats(data));
+		return rolesArray;
+	}
+
+	private JSONArray getHistoyStats(JSONArray data) {
+		JSONArray finalData = new JSONArray();
+		for (int i = 0; i < 10; i++) {
+			int counter = 10;
+			int counter_assists = 10;
+			int counter_deaths = 10;
+			int counter_winrate = 10;
+			int counterKDA = 10;
+			Double winrate = 0d;
+			Double kills = 0d;
+			Double deaths = 0d;
+			Double assists = 0d;
+			Double kda = 0d;
+		
+		try {
+			kda = data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kda");
+
+			for (int k = 0; k < 10; k++) {
+
+				if (kda > data.getJSONObject(k).getJSONArray("history").getJSONObject(10).getDouble("kda")) {
+					counterKDA--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			kills =data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game");
+
+			for (int k = 0; k < 10; k++) {
+
+				if (kills > data.getJSONObject(k).getJSONArray("history").getJSONObject(10).getDouble("kills_per_game")) {
+					counter--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			assists =data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game");
+
+			for (int k = 0; k < 10; k++) {
+
+				if (assists > data.getJSONObject(k).getJSONArray("history").getJSONObject(10).getDouble("assists_per_game")) {
+					counter_assists--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			deaths =data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game");
+
+			for (int k = 0; k < 10; k++) {
+
+				if (kills > data.getJSONObject(k).getJSONArray("history").getJSONObject(10).getDouble("deaths_per_game")) {
+					counter_deaths--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		try {
+			winrate =data.getJSONObject(i).getJSONArray("history").getJSONObject(10).getDouble("winrate");
+
+			for (int k = 0; k < 10; k++) {
+
+				if (kills > data.getJSONObject(k).getJSONArray("history").getJSONObject(10).getDouble("winrate")) {
+					counter_winrate--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
+		JSONArray userInfo = new JSONArray();
+		JSONObject genData = new JSONObject();
+		JSONObject killsInfo = new JSONObject();
+		JSONObject assistsInfo = new JSONObject();
+		JSONObject deathsInfo = new JSONObject();
+		JSONObject winrateInfo = new JSONObject();
+		JSONObject kdaInfo = new JSONObject();
+		
+		kdaInfo.put("stat", kda);
+		kdaInfo.put("counter", counterKDA);
+		kdaInfo.put("label", "KDA");
+		killsInfo.put("stat", kills);
+		killsInfo.put("counter", counter);
+		killsInfo.put("label", "Kills");
+		assistsInfo.put("stat", assists);
+		assistsInfo.put("counter", counter_assists);
+		assistsInfo.put("label", "Assists");
+		deathsInfo.put("stat", deaths);
+		deathsInfo.put("counter", counter_deaths);
+		deathsInfo.put("label", "Assists");
+		winrateInfo.put("counter", counter_winrate);
+		winrateInfo.put("stat", winrate);
+		winrateInfo.put("label", "winrate");
+		userInfo.put(kdaInfo);
+		userInfo.put(killsInfo);
+		userInfo.put(assistsInfo);
+		userInfo.put(deathsInfo);
+		userInfo.put(winrateInfo);
+		genData.put("history_rates", userInfo);
+		finalData.put(genData);
+		}
+		
+		return finalData;
 	}
 }

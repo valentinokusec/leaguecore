@@ -481,17 +481,17 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
+					general_data[iter].history = data;
 					iter++;
-					console.log(data);
-					console.log(iter);
+		
 					if (iter < 10) {
 						
-						general_data[iter].history = data;
+						
 						
 						getHistory(gen_data[0]);
 						$("#loading_history").append("");
 					}
-					if(iter==1)
+					if(iter==2)
 						{
 							console.log(general_data);
 							populateHistoryRoles(general_data);
@@ -523,15 +523,26 @@
 				timeout : 100000,
 				success : function(data) {
 					console.log(data);
-
+					
+					var i=0;
+					
+					console.log(data[1]);
+					if (i < 1) {
+						roles_data[i].history=data[i].history_stats;
+						i++;
+					}
+					
+					for (i = 0; i < 10; i++) {
+						console.log(data[1].history_rates[0]);	
+					general_data[i].history.kda_rate=data[1].history_rates[0].counter;
+					console.log(general_data[i].history.kda_rate);	
+					}
 					
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
 					iter++;
-					if (iter < 10) {
-						getHistory(gen_data[0]);
-					}
+					
 
 				},
 				done : function(e) {
@@ -858,18 +869,17 @@
 							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[4].user_2_stat+"</p></td>"		
 							
 							+"</tr>"
-					
-						
-
-							+ "</table>"
-							+ "</table>"
-							+ "	<table style='float: left;'>"
 							+ "		<tr>"
 							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[5].user_1_stat+"</p></td>"
 							+ "			<td colspan=''><p class='"+data[player_id].general_stats[5].higher+"'></p></td>"
 							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[5].user_2_stat+"</p></td>"		
 							
 							+"</tr>"
+						
+
+							+ "</table>"
+							+ "</table>"
+							+ "	<table style='float: left;'>"
 							+ "		<tr>"
 							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[6].user_1_stat+"</p></td>"
 							+ "			<td colspan=''><p class='"+data[player_id].general_stats[6].higher+"'></p></td>"
@@ -894,7 +904,18 @@
 							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[9].user_2_stat+"</p></td>"		
 							
 							+"</tr>"
-					
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[10].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[10].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[10].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
+							+ "		<tr>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[11].user_1_stat+"</p></td>"
+							+ "			<td colspan=''><p class='"+data[player_id].general_stats[11].higher+"'></p></td>"
+							+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].general_stats[11].user_2_stat+"</p></td>"		
+							
+							+"</tr>"
 						
 
 							+ "</table>"
@@ -916,9 +937,49 @@
 							);
 			
 			    
-			if (data[player_id].roles.history != "None") {
+			if (data[player_id].history != "None") {
 				$("#loading_history").text("");
+				$("#loading_history")
+				.append(
+						 "		<tr>"
+						+ "			<td colspan='3'><p class='kda_text_main kda_text'>=</p></td>"
+							
+						
+						+"</tr>"
+						+ "		<tr>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[0].user_1_stat+"</p></td>"
+						+ "			<td colspan=''><p class='"+data[player_id].history[0].higher+"'></p></td>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[0].user_2_stat+"</p></td>"		
+						
+						+"</tr>"
+						+ "		<tr>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[1].user_1_stat+"</p></td>"
+						+ "			<td colspan=''><p class='"+data[player_id].history[1].higher+"'></p></td>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[1].user_2_stat+"</p></td>"		
+						
+						+"</tr>"
+						+ "		<tr>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[2].user_1_stat+"</p></td>"
+						+ "			<td colspan=''><p class='"+data[player_id].history[2].higher+"'></p></td>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[2].user_2_stat+"</p></td>"		
+						
+						+"</tr>"
+						+ "		<tr>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[3].user_1_stat+"</p></td>"
+						+ "			<td colspan=''><p class='"+data[player_id].history[3].higher+"'></p></td>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[3].user_2_stat+"</p></td>"		
+						
+						+"</tr>"
+						+"</tr>"
+						+ "		<tr>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[4].user_1_stat+"</p></td>"
+						+ "			<td colspan=''><p class='"+data[player_id].history[4].higher+"'></p></td>"
+						+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[player_id].history[4].user_2_stat+"</p></td>"		
+						
+						+"</tr>"
+						);
 			}
+		
 			$("#close_extra").click(function() {
 
 				$("#extra_data").fadeOut();

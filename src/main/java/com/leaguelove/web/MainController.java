@@ -155,9 +155,12 @@ public class MainController {
     	data=data.replaceAll("%22", ":");
     	data=data.replaceAll("%5B", "[");
     	data=data.replaceAll("%5D", "]");
-    	data=data.replaceAll("%7C", "}");
-    	data=data.replaceAll("%2C", "'");
-    	JSONArray data_get = livestatsService.getHistory(get_data);
+    	data=data.replaceAll("%3A", ":");
+    	data=data.replaceAll("%7D", "}");
+    	data=data.replaceAll("%2C", ",");
+    	
+    	JSONObject data_get = new JSONObject(data);
+    	JSONArray data_a = livestatsService.getHistoryRoles(data_get);
 //    	try {
 //    		
 //    		data.getString(0);
@@ -169,7 +172,7 @@ public class MainController {
 //		}
 //    	catch(Exception e) {
 //    		
-    		return get_data.toString();
+    		return data_a.toString();
 		
     	
     }
