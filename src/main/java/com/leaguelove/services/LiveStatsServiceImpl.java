@@ -3,6 +3,7 @@ package com.leaguelove.services;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -89,8 +90,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			else{
 				playerStats.put("owner", false);
 			}
+			
 			playerStats.put("team", player.getTeam().toString());
 			playerStats.put("id", player.getSummonerID());
+			playerStats.put("rune1", player.getSummonerSpell1().toString());
+			playerStats.put("rune2", player.getSummonerSpell2().toString());
 			playerStats.put("champion_name", player.getChampion().getName());
 			Champion ch = RiotAPI.getChampionByName(player.getChampion().getName());
 			playerStats.put("champion_key", ch.getKey());
@@ -113,7 +117,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			players.put(playerStats);
 		}
-
+		players=newList(players);
 		liveStats.put("players", players);
 
 		JSONObject stats = getStats(players);
@@ -132,6 +136,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 		return liveStatsArray;
 	}
+
+	
 
 	private JSONArray getRolesStats(JSONArray players) {
 		JSONObject roles=new JSONObject();
@@ -605,6 +611,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 								/ (1);
 						 assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
 								/ (double) (1);
+						 
 					}
 					else
 					{
@@ -619,8 +626,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					
 					Double winrate = (double) (entry.getValue().getAggregatedStats().getTotalWins())
 							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed()) * 100;
+					if (deathsPerGame==0) {
+						champion.put("kda", round((killsPerGame + assistsPerGame), 2));
+					}
+					else
+					{
 					champion.put("kda", round((killsPerGame + assistsPerGame) / deathsPerGame, 2));
-
+					}
 					champion.put("kills_per_game", formatter.format(killsPerGame));
 					champion.put("deaths_per_game", formatter.format(deathsPerGame));
 					champion.put("assists_per_game", formatter.format(assistsPerGame));
@@ -710,7 +722,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				/ (double) (entry.getValue().getStats().getTotalGamesPlayed());
 		Double winrate = (double) (entry.getValue().getStats().getTotalWins())
 				/ (double) (entry.getValue().getStats().getTotalGamesPlayed()) * 100;
+		if (deathsPerGame==0) {
+			champion.put("kda", round((killsPerGame + assistsPerGame), 2));
+		}
+		else
+		{
 		champion.put("kda", round((killsPerGame + assistsPerGame) / deathsPerGame, 2));
+		}
 
 		champion.put("kills_per_game", formatter.format(killsPerGame));
 		champion.put("deaths_per_game", formatter.format(deathsPerGame));
@@ -818,7 +836,14 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				System.out.println(e);
 			}
 		}
-		Double kda=round((double)(kills+assists)/deaths,2);
+		Double kda=0d;
+		if (deaths==0) {
+			kda=round((kills + assists), 2);
+		}
+		else
+		{
+			kda=round((kills + assists)/deaths, 2);
+		}
 		Double killsPer=(double) kills/10;
 		Double daethsPer=(double) deaths/10;
 		Double assistsPer=(double) assists/10;
@@ -827,6 +852,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject historyInfo=new JSONObject();
 		historyInfo.put("kda", round(kda,2));
 		historyInfo.put("kills_per_game", killsPer);
+		historyInfo.put("kda_rate", "none");
+		historyInfo.put("kills_rate", "none");
+		historyInfo.put("death_rate", "none");
+		historyInfo.put("assists_rate", "none");
+		historyInfo.put("winrate_rate", "none");
 		historyInfo.put("assists_per_game", daethsPer);
 		historyInfo.put("deaths_per_game", assistsPer);
 		historyInfo.put("winrate", winrate);
@@ -1227,5 +1257,51 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		}
 		
 		return finalData;
+	}
+	private JSONArray newList(JSONArray players) {
+		// TODO Auto-generated method stub
+		List<JSONObject> returnArray=  Arrays.asList(new JSONObject[10]);
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < 10; i++) {
+			list.add(i);
+		}
+		for (int i = 0; i < 10; i++) {
+			if (players.getJSONObject(i).getString("rune1").contains("Smite") || players.getJSONObject(i).getString("rune2").contains("Smite")) {
+				list.set(i, 10);
+				if (i<5) {
+					returnArray.set(0, players.getJSONObject(i));
+				}
+				else
+				{
+					returnArray.set(5, players.getJSONObject(i));
+				}
+
+			}
+			if (players.getJSONObject(i).getString("rune1").contains("Heal") || players.getJSONObject(i).getString("rune2").contains("Heal")) {
+				list.set(i, 10);
+				if (i<5) {
+					returnArray.set(1, players.getJSONObject(i));
+				}
+				else
+				{
+					returnArray.set(6, players.getJSONObject(i));
+				}
+
+			}
+			if (players.getJSONObject(i).getString("rune1").contains("Exhaust") || players.getJSONObject(i).getString("rune2").contains("Exhaust")) {
+				list.set(i, 10);
+				if (i<5) {
+					returnArray.set(2, players.getJSONObject(i));
+				}
+				else
+				{
+					returnArray.set(7, players.getJSONObject(i));
+				}
+
+			}
+			
+			
+		}
+		return null;
 	}
 }

@@ -533,9 +533,10 @@
 					}
 					
 					for (i = 0; i < 10; i++) {
-						console.log(data[1].history_rates[0]);	
-					general_data[i].history.kda_rate=data[1].history_rates[0].counter;
-					console.log(general_data[i].history.kda_rate);	
+						console.log(general_data[i]);	
+						console.log(general_data[i].history[10].kda_rate);	
+					general_data[i].history[10].kda_rate=data[1][i].history_rates[0].counter;
+					console.log(general_data[i].history[10].kda_rate);	
 					}
 					
 				},
