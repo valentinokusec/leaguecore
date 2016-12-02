@@ -1262,6 +1262,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		// TODO Auto-generated method stub
 		List<JSONObject> returnArray=  Arrays.asList(new JSONObject[10]);
 		List<Integer> list = new ArrayList<Integer>();
+		int firstTeam=0;
+		int secondTeam=5;
 		for (int i = 0; i < 10; i++) {
 			list.add(i);
 		}
@@ -1269,10 +1271,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			if (players.getJSONObject(i).getString("rune1").contains("Smite") || players.getJSONObject(i).getString("rune2").contains("Smite")) {
 				list.set(i, 10);
 				if (i<5) {
+					firstTeam++;
 					returnArray.set(0, players.getJSONObject(i));
 				}
 				else
 				{
+					secondTeam++;
 					returnArray.set(5, players.getJSONObject(i));
 				}
 
@@ -1280,10 +1284,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			if (players.getJSONObject(i).getString("rune1").contains("Heal") || players.getJSONObject(i).getString("rune2").contains("Heal")) {
 				list.set(i, 10);
 				if (i<5) {
+					firstTeam++;
 					returnArray.set(1, players.getJSONObject(i));
 				}
 				else
 				{
+					secondTeam++;
 					returnArray.set(6, players.getJSONObject(i));
 				}
 
@@ -1291,10 +1297,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			if (players.getJSONObject(i).getString("rune1").contains("Exhaust") || players.getJSONObject(i).getString("rune2").contains("Exhaust")) {
 				list.set(i, 10);
 				if (i<5) {
+					firstTeam++;
 					returnArray.set(2, players.getJSONObject(i));
 				}
 				else
 				{
+					secondTeam++;
 					returnArray.set(7, players.getJSONObject(i));
 				}
 
@@ -1302,6 +1310,24 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			
 			
 		}
-		return null;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i)!=10) {
+				if (i<5) {
+					
+					list.set(i, 10);
+					returnArray.set(firstTeam, players.getJSONObject(i));
+					firstTeam++;
+					
+				}
+				else
+				{
+					list.set(i, 10);
+					returnArray.set(secondTeam, players.getJSONObject(i));
+					secondTeam++;
+				}
+			}
+			
+		}
+		return new JSONArray(returnArray);
 	}
 }

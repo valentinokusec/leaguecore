@@ -14,11 +14,10 @@
 <link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" />
+
 <link rel="stylesheet" type="text/css" href="../css/demo.css" />
 <link rel="stylesheet" type="text/css" href="../css/component.css" />
 <link rel="stylesheet" type="text/css" href="../css/style5.css" />
-<link rel="stylesheet" type="text/css" href="../css/tabstyles.css" />
-<link rel="stylesheet" type="text/css" href="../css/tabs.css" />
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -59,6 +58,7 @@
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
 					<a href="/html/" style="color: white;">LeagueCore</a>
+				<button id="menu_b"><i class="fa fa-random fa-2x" aria-hidden="true"></i></button>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
@@ -87,7 +87,7 @@
 
 					</div>
 				</nav>
-				<!-- <p><button id="menu_b"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></button></p> -->
+			
 
 
 
@@ -269,25 +269,39 @@
 	</div>
 	<div class="overlay"></div>
 	<nav class="outer-nav top horizontal">
-		<a href="#" class="">Home</a> <a href="#" class="">News</a> <a
-			href="#" class="">Images</a> <a href="#" class="">Uploads</a> <a
-			href="#" class="">Favorites</a> <a href="#" class="">Messages</a> <a
-			href="#" class="">Security</a>
+		<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+</ul>
 	</nav>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 	<script src="../js/classie.js"></script>
 	<script src="../js/pathLoader.js"></script>
 	<script src="../js/modernizr.custom.js"></script>
 	<script src="../js/cbpFWTabs.js"></script>
+<script src="../js/menu.js"></script>
 
-	<script type="text/javascript"
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 
 	<script type="text/javascript">
 		/*<![CDATA[*/
-		var show_stats = 0;
+		           
+		           $(function() {
+    $( "#sortable").sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  });
 
+
+		var show_stats = 0;
+		
 		//	$("#table_stats").hide();
 		$(".no_game").hide();
 
@@ -297,6 +311,8 @@
 		var gen_data;
 		var general_data;
 		var roles_data;
+		var global_player_id=0;
+		var global_roles_id=0;
 		function getData() {
 
 			$
@@ -481,15 +497,51 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
+
 					general_data[iter].history = data;
 					iter++;
-		
+					if(iter==global_player_id)
+						{
+						$("#kda_his").text("");
+						$("#pro_his").text("");
+						$("#loading_history").append("");
+						$("#loading_history").append(
+								"" + "	<tr style=''>" + "		<td><p>KDA</p></td>"
+										+ "		<td><p>"
+										+ data[10].kda
+										+ "</p></td>"
+										+ "	</tr>"
+										+ "	<tr style=''>"
+										+ "		<td><p>Kills</p></td>"
+										+ "		<td><p>"
+										+ data[10].kills_per_game
+										+ "</p></td>"
+										+ "	</tr>"
+										+ "	<tr style=''>"
+										+ "		<td><p>Deaths</p></td>"
+										+ "		<td><p>"
+										+ data[10].deaths_per_game
+										+ "</p></td>"
+										+ "	</tr>"
+										+ "	<tr style=''>"
+										+ "		<td><p>Assists</p></td>"
+										+ "		<td><p>"
+										+ data[10].assists_per_game
+										+ "</p></td>"
+										+ "	</tr>"
+										+ "	<tr style=''>"
+										+ "		<td><p>KDA</p></td>"
+										+ "		<td><p>"
+										+ data[10].winrate
+										+ "</p></td>" + "	</tr>");
+						}
+					
 					if (iter < 10) {
 						
 						
 						
 						getHistory(gen_data[0]);
-						$("#loading_history").append("");
+						
 					}
 					if(iter==2)
 						{
@@ -524,13 +576,55 @@
 				success : function(data) {
 					console.log(data);
 					
-					var i=0;
+				
 					
 					console.log(data[1]);
-					if (i < 1) {
+					for (i = 0; i < 1; i++) {
 						roles_data[i].history=data[i].history_stats;
-						i++;
+					
 					}
+				
+						$("#loading_history").text("");
+						$("#loading_history")
+						.append(
+								 "		<tr>"
+								+ "			<td colspan='3'><p class='kda_text_main kda_text'>=</p></td>"
+									
+								
+								+"</tr>"
+								+ "		<tr>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[0].user_1_stat+"</p></td>"
+								+ "			<td colspan=''><p class='"+data[global_roles_id].history_stats[0].higher+"'></p></td>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[0].user_2_stat+"</p></td>"		
+								
+								+"</tr>"
+								+ "		<tr>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[1].user_1_stat+"</p></td>"
+								+ "			<td colspan=''><p class='"+data[global_roles_id].history[1].history_stats+"'></p></td>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[1].user_2_stat+"</p></td>"		
+								
+								+"</tr>"
+								+ "		<tr>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[2].user_1_stat+"</p></td>"
+								+ "			<td colspan=''><p class='"+data[global_roles_id].history[2].history_stats+"'></p></td>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[2].user_2_stat+"</p></td>"		
+								
+								+"</tr>"
+								+ "		<tr>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[3].user_1_stat+"</p></td>"
+								+ "			<td colspan=''><p class='"+data[global_roles_id].history_stats[3].higher+"'></p></td>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[3].user_2_stat+"</p></td>"		
+								
+								+"</tr>"
+								+"</tr>"
+								+ "		<tr>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[4].user_1_stat+"</p></td>"
+								+ "			<td colspan=''><p class='"+data[global_roles_id].history_stats[4].higher+"'></p></td>"
+								+ "			<td colspan=''><p class='kda_text_main kda_text'>"+data[global_roles_id].history_stats[4].user_2_stat+"</p></td>"		
+								
+								+"</tr>"
+								);
+						
 					
 					for (i = 0; i < 10; i++) {
 						console.log(general_data[i]);	
@@ -797,6 +891,7 @@
 		function populateRolesData(data, player_id) {
 			console.log(data);
 			console.log(player_id);
+			global_roles_id=player_id;
 			$("#extra_data").text("");
 			$("#extra_data")
 			.append(
@@ -989,6 +1084,7 @@
 		function populateExtraData(data, player_id) {
 			console.log(data);
 			console.log(player_id);
+			global_player_id=player_id;
 			$("#extra_data").text("");
 
 			$("#extra_data")
