@@ -161,17 +161,26 @@ public class MainController {
     	
     	JSONObject data_get = new JSONObject(data);
     	JSONArray data_a = livestatsService.getHistoryRoles(data_get);
-//    	try {
-//    		
-//    		data.getString(0);
-//    		
-//    		data.put("no_game");
-//    		return data.toString();
-//    		
-//    		
-//		}
-//    	catch(Exception e) {
-//    		
+	
+    		return data_a.toString();
+		
+    	
+    }
+    @RequestMapping(value="/getsort",method=RequestMethod.POST)
+    public @ResponseBody String getSort( @RequestBody String get_data ,Model model) throws Exception {
+
+    	String data=get_data;
+    	data=data.replaceAll("%22", "\"");
+    
+    	data=data.replaceAll("%5B", "[");
+    	data=data.replaceAll("%5D", "]");
+    
+
+    	data=data.replaceAll("%2C", ",");
+    	data=data.substring(1, data.length()-2);
+    	
+    	JSONArray data_a = livestatsService.getSort(new JSONArray(data));
+	
     		return data_a.toString();
 		
     	

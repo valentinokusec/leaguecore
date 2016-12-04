@@ -823,7 +823,7 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
 .roles
 {
 	background: white;
-    width: 100px;
+    width: 150px;
     height: 50px;
    
  
@@ -838,11 +838,17 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
     -moz-border-radius: 65px 65px 65px 65px;
     -webkit-border-radius: 65px 65px 65px 65px;
     border: 0px solid #000000;
-    margin-left: 40px;
+    margin-left: 30px;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
+.roles p
+{
+	width:80px !important;
+	float:right;
+	}
+
 .pagination {
 	padding: 5px;
 	height: 70px;
@@ -2200,7 +2206,7 @@ border: 0px solid #000000;
 	position: absolute;
 
 	background: #374d5a;
-	top: 10%;
+	top: 8%;
 	left:40%;
 	border: 0;
 	
@@ -2219,6 +2225,30 @@ border: 0px solid #000000;
 	left: 10%;
 
 
+
+}
+.sort
+{
+    border-radius: 55px 55px 55px 55px;
+    -moz-border-radius: 55px 55px 55px 55px;
+    -webkit-border-radius: 55px 55px 55px 55px;
+    border: 0px solid #000000;
+    background-color: rgb(255,64,129);
+    color: white;
+    width: 100px;
+    height: 50px;
+    padding: 0px !important;
+}	
+#sortable div
+{
+float:left;
+margin:20px;
+
+}
+#sortable1 div
+{
+float:left;
+margin:20px;
 
 }
 .extra_class_stats_roles
@@ -2283,7 +2313,7 @@ border: 0px solid #000000;
 }
 .extra_class_stats_roles table
 {
-	margin:20px;
+	margin-top:20px;
 	    width: 400px;
     height: 400px
 }

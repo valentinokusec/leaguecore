@@ -13,4 +13,5 @@ public interface LiveStatsService {
 	public JSONArray getLiveStats(String name);
 	public JSONArray getHistory(String name);
 	public JSONArray getHistoryRoles(JSONObject data_get);
+	public JSONArray getSort(JSONArray jsonArray);
 } 

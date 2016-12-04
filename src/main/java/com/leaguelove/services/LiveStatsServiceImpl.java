@@ -38,6 +38,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 	@Autowired
 	MatchDao matchdao;
+	
+	private JSONArray statsLive=new JSONArray();
 
 	@Override
 	public JSONArray getLiveStats(String name) {
@@ -74,7 +76,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 		JSONArray liveStatsArray = new JSONArray();
 		JSONObject liveStats = new JSONObject();
-		liveStats.put("game_mode", summoner.getCurrentGame().getQueueType());
+		liveStats.put("game_mode", summoner.getCurrentGame().getMode());
 
 		JSONArray players = new JSONArray();
 		for (com.robrua.orianna.type.core.currentgame.Participant player : summoner.getCurrentGame()
@@ -117,23 +119,28 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			players.put(playerStats);
 		}
+		
+		
+		if (summoner.getCurrentGame().getMode().toString().contains("CLASSIC")) {
 		players=newList(players);
+		
+		JSONArray roles = getRolesStats(players);
+
+		liveStats.put("roles", roles);
+		}
 		liveStats.put("players", players);
 
 		JSONObject stats = getStats(players);
 
 		liveStats.put("stats", stats);
-		
-		JSONArray roles = getRolesStats(players);
-
-		liveStats.put("roles", roles);
-
 		JSONArray generalInfo = getGeneralInfo(players);
 
 		liveStats.put("general_stats", generalInfo);
 
 		liveStatsArray.put(liveStats);
-
+		
+		statsLive=liveStatsArray;
+		
 		return liveStatsArray;
 	}
 
@@ -860,6 +867,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		historyInfo.put("assists_per_game", daethsPer);
 		historyInfo.put("deaths_per_game", assistsPer);
 		historyInfo.put("winrate", winrate);
+		
 	
 		history.put(historyInfo);
 		
@@ -1262,8 +1270,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		// TODO Auto-generated method stub
 		List<JSONObject> returnArray=  Arrays.asList(new JSONObject[10]);
 		List<Integer> list = new ArrayList<Integer>();
-		int firstTeam=0;
-		int secondTeam=5;
+	
+		int exhPosTeam1=2;
+		int healPosTeam1=1;
+		int exhPosTeam2=7;
+		int healPosTeam2=6;
+	
 		for (int i = 0; i < 10; i++) {
 			list.add(i);
 		}
@@ -1271,12 +1283,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			if (players.getJSONObject(i).getString("rune1").contains("Smite") || players.getJSONObject(i).getString("rune2").contains("Smite")) {
 				list.set(i, 10);
 				if (i<5) {
-					firstTeam++;
+					
 					returnArray.set(0, players.getJSONObject(i));
 				}
 				else
 				{
-					secondTeam++;
+				
 					returnArray.set(5, players.getJSONObject(i));
 				}
 
@@ -1284,50 +1296,80 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			if (players.getJSONObject(i).getString("rune1").contains("Heal") || players.getJSONObject(i).getString("rune2").contains("Heal")) {
 				list.set(i, 10);
 				if (i<5) {
-					firstTeam++;
-					returnArray.set(1, players.getJSONObject(i));
+					
+					returnArray.set(healPosTeam1, players.getJSONObject(i));
+					healPosTeam1=3;
 				}
 				else
 				{
-					secondTeam++;
-					returnArray.set(6, players.getJSONObject(i));
+					
+					returnArray.set(healPosTeam2, players.getJSONObject(i));
+					healPosTeam2=8;
 				}
-
+				
 			}
 			if (players.getJSONObject(i).getString("rune1").contains("Exhaust") || players.getJSONObject(i).getString("rune2").contains("Exhaust")) {
 				list.set(i, 10);
 				if (i<5) {
-					firstTeam++;
-					returnArray.set(2, players.getJSONObject(i));
+					
+					returnArray.set(exhPosTeam1, players.getJSONObject(i));
+					exhPosTeam1=4;
 				}
 				else
 				{
-					secondTeam++;
-					returnArray.set(7, players.getJSONObject(i));
+					
+					returnArray.set(exhPosTeam2, players.getJSONObject(i));
+					exhPosTeam2=9;
 				}
-
+				
 			}
 			
 			
 		}
+		
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i)!=10) {
 				if (i<5) {
 					
 					list.set(i, 10);
-					returnArray.set(firstTeam, players.getJSONObject(i));
-					firstTeam++;
+					
+					for (int j = 0; j < 5; j++) {
+						if (returnArray.get(j)==null) {
+							returnArray.set(j, players.getJSONObject(i));
+						}
+						
+					}
 					
 				}
 				else
 				{
 					list.set(i, 10);
-					returnArray.set(secondTeam, players.getJSONObject(i));
-					secondTeam++;
+					for (int j = 5; j < 10; j++) {
+						if (returnArray.get(j)==null) {
+							returnArray.set(j, players.getJSONObject(i));
+						}
+						
+					}
 				}
 			}
 			
 		}
 		return new JSONArray(returnArray);
+	}
+
+	@Override
+	public JSONArray getSort(JSONArray data_get) {
+		// TODO Auto-generated method stub
+		List<JSONObject> returnArray=  Arrays.asList(new JSONObject[10]);
+		JSONArray returnList=statsLive.getJSONObject(0).getJSONArray("players");
+		for (int i = 0; i <10; i++) {
+			returnArray.set(data_get.getInt(i), returnList.getJSONObject(i));
+			
+		}
+		statsLive.getJSONObject(0).put("players", new JSONArray(returnArray));
+		JSONArray roles = getRolesStats(new JSONArray(returnArray));
+
+		statsLive.getJSONObject(0).put("roles", roles);
+		return statsLive;
 	}
 }

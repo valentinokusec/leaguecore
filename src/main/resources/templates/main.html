@@ -131,11 +131,11 @@
 					<table id="table_stats" style="width: 85%;">
 					<tr>
 					<td>
-						<div class="col-md-2" style="text-align: center;"><span id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><span id="0_Jungle_text">Jungle</span></span></div>
-						<div class="col-md-2" style="text-align: center;"><span id="1_Adc" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><span id="1_Adc_text">Adc</span></span></div>
-						<div class="col-md-2" style="text-align: center;"><span id="2_Support" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><span id="2_Support_text">Support</span></span></div>
-						<div class="col-md-2" style="text-align: center;"><span id="3_Mid" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><span id="3_Top_text">Top</span></span></div>
-						<div class="col-md-2" style="text-align: center;"><span id="4_Top" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><span id="4_Mid_text">Mid</span></span></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
 					</td>
 					</tr>
 
@@ -269,15 +269,30 @@
 	</div>
 	<div class="overlay"></div>
 	<nav class="outer-nav top horizontal">
-		<ul id="sortable">
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
-</ul>
+	<table>
+	<tr>
+	<td>
+
+		<div id="sortable" class="ui-state-default">
+  		
+ 			
+   </div>
+  </td>
+	</tr>
+	<tr>
+	<td>
+       
+
+		<div id="sortable1" class="ui-state-default">
+    </div>
+ </td>
+	</tr>
+	<tr>
+	<td>
+<button class="sort" onClick="getSort()">Sort</button>
+	</td>
+	</tr>
+	</table>
 	</nav>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -297,9 +312,47 @@
     $( "#sortable").sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
+
+    $( "#sortable" ).draggable({ axis: "x" });
+    $( "#sortable1").sortable({
+        connectWith: ".connectedSortable"
+      }).disableSelection();
+
+      $( "#sortable1" ).draggable({ axis: "x" });
   });
+		function getSort() {
+		           var idsInOrder = $("#sortable").sortable("toArray");
+		           var idsInOrder1 = $("#sortable1").sortable("toArray");
+		           var sort="["+idsInOrder+","+idsInOrder1+"]";
+		           console.log(idsInOrder);
+		           console.log(sort);
+		           getSortData(sort);
+		}
+		
+		function getSortData(data) {
+			
+			$.ajax({
+				type : "POST",
+				//contentType : "application/json",
+				url : "/getsort/",
+				data:JSON.stringify(data),
 
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					console.log(data);
+					
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					
 
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		};
 		var show_stats = 0;
 		
 		//	$("#table_stats").hide();
@@ -497,7 +550,7 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
-
+					console.log(data);
 					general_data[iter].history = data;
 					iter++;
 					if(iter==global_player_id)
@@ -574,11 +627,7 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
-					console.log(data);
-					
 				
-					
-					console.log(data[1]);
 					for (i = 0; i < 1; i++) {
 						roles_data[i].history=data[i].history_stats;
 					
@@ -627,10 +676,9 @@
 						
 					
 					for (i = 0; i < 10; i++) {
-						console.log(general_data[i]);	
-						console.log(general_data[i].history[10].kda_rate);	
+						
 					general_data[i].history[10].kda_rate=data[1][i].history_rates[0].counter;
-					console.log(general_data[i].history[10].kda_rate);	
+				
 					}
 					
 				},
@@ -659,11 +707,11 @@
 
 		});
 		function populateData(data, show_stats) {
-			console.log(data);
-			console.log(show_stats);
+		
 			$("#first_row").text("");
 			$("#second_row").text("");
 			for (i = 0; i < 5; i++) {
+				$("#sortable").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
 				$("#first_row")
 						.append(
 								"<div class='col-md-2'>  <div id='"+i+"_"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
@@ -746,8 +794,7 @@
 						function() {
 
 							var showID = $(this).attr("ID");
-							console.log(i);
-							console.log("#" + showID + "_toggle");
+							
 							/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
 
 							$("#" + showID + "_toggle").animate({
@@ -757,7 +804,7 @@
 							}, 200);
 						}, function() {
 							var showID = $(this).attr("ID");
-							console.log(showID);
+							
 							$("#" + showID + "_toggle").animate({
 								opacity : 0,
 								bottom : "-=10px"
@@ -780,6 +827,7 @@
 				});
 			}
 			for (i = 5; i < 10; i++) {
+				$("#sortable1").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
 				$("#second_row")
 						.append(
 								"<div class='col-md-2'>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
@@ -918,7 +966,7 @@
 
 							+ "</table>"
 							+ "<div class='extra_class_stats_roles'>"
-							+ "	<table style='float: left;'>"
+							+ "	<table style='float: left; width:300px;'>"
 							+ "		<tr>"
 							+ "			<td colspan='3'><p>Games Played</p></td><tr>"
 							+ "		<tr>"
