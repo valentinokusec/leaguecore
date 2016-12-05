@@ -810,6 +810,17 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
 		-webkit-animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
 	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
 }
+.loader_roles {
+	position: absolute;
+	bottom: 100%;
+	left: 25%;
+	display:none;
+	z-index:1000;
+	-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+    animation-delay: 2s;
+		-webkit-animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
+	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
+}
 .load_custom
 {
 	-webkit-animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
@@ -826,7 +837,7 @@ box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.54);*/
     width: 150px;
     height: 50px;
    
- 
+ 	display:none;
    margin-right: 70px;
     padding: 10px;
 
@@ -1997,7 +2008,7 @@ border: 0px solid #000000;
     top:0;
     left:0;
     
-    opacity: 0.5;
+    opacity: 0.1;
     z-index: -99;
 	-webkit-filter: blur(5px);
 	-moz-filter: blur(5px);

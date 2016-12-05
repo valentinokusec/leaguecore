@@ -17,8 +17,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.leaguelove.dao.MatchDao;
-import com.leaguelove.domain.Match;
+
+
 import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Season;
@@ -36,8 +36,7 @@ import com.robrua.orianna.type.core.summoner.Summoner;
 @Service
 public class LiveStatsServiceImpl implements LiveStatsService {
 
-	@Autowired
-	MatchDao matchdao;
+
 	
 	private JSONArray statsLive=new JSONArray();
 
@@ -157,8 +156,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		}
 		for (int i = 0; i < 5; i++) {
 			JSONObject users=new JSONObject();
-			users.put("user_1", players.getJSONObject(i).getString("champion_name"));
-			users.put("user_2", players.getJSONObject(i+5).getString("champion_name"));
+			users.put("user_1", players.getJSONObject(i).getString("champion_key"));
+			users.put("user_2", players.getJSONObject(i+5).getString("champion_key"));
 			
 			JSONArray generalStats=new JSONArray();
 			for (int j = 0; j < 2; j++) {

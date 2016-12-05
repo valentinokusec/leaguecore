@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.leaguelove.domain.SummonerProfile;
+
 
 @Service
 public interface LiveStatsService {

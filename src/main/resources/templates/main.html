@@ -63,9 +63,9 @@
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
 								placeholder="Search..." />
-							<button class="morphsearch-submit"
+							<button class="morphsearch-submit"  onClick="searchUser()"
 								style="box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);"
-								type="submit"></button>
+								><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
 						</form>
 						<div class="morphsearch-content">
 							<div class="dummy-column">
@@ -290,6 +290,32 @@
 	<tr>
 	<td>
 <button class="sort" onClick="getSort()">Sort</button>
+		<div class="loader_roles">
+
+				<svg width='196px' height='196px' xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+					class="uil-ripple">
+<rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
+					<g> <animate attributeName="opacity" dur="2s"
+						repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1"
+						values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#afafb7" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="0s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+					<g>
+					<animate attributeName="opacity" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#ff4081" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+</svg>
+			</div>
 	</td>
 	</tr>
 	</table>
@@ -300,7 +326,7 @@
 	<script src="../js/classie.js"></script>
 	<script src="../js/pathLoader.js"></script>
 	<script src="../js/modernizr.custom.js"></script>
-	<script src="../js/cbpFWTabs.js"></script>
+
 <script src="../js/menu.js"></script>
 
 
@@ -324,9 +350,12 @@
 		           var idsInOrder = $("#sortable").sortable("toArray");
 		           var idsInOrder1 = $("#sortable1").sortable("toArray");
 		           var sort="["+idsInOrder+","+idsInOrder1+"]";
-		           console.log(idsInOrder);
-		           console.log(sort);
+		        
+		           $(".loader").fadeIn();
+		           $(".loader_roles").fadeIn();
 		           getSortData(sort);
+		          
+		     
 		}
 		
 		function getSortData(data) {
@@ -341,6 +370,19 @@
 				timeout : 100000,
 				success : function(data) {
 					console.log(data);
+					
+					gen_data = data;
+					general_data = data[0].general_stats;
+					roles_data = data[0].roles;
+					
+					populateData(gen_data, show_stats);
+					setTimeout(
+							function() {
+			
+					  $(".loader").fadeOut();
+					  $(".loader_roles").fadeOut();
+							},1000);
+					
 					
 				},
 				error : function(e) {
@@ -384,6 +426,13 @@
 							general_data = data[0].general_stats;
 							roles_data = data[0].roles;
 							
+							if(data[0].game_mode=="CLASSIC")
+								{
+								$(".roles").show();
+								}
+							{
+								$("#menu_b").fadeIn();
+								}
 							$(".roles").hover(
 									function() {
 
@@ -710,6 +759,8 @@
 		
 			$("#first_row").text("");
 			$("#second_row").text("");
+			$("#sortable").text("");
+			$("#sortable1").text("");
 			for (i = 0; i < 5; i++) {
 				$("#sortable").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
 				$("#first_row")
@@ -723,7 +774,7 @@
 										
 										+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
 
-										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_name+"_0.jpg' class=' live_stats_border'></img>"
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
 
 										+ " <div class='mdl-card__title'>"
 										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
@@ -839,7 +890,7 @@
 										
 										+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
 
-										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_name+"_0.jpg' class=' live_stats_border'></img>"
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
 
 										+ " <div class='mdl-card__title'>"
 										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
@@ -1129,6 +1180,11 @@
 				$("#extra_data").fadeOut();
 			});
 		}
+		function searchUser() {
+			
+			
+		}
+		
 		function populateExtraData(data, player_id) {
 			console.log(data);
 			console.log(player_id);
@@ -1477,6 +1533,7 @@
 				});
 			}
 		}.call(this));
+		
 		/*]]>*/
 	</script>
 </body>
