@@ -23,6 +23,7 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/effect1.css" />
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/rpg-awesome.min.css" />
 </head>
 <body class="">
 	<div id="perspective" class="perspective effect-movedown">
@@ -58,14 +59,14 @@
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
 					<a href="/html/" style="color: white;">LeagueCore</a>
-				<button id="menu_b"><i class="fa fa-random fa-2x" aria-hidden="true"></i></button>
+				<button id="menu_b"><i class="fa fa-random fa-2x" style="font-size: 25px !important;" aria-hidden="true"></i></button>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
 								placeholder="Search..." />
 							<button class="morphsearch-submit"  onClick="searchUser()"
 								style="box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);"
-								><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
+								></button>
 						</form>
 						<div class="morphsearch-content">
 							<div class="dummy-column">
@@ -131,11 +132,11 @@
 					<table id="table_stats" style="width: 85%;">
 					<tr>
 					<td>
-						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
-						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
-						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
-						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
-						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="fa fa-car fa-role" aria-hidden="true"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="0_Jungle" class="roles"><i class="ra ra-leaf"></i><p id="0_Jungle_text">Jungle</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="1_Adc" class="roles"><i class="ra ra-archer"></i><p id="1_Adc_text">Adc</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="2_Support" class="roles"><i class="ra ra-crystal-wand"></i><p id="2_Support_text">Support</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="3_Mid" class="roles"><i class="ra ra-medical-pack"></i><p id="3_Mid_text">Mid</p></div></div>
+						<div class="col-md-2" style="text-align: center;"><div id="4_Top" class="roles"><i class="ra ra-crossed-swords"></i><p id="4_Top_text">Top</p></div></div>
 					</td>
 					</tr>
 
@@ -427,23 +428,69 @@
 							roles_data = data[0].roles;
 							
 							if(data[0].game_mode=="CLASSIC")
-								{
-								$(".roles").show();
-								}
 							{
+								
+								$(".roles").show();
+							
+							
 								$("#menu_b").fadeIn();
 								}
+							var role_text;
 							$(".roles").hover(
 									function() {
 
 										var showID = $(this).attr("ID");
+										role_text=$("#" + showID +"_text").text();
+										console.log(showID);
 									
 										/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
-
+										$("#" + showID +"_text").animate({
+											bottom : "-=30px",
+											opacity: 0,
+										
+										}, 100);
+										$("#" + showID).animate({								
+											background:"#ff4081",
+										}, 100);
+										setTimeout(
+												function() {
+									
+										$("#" + showID +"_text").animate({
+											bottom : "+=60px"
+										}, 1);
+										
 										$("#" + showID +"_text").text("Info");
+										$("#" + showID +"_text").animate({
+											bottom : "-=30px",
+												opacity: 1,
+												
+										}, 100);
+												},100);
 									}, function() {
 										var showID = $(this).attr("ID");
-										$("#" + showID +"_text").text("Jungle");
+										
+										$("#" + showID +"_text").animate({
+											bottom : "+=30px",
+											opacity: 0,
+										
+										}, 100);
+										$("#" + showID).animate({								
+											background:"#ff4081",
+										}, 100);
+										setTimeout(
+												function() {
+									
+										$("#" + showID +"_text").animate({
+											bottom : "-=60px"
+										}, 1);
+										
+										$("#" + showID +"_text").text(role_text);
+										$("#" + showID +"_text").animate({
+											bottom : "+=30px",
+												opacity: 1,
+												
+										}, 100);
+												},100);
 									});
 							$(".roles").click(
 									function() {
@@ -1180,11 +1227,10 @@
 				$("#extra_data").fadeOut();
 			});
 		}
-		function searchUser() {
+function searchUser() {
 			
 			
 		}
-		
 		function populateExtraData(data, player_id) {
 			console.log(data);
 			console.log(player_id);
@@ -1497,7 +1543,7 @@
 			});
 
 			/***** for demo purposes only: don't allow to submit the form *****/
-			morphSearch.querySelector('button[type="submit"]')
+			morphSearch.querySelector('button')
 					.addEventListener('click', function(ev) {
 						ev.preventDefault();
 					});

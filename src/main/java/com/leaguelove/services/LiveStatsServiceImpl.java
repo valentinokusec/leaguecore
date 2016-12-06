@@ -657,6 +657,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			champion1.put("deaths", 0);
 			champion1.put("loses", 0);
 			champion1.put("wins", 0);
+			champion1.put("kda", 0);
 
 			champion1.put("kills_per_game", Integer.toString(0));
 			champion1.put("deaths_per_game", Integer.toString(0));
