@@ -23,9 +23,9 @@ border: 0px solid #969696 !important;
   	    position: absolute;
     left: 49%;
     top: 5px;
-    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75) !important;
--moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75) !important;
-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75) !important;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 #menu_b:hover
 { 

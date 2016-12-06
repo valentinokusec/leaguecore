@@ -1376,7 +1376,33 @@ input:-webkit-autofill {
 .stats_badge {
 	margin: 50px;
 }
+.tier
+{
+width: 40px;
+    height: 40px;
+    margin: 0px;
+    margin-right: 30px;
+    }
+    .sum
+{
+width: 40px;
+    height: 40px;
+    margin: 0px;
+    margin-right: 30px;
+    }
+        .sum_table	
+{
 
+    }
+.que
+{
+	top: 16px;
+	left: 10%;
+	color:white;
+	font-weight:bolder;
+	position:fixed;
+	display:none;
+}
 .content_stats {
 	top: 20%;
 	left: 0;
@@ -2782,8 +2808,9 @@ p {
 
 #check {
 	position: fixed;
-	bottom: 0%;
-	left: 50%;
+	top: 0%;
+	left: 40%;
+	z-index: 10000;
 }
 
 @media screen and (max-width: 1280px) {
@@ -3185,8 +3212,8 @@ input[type="checkbox"] {
 	display: inline-block;
 	-webkit-appearance: none;
 	-webkit-tap-highlight-color: transparent;
-	height: 2em;
-	width: 4em;
+	height: 41px;
+	width: 80px;
 	font-size: 2em;
 	border-radius: 1.5em;
 	background-color: rgb(255, 64, 129);
@@ -3196,6 +3223,9 @@ input[type="checkbox"] {
 	vertical-align: middle;
 	-webkit-transition: all 0.25s linear 0.25s;
 	transition: all 0.25s linear 0.25s;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 input[type="checkbox"]::before {
@@ -3216,13 +3246,13 @@ input[type="checkbox"]::before {
 
 input[type="checkbox"]::after {
 	position: absolute;
-	left: 0.675em;
-	top: 0;
+	left: 1px;
+	top: 01;
 	line-height: 2;
 	font-family: "Ionicons";
 	content: url(../img/ic_account_circle_white_36dp_1x.png) "   "
 		url(../img/ic_account_circle_white_36dp_1x.png);
-	padding-top: 8px;
+	padding-top: 2px;
 	z-index: 1;
 }
 
@@ -3245,7 +3275,7 @@ input[type="checkbox"]:checked::before {
 
 .field {
 	display: inline-block;
-	margin: 1.5em 0;
+	
 }
 
 .field.position input[type="checkbox"]::before {

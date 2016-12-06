@@ -59,6 +59,7 @@
 				<!-- wrapper needed for scroll -->
 				<nav style="height: 50px; padding: 17px;" class="main_nav">
 					<a href="/html/" style="color: white;">LeagueCore</a>
+					<p class="que">Que Type <span style="color:rgb(255, 64, 129);">: </span><span id="que"></span></p>
 				<button id="menu_b"><i class="fa fa-random fa-2x" style="font-size: 25px !important;" aria-hidden="true"></i></button>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
@@ -525,8 +526,9 @@
 								$(".extra_feat").hide();
 							} else {
 
-								$("#check").show();
-
+								$("#check").fadeIn();
+								
+								$("#que").text(data[0].game_mode);
 								/* $("#table_stats").stop().fadeIn();
 								$("#table_stats").stop().animate({
 									opacity : 1,
@@ -536,6 +538,7 @@
 
 								setTimeout(
 										function() {
+											$(".que").fadeIn();
 											$(".left_stats").stop().fadeIn();
 
 											$(".left_stats").stop().animate({
@@ -793,15 +796,7 @@
 			getData();
 
 		}, 500);
-		$(function() {
 
-			$('#cd-dropdown').dropdown({
-				gutter : 5,
-				stack : false,
-				slidingIn : 100
-			});
-
-		});
 		function populateData(data, show_stats) {
 		
 			$("#first_row").text("");
@@ -825,9 +820,11 @@
 
 										+ " <div class='mdl-card__title'>"
 										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-										+ "<button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 10px;' class='kda_text_main kda_text' >1</i></button>"
+										+  "<div class='sum_table'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card  sum'></img>"
+										
+										+"</div"
 										+ "<p style='font-weight: bold;color:white;'>"
-										+ data[0].players[i].tier
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card  tier'></img>"+data[0].players[i].tier
 										+ "</p></div>"
 										+ " </div>"
 
