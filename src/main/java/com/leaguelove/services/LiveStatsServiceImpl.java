@@ -112,14 +112,18 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			playerStats.put("champion_key", ch.getKey());
 			playerStats.put("icon", player.getProfileIconID());
 			String tier;
+			String tier_img;
 			try {
 				tier = RiotAPI.getLeagueEntriesBySummonerName(player.getSummonerName()).get(0).getTier() + " "
 						+ RiotAPI.getLeagueEntriesBySummonerName(player.getSummonerName()).get(0).getEntries()
 								.iterator().next().getDivision();
+				tier_img=tier.replace(" ", "_");
 			} catch (Exception e) {
 				tier = "Unranked";
+				tier_img="Unranked";
 			}
 			playerStats.put("tier", tier);
+			playerStats.put("tier_img", tier_img);
 			playerStats.put("general_stats", getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),
 					player.getChampion().getName()));
 			
