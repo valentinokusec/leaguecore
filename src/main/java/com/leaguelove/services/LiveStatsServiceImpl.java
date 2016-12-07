@@ -23,6 +23,7 @@ import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Season;
 import com.robrua.orianna.type.core.currentgame.CurrentGame;
+import com.robrua.orianna.type.core.currentgame.MasteryRank;
 import com.robrua.orianna.type.core.game.Game;
 import com.robrua.orianna.type.core.league.League;
 import com.robrua.orianna.type.core.match.Participant;
@@ -94,8 +95,18 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			
 			playerStats.put("team", player.getTeam().toString());
 			playerStats.put("id", player.getSummonerID());
+			for (MasteryRank   mastery:player.getMasteries()) {
+				Long mastId=mastery.getMastery().getID();
+				if (mastId==6161 || mastId==6162 || mastId==6141 || mastId==6361 || mastId==6362 || mastId==6363 || mastId==6261 || mastId==6262 || mastId==6263 ) {
+					playerStats.put("keystone_img", mastery.getMastery().getImage().getFull());
+				}
+				
+			}
+			
 			playerStats.put("rune1", player.getSummonerSpell1().toString());
 			playerStats.put("rune2", player.getSummonerSpell2().toString());
+			playerStats.put("rune1_img", player.getSummonerSpell1().getImage().getFull());
+			playerStats.put("rune2_img", player.getSummonerSpell2().getImage().getFull());
 			playerStats.put("champion_name", player.getChampion().getName());
 			Champion ch = RiotAPI.getChampionByName(player.getChampion().getName());
 			playerStats.put("champion_key", ch.getKey());
@@ -135,6 +146,10 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONArray generalInfo = getGeneralInfo(players);
 
 		liveStats.put("general_stats", generalInfo);
+		
+		JSONArray metrics = getMetrics(players);
+
+		liveStats.put("metrics", metrics);
 
 		liveStatsArray.put(liveStats);
 		
@@ -144,6 +159,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 	}
 
 	
+
+	private JSONArray getMetrics(JSONArray players) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private JSONArray getRolesStats(JSONArray players) {
 		JSONObject roles=new JSONObject();

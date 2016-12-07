@@ -1,6 +1,5 @@
 @import url('demo.css');
-@import url('common.css');
-@import url('icons.css');
+
 
 .cd-dropdown ul {
 	position: absolute;

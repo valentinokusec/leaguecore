@@ -182,7 +182,7 @@
 		<table class="extra_class">
 			<tr>
 				<td colspan="3"><img
-					src="http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/Irelia.png"
+					src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Irelia.png"
 					class="img_card live_stats_size" style="margin-left: 20%;"></img></td>
 			</tr>
 			<tr>
@@ -322,7 +322,9 @@
 	</tr>
 	</table>
 	</nav>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+	
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 	<script src="../js/classie.js"></script>
@@ -551,11 +553,11 @@
 													.append(
 															"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.highest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 																	+ "</tr>"
 																	+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.lowest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
 																	+ "</tr>"
 
@@ -804,7 +806,7 @@
 			$("#sortable").text("");
 			$("#sortable1").text("");
 			for (i = 0; i < 5; i++) {
-				$("#sortable").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				$("#sortable").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
 				$("#first_row")
 						.append(
 								"<div class='col-md-2'>  <div id='"+i+"_"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
@@ -819,13 +821,22 @@
 										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
 
 										+ " <div class='mdl-card__title'>"
-										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-										+  "<div class='sum_table'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card  sum'></img>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+  "<table class='sum_table'>"
+										+"<tr>"
+										+"<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune1_img + "' class='img_card  sum'></img></td>"
+										+"<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune2_img + "' class='img_card  sum'></img></td>"
 										
-										+"</div"
-										+ "<p style='font-weight: bold;color:white;'>"
-										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card  tier'></img>"+data[0].players[i].tier
-										+ "</p></div>"
+										+"</tr>"
+										+"<tr>"
+										+"<td colspan='2'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/mastery/" + data[0].players[i].keystone_img + "' class='img_card  sum'></img></td>"
+										
+										+"</tr>"
+										
+										+"</table>"
+										+ "<div style='font-weight: bold;color:white;'>"
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card  tier'></img><p class='tier_text'>"+data[0].players[i].tier
+										+ "</p></div></div>"
 										+ " </div>"
 
 										+
@@ -922,7 +933,7 @@
 				});
 			}
 			for (i = 5; i < 10; i++) {
-				$("#sortable1").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				$("#sortable1").append("<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
 				$("#second_row")
 						.append(
 								"<div class='col-md-2'>  <div id='"+data[0].players[i].id+"_hover' class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size'>"
@@ -937,7 +948,7 @@
 										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
 
 										+ " <div class='mdl-card__title'>"
-										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
 										+ "<button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 10px;' class='kda_text_main kda_text' >1</i></button>"
 										+ "<p style='font-weight: bold;color:white;'>"
 										+ data[0].players[i].tier
@@ -1040,11 +1051,11 @@
 			.append(
 					"<table class='extra_class_roles'>"
 							+ "<tr>"
-							+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+							+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 							+ data[player_id].user_1
 							+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
 							+ "<td colspan='' style='text-align:center;'><span class='roles_vs'>VS</span></td>"
-							+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+							+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 							+ data[player_id].user_2
 							+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
 							+ "</tr>"
@@ -1238,7 +1249,7 @@ function searchUser() {
 					.append(
 							"<table class='extra_class'>"
 									+ "<tr>"
-									+ "<td colspan='3'><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+									+ "<td colspan='3'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 									+ data[player_id].champion
 									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
 									+ "</tr>"
@@ -1258,11 +1269,11 @@ function searchUser() {
 									+ "	<table style='float: left;'>"
 									+ "		<tr>"
 									+ "			<td colspan='3'><p>Most played</p></td><tr>"
-									+ "			<tr><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+									+ "			<tr><td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 									+ data[player_id].preffered_champions[0]
-									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 									+ data[player_id].preffered_champions[1]
-									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td><td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 									+ data[player_id].preffered_champions[2]
 									+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
 
@@ -1478,7 +1489,7 @@ function searchUser() {
 				for (i = 0; i < 10; i++) {
 					$("#pro_his")
 							.append(
-									"<td><img src='http://ddragon.leagueoflegends.com/cdn/6.16.2/img/champion/"
+									"<td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 											+ data[player_id].history[i].champion
 											+ ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>");
 					$("#kda_his").append(
