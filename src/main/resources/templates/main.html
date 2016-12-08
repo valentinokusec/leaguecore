@@ -61,6 +61,7 @@
 					<a href="/html/" style="color: white;">LeagueCore</a>
 					<p class="que">Que Type <span style="color:rgb(255, 64, 129);">: </span><span id="que"></span></p>
 				<button id="menu_b"><i class="fa fa-random fa-2x" style="font-size: 25px !important;" aria-hidden="true"></i></button>
+				<button id="metrics" onClick="getMetricsData()"><i class="fa fa-random fa-2x" style="font-size: 25px !important;" aria-hidden="true"></i></button>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
@@ -292,6 +293,7 @@
 	<tr>
 	<td>
 <button class="sort" onClick="getSort()">Sort</button>
+
 		<div class="loader_roles">
 
 				<svg width='196px' height='196px' xmlns="http://www.w3.org/2000/svg"
@@ -409,6 +411,7 @@
 		$("#check").hide();
 		var gen_data;
 		var general_data;
+		var metrics;
 		var roles_data;
 		var global_player_id=0;
 		var global_roles_id=0;
@@ -427,6 +430,7 @@
 							$(".loader").hide();
 							console.log("SUCCESS: ", data);
 							gen_data = data;
+							metrics = data[0].metrics;
 							general_data = data[0].general_stats;
 							roles_data = data[0].roles;
 							
@@ -529,7 +533,7 @@
 							} else {
 
 								$("#check").fadeIn();
-								
+								$("#metrics").fadeIn();
 								$("#que").text(data[0].game_mode);
 								/* $("#table_stats").stop().fadeIn();
 								$("#table_stats").stop().animate({
@@ -1041,6 +1045,117 @@
 						});
 
 			}
+		}
+		
+		function getMetricsData() {
+			console.log(metrics);
+			populateMetricsData();
+			$("#extra_data").toggle("fast");
+			
+			
+		}
+		function populateMetricsData() {
+			console.log( metrics[0]);
+			$("#extra_data").text("");
+			$("#extra_data").append("<table class='extra_class_roles'>"
+					+ "<tr>"
+					+"<td><p class='kda_text_main kda_text'>1</p></td>"
+					+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
+					/*  + metrics[0][1].champion  */
+					 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
+					
+					+ "</tr>"
+
+					+ "</table>" 
+					+"<canvas id='myChart' width='400' height='400'></canvas>" 
+					+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
+					+"	class='kda_text_main kda_text' id='close_extra'>"
+					+ "	<i class='fa fa-times' aria-hidden='true'></i>"
+					+ "</button>"
+					);
+			var ctx = $("#myChart");
+			var data = {
+					
+				    datasets: [
+				        {
+				        	pointStyle:'circle',
+				            label: 'Games Played',
+				            data: [
+				                {
+				                    x: 1,
+				                    y: 10,
+				                    r: 15
+				                },
+				                {
+				                    x: 2,
+				                    y: 20,
+				                    r: 15
+				                },
+				                {
+				                    x: 3,
+				                    y: 30,
+				                    r: 15
+				                },
+				                {
+				                    x: 4,
+				                    y: 40,
+				                    r: 15
+				                },
+				                {
+				                    x: 5,
+				                    y: 50,
+				                    r: 15
+				                },
+				                {
+				                    x: 6,
+				                    y: 60,
+				                    r: 15
+				                },
+				                {
+				                    x: 7,
+				                    y: 70,
+				                    r: 15
+				                },
+				                {
+				                    x: 8,
+				                    y: 80,
+				                    r: 15
+				                },
+				                {
+				                    x: 9,
+				                    y: 90,
+				                    r: 15
+				                },
+				                {
+				                    x: 10,
+				                    y: 100,
+				                    r: 15
+				                }
+				            ],
+				            backgroundColor:"#FF6384",
+				            hoverBackgroundColor: "#FF6384",
+				        }]
+				};
+			var myBubbleChart = new Chart(ctx,{
+			    type: 'bubble',
+			    data: data,
+			    options: {
+			        responsive: false,
+			        scales: {
+			            xAxes: [{
+			                        gridLines: {
+			                            display:false
+			                        }
+			                    }],
+			            yAxes: [{
+			                        gridLines: {
+			                            display:false
+			                        }   
+			                    }]
+			            }
+			    }
+			});
+			
 		}
 		function populateRolesData(data, player_id) {
 			console.log(data);

@@ -151,7 +151,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 		liveStats.put("general_stats", generalInfo);
 		
-		JSONArray metrics = getMetrics(players);
+		JSONArray metrics = getMetrics(generalInfo);
 
 		liveStats.put("metrics", metrics);
 
@@ -166,7 +166,101 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 	private JSONArray getMetrics(JSONArray players) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		JSONArray returnData= new JSONArray();
+		
+		List<JSONObject> kdaGeneral=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> killsGeneral=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> deathsGeneral=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> assistsGeneral=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> winrateGeneral=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> gamesGeneral=  Arrays.asList(new JSONObject[10]);
+		
+		List<JSONObject> kdaChampion=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> killsChampion=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> deathsChampion=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> assistsChampion=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> winrateChampion=  Arrays.asList(new JSONObject[10]);
+		List<JSONObject> gamesChampion=  Arrays.asList(new JSONObject[10]);
+	
+		for (int i = 0; i < players.length(); i++) {
+//			kdaGeneral.set(index, element)
+//			players.getJSONObject(i).getJSONArray("general_info").
+		
+				
+			
+			JSONObject info=new JSONObject();
+			JSONObject infoChampion=new JSONObject();
+			info.put("champion", players.getJSONObject(i).getString("champion"));
+			info.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(0).getInt("stat"));
+			gamesGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(0).getInt("counter")-1, info);
+			infoChampion.put("champion", players.getJSONObject(i).getString("champion"));
+			infoChampion.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(0).getInt("stat"));
+			gamesChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(0).getInt("counter")-1, infoChampion);
+			
+			JSONObject kda=new JSONObject();
+			JSONObject kdaInfo=new JSONObject();
+			kda.put("champion", players.getJSONObject(i).getString("champion"));
+			kda.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(1).getInt("stat"));
+			kdaGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(1).getInt("counter")-1, kda);
+			kdaInfo.put("champion", players.getJSONObject(i).getString("champion"));
+			kdaInfo.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(1).getInt("stat"));
+			kdaChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(1).getInt("counter")-1, kdaInfo);
+			
+			JSONObject kills=new JSONObject();
+			JSONObject infoKills=new JSONObject();
+			kills.put("champion", players.getJSONObject(i).getString("champion"));
+			kills.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(2).getInt("stat"));
+			killsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(2).getInt("counter")-1, info);
+			infoKills.put("champion", players.getJSONObject(i).getString("champion"));
+			infoKills.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(2).getInt("stat"));
+			killsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(2).getInt("counter")-1, infoChampion);
+			
+			JSONObject assists=new JSONObject();
+			JSONObject infoAssits=new JSONObject();
+			assists.put("champion", players.getJSONObject(i).getString("champion"));
+			assists.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(3).getInt("stat"));
+			assistsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(3).getInt("counter")-1, info);
+			infoAssits.put("champion", players.getJSONObject(i).getString("champion"));
+			infoAssits.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(3).getInt("stat"));
+			assistsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(3).getInt("counter")-1, infoChampion);
+			
+			JSONObject deaths=new JSONObject();
+			JSONObject infoDeaths=new JSONObject();
+			deaths.put("champion", players.getJSONObject(i).getString("champion"));
+			deaths.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(4).getInt("stat"));
+			deathsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(4).getInt("counter")-1, info);
+			infoDeaths.put("champion", players.getJSONObject(i).getString("champion"));
+			infoDeaths.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(4).getInt("stat"));
+			deathsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(4).getInt("counter")-1, infoChampion);
+			
+			JSONObject winrate=new JSONObject();
+			JSONObject infowinrate=new JSONObject();
+			winrate.put("champion", players.getJSONObject(i).getString("champion"));
+			winrate.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(5).getInt("stat"));
+			winrateGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(5).getInt("counter")-1, info);
+			infowinrate.put("champion", players.getJSONObject(i).getString("champion"));
+			infowinrate.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(5).getInt("stat"));
+			winrateChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(5).getInt("counter")-1, infoChampion);
+			
+			
+		}
+		returnData.put(gamesGeneral);
+		returnData.put(kdaGeneral);
+		returnData.put(killsGeneral);
+		returnData.put(deathsGeneral);
+		returnData.put(killsGeneral);
+		returnData.put(winrateGeneral);
+		
+		returnData.put(gamesChampion);
+		returnData.put(kdaChampion);
+		returnData.put(killsChampion);
+		returnData.put(deathsChampion);
+		returnData.put(killsChampion);
+		returnData.put(winrateChampion);
+		
+		
+		return returnData;
 	}
 
 	private JSONArray getRolesStats(JSONArray players) {
@@ -408,11 +502,27 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		int counter_deaths = 10;
 		int counter_winrate = 10;
 		int counterKDA = 10;
+		int counterGames = 10;
 		Double winrate = 0d;
 		Double kills = 0d;
 		Double deaths = 0d;
 		Double assists = 0d;
 		Double kda = 0d;
+		int games = 0;
+		try {
+			games = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info).getInt("games_played");
+
+			for (int k = 0; k < players.length(); k++) {
+
+				if (games >players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info).getInt("games_played")) {
+					counterGames--;
+
+				}
+			}
+
+		} catch (Exception e) {
+			
+		}
 		try {
 			kda = Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
 					.getString("kda").replace(",", "."));
@@ -497,7 +607,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject deathsInfo = new JSONObject();
 		JSONObject winrateInfo = new JSONObject();
 		JSONObject kdaInfo = new JSONObject();
+		JSONObject gamesInfo = new JSONObject();
 		
+		gamesInfo.put("stat", games);
+		gamesInfo.put("counter", counterGames);
+		gamesInfo.put("label", "Games Played");
 		kdaInfo.put("stat", kda);
 		kdaInfo.put("counter", counterKDA);
 		kdaInfo.put("label", "KDA");
@@ -509,10 +623,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		assistsInfo.put("label", "Assists");
 		deathsInfo.put("stat", deaths);
 		deathsInfo.put("counter", counter_deaths);
-		deathsInfo.put("label", "Assists");
+		deathsInfo.put("label", "Deaths");
 		winrateInfo.put("counter", counter_winrate);
 		winrateInfo.put("stat", winrate);
 		winrateInfo.put("label", "winrate");
+		userInfo.put(gamesInfo);
 		userInfo.put(kdaInfo);
 		userInfo.put(killsInfo);
 		userInfo.put(assistsInfo);

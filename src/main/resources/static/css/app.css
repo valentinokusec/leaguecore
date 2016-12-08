@@ -2304,7 +2304,32 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 	height: 50px;
 	padding: 0px !important;
 }
-
+#metrics
+{
+	background-color:rgb(255,64,129) !important;
+	border-radius: 200px 200px 200px 200px !important;
+-moz-border-radius: 200px 200px 200px 200px !important;
+-webkit-border-radius: 200px 200px 200px 200px !important;
+border: 0px solid #969696 !important;
+	width:40px !important;
+	height:40px !important;
+	padding-left: 9px;
+	display:none;
+  	    position: absolute;
+    left: 30%;
+    top: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+#metrics_hover
+{ 
+	opacity:0.9;	
+}
+canvas
+ {
+ 	background-color:white;
+ }
 #sortable div {
 	float: left;
 	margin: 20px;
