@@ -2334,7 +2334,14 @@ canvas
 	float: left;
 	margin: 20px;
 }
-
+.graph
+{
+	background-color:white;
+}
+.graph img
+{
+	display:none;
+}
 #sortable1 div {
 	float: left;
 	margin: 20px;

@@ -1067,94 +1067,53 @@
 					+ "</tr>"
 
 					+ "</table>" 
-					+"<canvas id='myChart' width='400' height='400'></canvas>" 
+					+"<canvas id='gamesPlayedGeneral' class='graph' width='300' height='300'></canvas>" 
+				
 					+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
 					+"	class='kda_text_main kda_text' id='close_extra'>"
 					+ "	<i class='fa fa-times' aria-hidden='true'></i>"
 					+ "</button>"
 					);
-			var ctx = $("#myChart");
-			var data = {
-					
-				    datasets: [
-				        {
-				        	pointStyle:'circle',
-				            label: 'Games Played',
-				            data: [
-				                {
-				                    x: 1,
-				                    y: 10,
-				                    r: 15
-				                },
-				                {
-				                    x: 2,
-				                    y: 20,
-				                    r: 15
-				                },
-				                {
-				                    x: 3,
-				                    y: 30,
-				                    r: 15
-				                },
-				                {
-				                    x: 4,
-				                    y: 40,
-				                    r: 15
-				                },
-				                {
-				                    x: 5,
-				                    y: 50,
-				                    r: 15
-				                },
-				                {
-				                    x: 6,
-				                    y: 60,
-				                    r: 15
-				                },
-				                {
-				                    x: 7,
-				                    y: 70,
-				                    r: 15
-				                },
-				                {
-				                    x: 8,
-				                    y: 80,
-				                    r: 15
-				                },
-				                {
-				                    x: 9,
-				                    y: 90,
-				                    r: 15
-				                },
-				                {
-				                    x: 10,
-				                    y: 100,
-				                    r: 15
-				                }
-				            ],
-				            backgroundColor:"#FF6384",
-				            hoverBackgroundColor: "#FF6384",
-				        }]
+		
+		
+			
+		
+			var img = new Image;
+			img.src = 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/rune/r_1_1.png';
+			
+			var img2 = new Image;
+			img2.src = 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/rune/r_1_1.png';
+			
+			var c = document.getElementById("gamesPlayedGeneral");
+			var ctx = c.getContext("2d");
+			ctx.moveTo(10,280);
+			ctx.lineTo(280,280);
+			ctx.moveTo(10,280);
+			ctx.lineTo(10,10);
+		
+			
+			img.onload = function(){
+			    ctx.save();
+			    
+			    
+			    // Create a circle
+			    ctx.beginPath();
+				ctx.arc(100,75,15,0,2*Math.PI);
+				ctx.clip();
+				  ctx.drawImage(img,80,55,40,40); // Or at whatever offset you like
+				  ctx.restore();
 				};
-			var myBubbleChart = new Chart(ctx,{
-			    type: 'bubble',
-			    data: data,
-			    options: {
-			        responsive: false,
-			        scales: {
-			            xAxes: [{
-			                        gridLines: {
-			                            display:false
-			                        }
-			                    }],
-			            yAxes: [{
-			                        gridLines: {
-			                            display:false
-			                        }   
-			                    }]
-			            }
-			    }
-			});
+				img2.onload = function(){
+				    ctx.save();
+				    
+				    
+				    // Create a circle
+				    ctx.beginPath();
+					ctx.arc(150,75,15,0,2*Math.PI);
+					ctx.clip();
+					  ctx.drawImage(img,130,55,40,40); // Or at whatever offset you like
+					};
+			ctx.stroke();
 			
 		}
 		function populateRolesData(data, player_id) {
