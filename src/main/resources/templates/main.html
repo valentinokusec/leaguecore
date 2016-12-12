@@ -1056,33 +1056,55 @@
 		}
 		function populateMetricsData() {
 			console.log( metrics[0]);
+			
 			$("#extra_data").text("");
-			$("#extra_data").append("<table class='extra_class_roles'>"
-					+ "<tr>"
-					+"<td><p class='kda_text_main kda_text'>1</p></td>"
-					+ "<td colspan=''><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
-					/*  + metrics[0][1].champion  */
-					 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img></td>"
-					
-					+ "</tr>"
+	
+			for(var i=0;i<12;i++)
+				{
 
-					+ "</table>" 
-					+"<canvas id='gamesPlayedGeneral' class='graph' width='300' height='300'></canvas>" 
+			$("#extra_data").append("<div class='col-md-6'>"
+					+"<table class='extra_class_metrics' id='table_"+i+"'>"
 				
-					+ "<button type='button' style='padding-left: 19px;margin: 20px;'"
-					+"	class='kda_text_main kda_text' id='close_extra'>"
-					+ "	<i class='fa fa-times' aria-hidden='true'></i>"
-					+ "</button>"
+
+					+ "</table></div>"
+				+"<div class='col-md-6'>" 
+					/* +"<canvas id='gamesPlayedGeneral' class='graph' width='300' height='300'></canvas>" */
+					+"</div>"  
+				
+				
+					
 					);
-		
+			var ii=0;
+			while(metrics[i][ii].length !=0 && ii!=9)
+			{
+				
 		
 			
+			var s=ii+1;
+			$("#table_"+i).append( "<tr id='tr_"+i+"_"+ii+"'>"
+			+"<td><p class='kda_text_main kda_text'>"+s+"</p></td>"
+		 	+"<td><p class='kda_text_main kda_text'>"+ metrics[i][ii][0].value +"</p></td>" 
+			
+			+ "</tr>");
+			
+			for(var k=0;k< metrics[i][ii].length;k++)
+			{
+			
+		$("#tr_"+i+"_"+ii).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
+				 + metrics[i][ii][k].champion  
+				 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img> </td>");
 		
-			var img = new Image;
-			img.src = 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/rune/r_1_1.png';
+			}
+			ii++;
+			}
+			
+			
+		/* 	
+			 var img = new Image;
+			img.src = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/'+ metrics[i][0][0].champion + '.png';
 			
 			var img2 = new Image;
-			img2.src = 'http://ddragon.leagueoflegends.com/cdn/6.16.2/img/rune/r_1_1.png';
+			img2.src = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/'+ metrics[i][0][0].champion + '.png';
 			
 			var c = document.getElementById("gamesPlayedGeneral");
 			var ctx = c.getContext("2d");
@@ -1090,7 +1112,7 @@
 			ctx.lineTo(280,280);
 			ctx.moveTo(10,280);
 			ctx.lineTo(10,10);
-		
+			ctx.webkitImageSmoothingEnabled=true;
 			
 			img.onload = function(){
 			    ctx.save();
@@ -1098,9 +1120,12 @@
 			    
 			    // Create a circle
 			    ctx.beginPath();
-				ctx.arc(100,75,15,0,2*Math.PI);
+				ctx.arc(100,75,35,0,2*Math.PI);
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = '#775599';
+				ctx.stroke();
 				ctx.clip();
-				  ctx.drawImage(img,80,55,40,40); // Or at whatever offset you like
+				  ctx.drawImage(img,60,35,80,80); // Or at whatever offset you like
 				  ctx.restore();
 				};
 				img2.onload = function(){
@@ -1111,10 +1136,12 @@
 				    ctx.beginPath();
 					ctx.arc(150,75,15,0,2*Math.PI);
 					ctx.clip();
-					  ctx.drawImage(img,130,55,40,40); // Or at whatever offset you like
+					  ctx.drawImage(img2,130,55,40,40); // Or at whatever offset you like
 					};
-			ctx.stroke();
-			
+					  ctx.restore();
+			ctx.stroke(); */
+		
+				}
 		}
 		function populateRolesData(data, player_id) {
 			console.log(data);

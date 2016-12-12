@@ -169,20 +169,56 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		
 		JSONArray returnData= new JSONArray();
 		
-		List<JSONObject> kdaGeneral=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> killsGeneral=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> deathsGeneral=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> assistsGeneral=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> winrateGeneral=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> gamesGeneral=  Arrays.asList(new JSONObject[10]);
+		JSONArray kdaGeneralArray= new JSONArray();
+		JSONArray killsGeneralArray= new JSONArray();
+		JSONArray deathsGeneralArray= new JSONArray();
+		JSONArray assistsGeneralArray= new JSONArray();
+		JSONArray winrateGeneralArray= new JSONArray();
+		JSONArray gamesGeneralArray= new JSONArray();
 		
-		List<JSONObject> kdaChampion=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> killsChampion=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> deathsChampion=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> assistsChampion=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> winrateChampion=  Arrays.asList(new JSONObject[10]);
-		List<JSONObject> gamesChampion=  Arrays.asList(new JSONObject[10]);
+		JSONArray kdaChampionArray= new JSONArray();
+		JSONArray killsChampionArray= new JSONArray();
+		JSONArray deathsChampionArray= new JSONArray();
+		JSONArray assistsChampionArray= new JSONArray();
+		JSONArray winrateChampionArray= new JSONArray();
+		JSONArray gamesChampionArray= new JSONArray();
 	
+		
+		
+		
+		List<JSONArray> kdaGeneral=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> killsGeneral=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> deathsGeneral=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> assistsGeneral=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> winrateGeneral=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> gamesGeneral=  Arrays.asList(new JSONArray[10]);
+		
+		List<JSONArray> kdaChampion=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> killsChampion=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> deathsChampion=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> assistsChampion=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> winrateChampion=  Arrays.asList(new JSONArray[10]);
+		List<JSONArray> gamesChampion=  Arrays.asList(new JSONArray[10]);
+		for (int i = 0; i < 10; i++) {
+			kdaGeneral.set(i,new JSONArray());
+			kdaChampion.set(i,new JSONArray());
+			
+			killsGeneral.set(i,new JSONArray());
+			killsChampion.set(i,new JSONArray());
+			
+			deathsGeneral.set(i,new JSONArray());
+			deathsChampion.set(i,new JSONArray());
+			
+			gamesGeneral.set(i,new JSONArray());
+			gamesChampion.set(i,new JSONArray());
+			
+			winrateGeneral.set(i,new JSONArray());
+			winrateChampion.set(i,new JSONArray());
+			
+			assistsGeneral.set(i,new JSONArray());
+			assistsChampion.set(i,new JSONArray());
+			
+		}
 		for (int i = 0; i < players.length(); i++) {
 //			kdaGeneral.set(index, element)
 //			players.getJSONObject(i).getJSONArray("general_info").
@@ -193,55 +229,57 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			JSONObject infoChampion=new JSONObject();
 			info.put("champion", players.getJSONObject(i).getString("champion"));
 			info.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(0).getInt("stat"));
-			gamesGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(0).getInt("counter")-1, info);
+			gamesChampionArray.put(info);
+			
+			gamesGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(0).getInt("counter")).put(info);
 			infoChampion.put("champion", players.getJSONObject(i).getString("champion"));
 			infoChampion.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(0).getInt("stat"));
-			gamesChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(0).getInt("counter")-1, infoChampion);
+			gamesChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(0).getInt("counter")).put(infoChampion);
 			
 			JSONObject kda=new JSONObject();
 			JSONObject kdaInfo=new JSONObject();
 			kda.put("champion", players.getJSONObject(i).getString("champion"));
 			kda.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(1).getInt("stat"));
-			kdaGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(1).getInt("counter")-1, kda);
+			kdaGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(1).getInt("counter")).put(kda);
 			kdaInfo.put("champion", players.getJSONObject(i).getString("champion"));
 			kdaInfo.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(1).getInt("stat"));
-			kdaChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(1).getInt("counter")-1, kdaInfo);
+			kdaChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(1).getInt("counter")).put(kdaInfo);
 			
 			JSONObject kills=new JSONObject();
 			JSONObject infoKills=new JSONObject();
 			kills.put("champion", players.getJSONObject(i).getString("champion"));
 			kills.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(2).getInt("stat"));
-			killsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(2).getInt("counter")-1, info);
+			killsGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(2).getInt("counter")).put(kills);
 			infoKills.put("champion", players.getJSONObject(i).getString("champion"));
 			infoKills.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(2).getInt("stat"));
-			killsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(2).getInt("counter")-1, infoChampion);
+			killsChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(2).getInt("counter")).put(infoKills);
 			
 			JSONObject assists=new JSONObject();
 			JSONObject infoAssits=new JSONObject();
 			assists.put("champion", players.getJSONObject(i).getString("champion"));
 			assists.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(3).getInt("stat"));
-			assistsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(3).getInt("counter")-1, info);
+			assistsGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(3).getInt("counter")).put(assists);
 			infoAssits.put("champion", players.getJSONObject(i).getString("champion"));
 			infoAssits.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(3).getInt("stat"));
-			assistsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(3).getInt("counter")-1, infoChampion);
+			assistsChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(3).getInt("counter")).put(infoAssits);
 			
 			JSONObject deaths=new JSONObject();
 			JSONObject infoDeaths=new JSONObject();
 			deaths.put("champion", players.getJSONObject(i).getString("champion"));
 			deaths.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(4).getInt("stat"));
-			deathsGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(4).getInt("counter")-1, info);
+			deathsGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(4).getInt("counter")).put(deaths);
 			infoDeaths.put("champion", players.getJSONObject(i).getString("champion"));
 			infoDeaths.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(4).getInt("stat"));
-			deathsChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(4).getInt("counter")-1, infoChampion);
+			deathsChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(4).getInt("counter")).put(infoDeaths);
 			
 			JSONObject winrate=new JSONObject();
 			JSONObject infowinrate=new JSONObject();
 			winrate.put("champion", players.getJSONObject(i).getString("champion"));
 			winrate.put("value", players.getJSONObject(i).getJSONArray("general_info").getJSONObject(5).getInt("stat"));
-			winrateGeneral.set(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(5).getInt("counter")-1, info);
+			winrateGeneral.get(players.getJSONObject(i).getJSONArray("general_info").getJSONObject(5).getInt("counter")).put(winrate);
 			infowinrate.put("champion", players.getJSONObject(i).getString("champion"));
 			infowinrate.put("value", players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(5).getInt("stat"));
-			winrateChampion.set(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(5).getInt("counter")-1, infoChampion);
+			winrateChampion.get(players.getJSONObject(i).getJSONArray("champion_info").getJSONObject(5).getInt("counter")).put(infowinrate);
 			
 			
 		}
@@ -514,7 +552,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (games >players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info).getInt("games_played")) {
+				if (games >=players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getInt("games_played")) {
 					counterGames--;
 
 				}
@@ -524,19 +562,18 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			
 		}
 		try {
-			kda = Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
-					.getString("kda").replace(",", "."));
+			kda =players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info).getDouble("kda");
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (kda > Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getString("kda").replace(",", "."))) {
+				if (kda >= players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getDouble("kda")) {
 					counterKDA--;
 
 				}
 			}
 
 		} catch (Exception e) {
-			
+			System.out.println(e);
 		}
 		try {
 			kills = Double.parseDouble(players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
@@ -544,7 +581,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (kills > Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getString("kills_per_game").replace(",", "."))) {
+				if (kills >= Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getString("kills_per_game").replace(",", "."))) {
 					counter--;
 
 				}
@@ -559,8 +596,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (assists > Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats")
-						.getJSONObject(info).getString("assists_per_game").replace(",", "."))) {
+				if (assists >= Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats").getJSONObject(info).getString("assists_per_game").replace(",", "."))) {
 					counter_assists--;
 
 				}
@@ -575,7 +611,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (deaths > Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats")
+				if (deaths >= Double.parseDouble(players.getJSONObject(k).getJSONArray("general_stats")
 						.getJSONObject(info).getString("deaths_per_game").replace(",", "."))) {
 					counter_deaths--;
 
@@ -591,7 +627,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			for (int k = 0; k < players.length(); k++) {
 
-				if (winrate > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
+				if (winrate >= players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(info)
 						.getDouble("winrate")) {
 					counter_winrate--;
 

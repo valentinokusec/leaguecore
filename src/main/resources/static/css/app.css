@@ -2284,6 +2284,16 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 .extra_class_roles td {
 	width: 100px;
 }
+.extra_class_metrics{
+	
+	background: #374d5a;
+
+	border: 0;
+}
+
+.extra_class_metrics td {
+	width: 100px;
+}
 
 .extra_class_stats {
 	position: absolute;
@@ -2840,6 +2850,7 @@ p {
 	top: 0%;
 	left: 40%;
 	z-index: 10000;
+	display:none;
 }
 
 @media screen and (max-width: 1280px) {
