@@ -1056,6 +1056,7 @@
 		}
 		function populateMetricsData() {
 			console.log( metrics[0]);
+			console.log( metrics[0].data);
 			
 			$("#extra_data").text("");
 	
@@ -1064,6 +1065,7 @@
 
 			$("#extra_data").append("<div class='col-md-6'>"
 					+"<table class='extra_class_metrics' id='table_"+i+"'>"
+					+"<th>"+metrics[i].label+"</th>"
 				
 
 					+ "</table></div>"
@@ -1075,23 +1077,25 @@
 					
 					);
 			var ii=0;
-			while(metrics[i][ii].length !=0 && ii!=9)
+			console.log(metrics[i]);
+			while(metrics[i].data[ii].length !=0 && ii!=9)
 			{
 				
-		
-			
+				console.log("i="+i);
+			console.log("ii="+ii);
+			console.log(metrics[i].data[ii]);
 			var s=ii+1;
 			$("#table_"+i).append( "<tr id='tr_"+i+"_"+ii+"'>"
 			+"<td><p class='kda_text_main kda_text'>"+s+"</p></td>"
-		 	+"<td><p class='kda_text_main kda_text'>"+ metrics[i][ii][0].value +"</p></td>" 
+		 	+"<td><p class='kda_text_main kda_text'>"+ metrics[i].data[ii][0].value +"</p></td>" 
 			
 			+ "</tr>");
 			
-			for(var k=0;k< metrics[i][ii].length;k++)
+			for(var k=0;k< metrics[i].data[ii].length;k++)
 			{
 			
 		$("#tr_"+i+"_"+ii).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
-				 + metrics[i][ii][k].champion  
+				 + metrics[i].data[ii][k].champion  
 				 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img> </td>");
 		
 			}
