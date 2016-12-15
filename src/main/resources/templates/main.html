@@ -1060,9 +1060,11 @@
 			
 			$("#extra_data").text("");
 	
-			for(var i=0;i<12;i++)
+			for(var i=0;i<12;i+=2)
 				{
-
+				
+			var table=i+1;
+		
 			$("#extra_data").append("<div class='col-md-6'>"
 					+"<table class='extra_class_metrics' id='table_"+i+"'>"
 					+"<th>"+metrics[i].label+"</th>"
@@ -1070,6 +1072,11 @@
 
 					+ "</table></div>"
 				+"<div class='col-md-6'>" 
+				+"<table class='extra_class_metrics' id='table_"+table+"'>"
+				+"<th>"+metrics[table].label+"</th>"
+			
+
+				+ "</table>"
 					/* +"<canvas id='gamesPlayedGeneral' class='graph' width='300' height='300'></canvas>" */
 					+"</div>"  
 				
@@ -1081,9 +1088,7 @@
 			while(metrics[i].data[ii].length !=0 && ii!=9)
 			{
 				
-				console.log("i="+i);
-			console.log("ii="+ii);
-			console.log(metrics[i].data[ii]);
+		
 			var s=ii+1;
 			$("#table_"+i).append( "<tr id='tr_"+i+"_"+ii+"'>"
 			+"<td><p class='kda_text_main kda_text'>"+s+"</p></td>"
@@ -1093,7 +1098,7 @@
 			
 			for(var k=0;k< metrics[i].data[ii].length;k++)
 			{
-			
+				console.log(i);
 		$("#tr_"+i+"_"+ii).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
 				 + metrics[i].data[ii][k].champion  
 				 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img> </td>");
@@ -1101,7 +1106,28 @@
 			}
 			ii++;
 			}
+		ii=0;
+			while(metrics[table].data[ii].length !=0 && ii!=9)
+			{
+				
+				console.log(table);
+				var s=ii+1;
+				$("#table_"+table).append( "<tr id='tr_"+table+"_"+ii+"'>"
+				+"<td><p class='kda_text_main kda_text'>"+s+"</p></td>"
+			 	+"<td><p class='kda_text_main kda_text'>"+ metrics[table].data[ii][0].value +"</p></td>" 
+				
+				+ "</tr>");
+				
+				for(var k=0;k< metrics[table].data[ii].length;k++)
+				{
+				
+			$("#tr_"+table+"_"+ii).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"
+					 + metrics[table].data[ii][k].champion  
+					 + ".png' class='img_card live_stats_size' style='margin-left: 20%'></img> </td>");
 			
+				}
+				ii++;
+				}
 			
 		/* 	
 			 var img = new Image;

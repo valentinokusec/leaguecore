@@ -219,7 +219,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			assistsChampion.set(i,new JSONArray());
 			
 		}
-		for (int i = 0; i < players.length(); i++) {
+		for (int i = 0; i < 10; i++) {
 //			kdaGeneral.set(index, element)
 //			players.getJSONObject(i).getJSONArray("general_info").
 		
