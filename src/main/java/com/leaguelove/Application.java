@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.robrua.orianna.api.core.RiotAPI;
-
+import com.robrua.orianna.store.HibernateDB;
 import com.robrua.orianna.type.core.common.Region;
 
 @SpringBootApplication
@@ -20,9 +20,9 @@ public class Application {
     	
     	RiotAPI.setRegion(Region.EUW);
         RiotAPI.setAPIKey(API_KEY);
-        
-//        HibernateDB db = HibernateDB.builder().URL("jdbc:mysql://localhost:3306/leaguecore").username("root").password("ireliaftw").build();
-//        RiotAPI.setDataStore(db);
+    
+        HibernateDB db = HibernateDB.builder().URL("jdbc:mysql://localhost:3306/leaguecore").username("root").password("ireliaftw").build();
+        RiotAPI.setDataStore(db);
         SpringApplication.run(Application.class, args);
     }
 

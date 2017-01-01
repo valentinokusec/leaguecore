@@ -43,9 +43,38 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 	@Override
 	public JSONArray getLiveStats(String name) {
+		Summoner summoner = null;
+		try
+		{
+		 summoner = RiotAPI.getSummonerByName(name);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		if (summoner == null) {
+			
+			JSONArray ja = new JSONArray();
 
-		Summoner summoner = RiotAPI.getSummonerByName(name);
+			for (CurrentGame iterable_element : RiotAPI.getFeaturedGames()) {
+				Long min = iterable_element.getLength() / 60;
+				Long sec = iterable_element.getLength() % 60;
+				String sumName = iterable_element.getParticipants().iterator().next().getSummonerName();
+				String tier;
+				try {
+					tier = RiotAPI.getLeagueEntriesBySummonerName(sumName).get(0).getTier() + " "
+							+ RiotAPI.getLeagueEntriesBySummonerName(sumName).get(0).getEntries().iterator().next()
+									.getDivision();
+				} catch (Exception e) {
+					tier = "Unranked";
+				}
+				ja.put(sumName);
+				ja.put(tier);
+				ja.put(min + ":" + sec);
 
+			}
+			return ja;
+		}
 		if (summoner.getCurrentGame() == null) {
 			JSONArray ja = new JSONArray();
 
@@ -549,9 +578,9 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONArray prefferChamps=new JSONArray();
 		try
 		{
-		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(0).getString("name"));
-		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(1).getString("name"));
-		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(2).getString("name"));
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(0).getString("champion_key"));
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(1).getString("champion_key"));
+		prefferChamps.put(players.getJSONObject(i).getJSONArray("general_stats").getJSONArray(2).getJSONObject(2).getString("champion_key"));
 		}
 		catch(Exception e)
 		{
@@ -809,12 +838,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				JSONObject champion = new JSONObject();
 				if (entry.getKey().toString().contentEquals("Unranked")) {
 					champion.put("name", "unranked");
-					champion.put("games_played", entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-					champion.put("kills", round(entry.getValue().getAggregatedStats().getTotalKills(), 1));
-					champion.put("assists", round(entry.getValue().getAggregatedStats().getTotalAssists(), 1));
-					champion.put("deaths", round(entry.getValue().getAggregatedStats().getTotalDeaths(), 1));
-					champion.put("loses", entry.getValue().getAggregatedStats().getTotalLosses());
-					champion.put("wins", entry.getValue().getAggregatedStats().getTotalWins());
+					champion.put("games_played", 0);
+					champion.put("kills", round(0, 1));
+					champion.put("assists", round(0, 1));
+					champion.put("deaths", round(0, 1));
+					champion.put("loses", 0);
+					champion.put("wins", 0);
 
 					NumberFormat formatter = new DecimalFormat("#0.0");
 					NumberFormat formatter_winrate = new DecimalFormat("#0.00");
@@ -822,22 +851,16 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					Double deathsPerGame;
 					Double assistsPerGame;
 					if (entry.getValue().getAggregatedStats().getTotalGamesPlayed()==0) {
-						 killsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalKills())
-								/ (double) (1);
-						 deathsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalDeaths())
-								/ (1);
-						 assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
-								/ (double) (1);
+						 killsPerGame = 0d;
+						 deathsPerGame = 0d;
+						 assistsPerGame = 0d;
 						 
 					}
 					else
 					{
-						 killsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalKills())
-								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-						 deathsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalDeaths())
-								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
-						 assistsPerGame = (double) (entry.getValue().getAggregatedStats().getTotalAssists())
-								/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed());
+						 killsPerGame = 0d;
+						 deathsPerGame = 0d;
+						 assistsPerGame = 0d;
 					}
 				
 					
@@ -923,6 +946,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 	private JSONObject getStatsObject(Entry<Champion, ChampionStats> entry, String string) {
 		JSONObject champion=new JSONObject();
 		champion.put("name",string);
+		if (string.equals("all")) {
+			champion.put("champion_key","all");
+		}
+		else{
+		Champion ch = RiotAPI.getChampionByName(string);
+		champion.put("champion_key",ch.getKey());
+	}
 		champion.put("games_played", entry.getValue().getStats().getTotalGamesPlayed());
 		champion.put("kills", round(entry.getValue().getStats().getTotalKills(), 1));
 		champion.put("assists", round(entry.getValue().getStats().getTotalAssists(), 1));
@@ -962,10 +992,12 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 		List<MatchReference> listmatch = summoner.getMatchList();
 		JSONArray history = new JSONArray();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
+			System.out.println(listmatch.get(i).getID());
 			int counter = 0;
 			for (Participant users : RiotAPI.getMatch(listmatch.get(i).getID()).getParticipants()) {
 				counter++;
+				
 				if (users.getSummonerName().contains(summoner.getName())) {
 					JSONObject stats = new JSONObject();
 
@@ -975,7 +1007,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					} else {
 						stats.put("win", RiotAPI.getMatch(listmatch.get(i).getID()).getTeams().get(1).getWinner());
 					}
-
+					Champion ch = RiotAPI.getChampionByName(listmatch.get(i).getChampion().toString());
+					stats.put("champion_key", ch.getKey());
 					stats.put("matchid", String.valueOf(listmatch.get(i).getID()));
 					stats.put("champion", users.getChampion());
 					stats.put("assists", users.getStats().getAssists());
@@ -1011,6 +1044,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 	public JSONArray getHistory(String name) {
 		// TODO Auto-generated method stub
 		Summoner summoner = RiotAPI.getSummonerByName(name);
+		getHistory(summoner);
 		List<Game> games = RiotAPI.getRecentGames(summoner);
 		List<MatchReference> listmatch = summoner.getMatchList();
 		JSONArray history = new JSONArray();
@@ -1029,6 +1063,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 				stats.put("matchid", String.valueOf(listmatch.get(i).getID()));
 				stats.put("champion", games.get(i).getChampion());
+				Champion ch = RiotAPI.getChampionByName(games.get(i).getChampion().toString());
+				stats.put("champion_key", ch.getKey());
 				stats.put("assists", games.get(i).getStats().getAssists());
 				stats.put("deaths", games.get(i).getStats().getDeaths());
 				stats.put("kills", games.get(i).getStats().getKills());
