@@ -151,8 +151,20 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				tier = "Unranked";
 				tier_img="Unranked";
 			}
-			playerStats.put("tier", tier);
-			playerStats.put("tier_img", tier_img);
+			if (tier.contains("Challenger")) {
+				playerStats.put("tier", "Challenger");
+				playerStats.put("tier_img", "Challenger");
+			}
+			else if (tier.contains("Master")) {
+				playerStats.put("tier", "Master");
+				playerStats.put("tier_img", "Master");
+				
+			}
+			else {
+				playerStats.put("tier", tier);
+				playerStats.put("tier_img", tier_img);
+			}
+		
 			playerStats.put("general_stats", getChampionList(RiotAPI.getSummonerByName(player.getSummonerName()),
 					player.getChampion().getName()));
 			
