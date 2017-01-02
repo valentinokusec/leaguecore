@@ -126,7 +126,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			playerStats.put("id", player.getSummonerID());
 			for (MasteryRank   mastery:player.getMasteries()) {
 				Long mastId=mastery.getMastery().getID();
-				if (mastId==6161 || mastId==6162 || mastId==6141 || mastId==6361 || mastId==6362 || mastId==6363 || mastId==6261 || mastId==6262 || mastId==6263 ) {
+				if (mastId==6161 || mastId==6162 || mastId==6141 || mastId==6361 || mastId==6362 || mastId==6363 || mastId==6261 || mastId==6262 || mastId==6263 || mastId==6164) {
 					playerStats.put("keystone_img", mastery.getMastery().getImage().getFull());
 				}
 				
