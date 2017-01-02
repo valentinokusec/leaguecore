@@ -900,9 +900,10 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			champion1.put("winrate", Integer.toString(0));
 
 			champion1.put("loserate", Integer.toString(0));
+		
 			championList.put(champion1);
 		}
-		
+		championList.put(new JSONObject().put("history","none"));
 		return championList;
 	}
 
@@ -1044,7 +1045,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 	public JSONArray getHistory(String name) {
 		// TODO Auto-generated method stub
 		Summoner summoner = RiotAPI.getSummonerByName(name);
-		getHistory(summoner);
+//		getHistory(summoner);
 		List<Game> games = RiotAPI.getRecentGames(summoner);
 		List<MatchReference> listmatch = summoner.getMatchList();
 		JSONArray history = new JSONArray();
@@ -1242,7 +1243,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				ownerTeam=data.getJSONObject(i).getString("team");
 			}
 		}
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 5; i++) {
 				JSONObject users=new JSONObject();
 				
 				

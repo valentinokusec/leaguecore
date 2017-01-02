@@ -337,9 +337,14 @@
 	-webkit-transition: color 0.3s, -webkit-transform 0.3s; 
 	transition: color 0.3s, transform 0.3s;
 }
-
+.sidebar
+{
+	opacity:0;
+}
 .tabs-style-linemove nav li.tab-current a {
-	color: #ff4081;
+	color: #ff4081 !important;
+    outline: none;
+    text-decoration: none;
 	border-bottom:3px solid #ff4081;
 	-webkit-transform: translate3d(0,8px,0);
 	transform: translate3d(0,8px,0);

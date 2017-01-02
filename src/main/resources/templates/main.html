@@ -125,39 +125,29 @@
 				<div class="tabs tabs-style-linemove">
 					<nav style="background: none;    margin-top: 20px;">
 						<ul>
-							<li><a href="#section-linemove-11" ><span>Games</span></a></li>
-							<li><a href="#section-linemove-12" ><span>KDA</span></a></li>
-							<li><a href="#section-linemove-13" ><span>Kills</span></a></li>
+							<li><a onclick="populateGeneral()" href="#section-linemove-91" ><span>All</span></a></li>
+							<li><a onclick="populateChampion()" href="#section-linemove-92" ><span>Champion</span></a></li>
+							<li><a href="#section-linemove-93" ><span>Last 10</span></a></li>
 				
 						</ul>
 					</nav>
 					<div class="content-wrap">
-						<section id="section-linemove-11"><p>1</p></section>
-						<section id="section-linemove-12"><p>2</p></section>
-						<section id="section-linemove-13"><p>3</p></section>
+						<section id="section-linemove-91"></section>
+						<section id="section-linemove-92"></section>
+						<section id="section-linemove-93"></section>
 					
 					</div><!-- /content -->
 				</div><!-- /tabs -->
 			</section>
-						<h1>Important facts</h1>
+						
 						<table id="stats">
-							<!-- 	<tr>
-								<td>fgfdg <span class="kdd">:</span> sdfds
-								</td>
-							</tr> -->
+					
 
 
 						</table>
 
 					</div>
-					<!-- 	<div class="right_stats">
-						<h1>Important facts</h1>
-						<section>
-						
-							/tabs
-						</section>
-
-					</div> -->
+			
 
 					<img
 						src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Braum_0.jpg"
@@ -210,15 +200,7 @@
 						</tr>
 
 					</table>
-					<form action='#' id="check">
-						<div class='field position'>
-						
-							<input type="checkbox" id="checkme" />
-							<label for="checkme" class="label1"></label>
-							<p class="champ_switch">Champion Stats</p>
-						</div>
-
-					</form>
+				
 					<div id='output'></div>
 
 
@@ -433,6 +415,7 @@
 		$(".left_stats").hide();
 		$("#check").hide();
 		var gen_data;
+		var mode;
 		var general_data;
 		var metrics;
 		var roles_data;
@@ -456,19 +439,22 @@
 							metrics = data[0].metrics;
 							general_data = data[0].general_stats;
 							roles_data = data[0].roles;
-
+							$(".sidebar").animate({
+								opacity : 1,
+							}, 100);
+							mode=data[0].game_mode;
 							if (data[0].game_mode == "CLASSIC") {
 
 								$(".roles").show();
 
-								$("#menu_b").fadeIn();
+								 $("#menu_b").fadeIn(); 
 							}
 							var role_text;
 							$(".roles").hover(function() {
 
 								var showID = $(this).attr("ID");
 								role_text = $("#" + showID + "_text").text();
-								console.log(showID);
+								
 
 								/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
 								$("#" + showID + "_text").animate({
@@ -572,7 +558,7 @@
 
 											}, 500);
 
-											$("#stats")
+											$("#section-linemove-91")
 													.append(
 															"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.highest_kda
@@ -585,11 +571,41 @@
 																	+ "</tr>"
 
 													);
-										}, 500);
+											$("#section-linemove-92")
+											.append(
+													"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
+															+ data[0].stats.highest_kda
+															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+															+ "</tr>"
+															+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
+															+ data[0].stats.lowest_kda
+															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+
+															+ "</tr>"
+
+											);
+											
+												$("#section-linemove-93")
+												.append(
+														"<span class='kdd'> Loading </span>"
+																
+														
+														
+																+"<div id='myProgress'>"
+																+"  <div id='myBar'><div id='label'>10%</div></div>"
+																+"</div>"	
+															
+															
+													
+
+												);
+											}, 500);
+												
+										
 
 								getHistory(data[0]);
 
-								populateData(gen_data, show_stats);
+								populateData(gen_data, 0);
 								setTimeout(function() {
 									$(".live_stats_back").last().addClass(
 											"loaded");
@@ -604,30 +620,40 @@
 						}
 					});
 		};
-		$("#check").click(function() {
-			if (show_stats == 0) {
-				show_stats = 1;
-			} else {
-				show_stats = 0;
-			}
+		function populateGeneral() {
+		
 			$(".switch_div").animate({
-				opacity : 0,
-				bottom : "+=10px"
+				opacity : 0
 
 			}, 200);
 			setTimeout(function() {
 
-				populateData(gen_data, show_stats);
+				populateData(gen_data, 0);
+				
 				$(".switch_div").animate({
-					bottom : "-=20px"
-				}, 1);
-				$(".switch_div").animate({
-					opacity : 1,
-					bottom : "+=10px"
+					opacity : 1
+					
 
 				}, 200);
 			}, 300);
-		});
+		};
+		function populateChampion() {
+			
+			$(".switch_div").animate({
+				opacity : 0
+
+			}, 200);
+			setTimeout(function() {
+
+				populateData(gen_data, 1);
+				
+				$(".switch_div").animate({
+					opacity : 1
+					
+
+				}, 200);
+			}, 300);
+		};
 		var iter = 0;
 		function expandTier(data) {
 
@@ -674,14 +700,20 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
-					console.log(data);
+					console.log("history:"+iter);
+					
+					  var elem = document.getElementById("myBar"); 
+					  var con=(iter+1)*10;
+					 
+					  elem.style.width = con + '%'; 
 					general_data[iter].history = data;
+				
 					iter++;
 					if (iter == global_player_id) {
 						$("#kda_his").text("");
 						$("#pro_his").text("");
 						$("#win_his").text("");
-						$("#loading_history").append("");
+						$("#loading_history").text("");
 						$("#loading_history").append(
 								"" + "	<tr style=''>" + "		<td><p>KDA</p></td>"
 										+ "		<td><p>"
@@ -719,15 +751,19 @@
 						getHistory(gen_data[0]);
 
 					}
-					if (iter == 2) {
-						console.log(general_data);
+					if (mode == "CLASSIC") {
+
+				
+					
+					if (iter == 10) {
+						
 						populateHistoryRoles(general_data);
 					}
-
+					}
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
-					iter++;
+				
 					if (iter < 10) {
 						getHistory(gen_data[0]);
 					}
@@ -752,8 +788,8 @@
 						dataType : 'json',
 						timeout : 100000,
 						success : function(data) {
-
-							for (i = 0; i < 1; i++) {
+							
+							for (i = 0; i < 5; i++) {
 								roles_data[i].history = data[i].history_stats;
 
 							}
@@ -779,7 +815,7 @@
 													+ "			<td colspan=''><p class='kda_text_main kda_text'>"
 													+ data[global_roles_id].history_stats[1].user_1_stat
 													+ "</p></td>"
-													+ "			<td colspan=''><p class='"+data[global_roles_id].history[1].history_stats+"'></p></td>"
+													+ "			<td colspan=''><p class='"+data[global_roles_id].history_stats[1].higher+"'></p></td>"
 													+ "			<td colspan=''><p class='kda_text_main kda_text'>"
 													+ data[global_roles_id].history_stats[1].user_2_stat
 													+ "</p></td>"
@@ -789,7 +825,7 @@
 													+ "			<td colspan=''><p class='kda_text_main kda_text'>"
 													+ data[global_roles_id].history_stats[2].user_1_stat
 													+ "</p></td>"
-													+ "			<td colspan=''><p class='"+data[global_roles_id].history[2].history_stats+"'></p></td>"
+													+ "			<td colspan=''><p class='"+data[global_roles_id].history_stats[2].higher+"'></p></td>"
 													+ "			<td colspan=''><p class='kda_text_main kda_text'>"
 													+ data[global_roles_id].history_stats[2].user_2_stat
 													+ "</p></td>"
@@ -816,10 +852,10 @@
 													+ "</p></td>"
 
 													+ "</tr>");
-
+					
 							for (i = 0; i < 10; i++) {
-
-								general_data[i].history[10].kda_rate = data[1][i].history_rates[0].counter;
+					
+								general_data[i].history[10].kda_rate = data[5][i].history_rates[0].counter;
 
 							}
 
@@ -993,7 +1029,7 @@
 				$("#" + i + "_hisid").click(function() {
 
 					var showID = $(this).attr("ID");
-					console.log(showID);
+			
 
 					toggleOverlay(general_data, showID.charAt(0));
 
@@ -1115,7 +1151,7 @@
 				$("#" + data[0].players[i].id + "_hover").hover(function() {
 
 					var showID = $(this).attr("ID");
-					console.log(showID);
+					
 					/* 	$("#" + showID + "_toggle").slideToggle("fast"); */
 
 					$("#" + showID + "_toggle").animate({
@@ -1125,7 +1161,7 @@
 					}, 200);
 				}, function() {
 					var showID = $(this).attr("ID");
-					console.log(showID);
+				
 					$("#" + showID + "_toggle").animate({
 						opacity : 0,
 						bottom : "-=10px"
