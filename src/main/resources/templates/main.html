@@ -127,7 +127,7 @@
 						<ul>
 							<li><a onclick="populateGeneral()" href="#section-linemove-91" ><span>All</span></a></li>
 							<li><a onclick="populateChampion()" href="#section-linemove-92" ><span>Champion</span></a></li>
-							<li><a href="#section-linemove-93" ><span>Last 10</span></a></li>
+							<li><a onclick="populateHistory()" href="#section-linemove-93" ><span>Last 10</span></a></li>
 				
 						</ul>
 					</nav>
@@ -421,6 +421,8 @@
 		var roles_data;
 		var global_player_id = 0;
 		var global_roles_id = 0;
+		var global_history;
+		var global_show_stats_id=0;
 		function getData() {
 
 			$
@@ -561,12 +563,12 @@
 											$("#section-linemove-91")
 													.append(
 															"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
-																	+ data[0].stats.highest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ data[0].stats.general_stats.highest_kda
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 																	+ "</tr>"
 																	+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
-																	+ data[0].stats.lowest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+																	+ data[0].stats.general_stats.lowest_kda
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
 																	+ "</tr>"
 
@@ -574,33 +576,33 @@
 											$("#section-linemove-92")
 											.append(
 													"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
-															+ data[0].stats.highest_kda
-															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+															+ data[0].stats.champion_stats.highest_kda
+															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.champion_stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 															+ "</tr>"
 															+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
-															+ data[0].stats.lowest_kda
-															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+															+ data[0].stats.champion_stats.lowest_kda
+															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.champion_stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
 															+ "</tr>"
 
 											);
 											
-												$("#section-linemove-93")
-												.append(
-														"<span class='kdd'> Loading </span>"
-																
-														
-														
-																+"<div id='myProgress'>"
-																+"  <div id='myBar'><div id='label'>10%</div></div>"
-																+"</div>"	
-															
-															
-													
-
-												);
-											}, 500);
 												
+											}, 500);
+								$("#section-linemove-93")
+								.append(
+										"<span class='kdd'> Loading </span>"
+												
+										
+										
+												+"<div id='myProgress'>"
+												+"<div id='myBar'></div>"
+												+"</div>"	
+											
+											
+									
+
+								);
 										
 
 								getHistory(data[0]);
@@ -625,7 +627,7 @@
 			$(".switch_div").animate({
 				opacity : 0
 
-			}, 200);
+			}, 100);
 			setTimeout(function() {
 
 				populateData(gen_data, 0);
@@ -634,15 +636,32 @@
 					opacity : 1
 					
 
-				}, 200);
-			}, 300);
+				}, 100);
+			}, 150);
+		};
+		function populateHistory() {
+			
+			$(".switch_div").animate({
+				opacity : 0
+
+			}, 100);
+			setTimeout(function() {
+
+				populateData(gen_data, 3);
+				
+				$(".switch_div").animate({
+					opacity : 1
+					
+
+				}, 100);
+			}, 150);
 		};
 		function populateChampion() {
 			
 			$(".switch_div").animate({
 				opacity : 0
 
-			}, 200);
+			}, 100);
 			setTimeout(function() {
 
 				populateData(gen_data, 1);
@@ -651,8 +670,8 @@
 					opacity : 1
 					
 
-				}, 200);
-			}, 300);
+				}, 100);
+			}, 150);
 		};
 		var iter = 0;
 		function expandTier(data) {
@@ -707,7 +726,24 @@
 					 
 					  elem.style.width = con + '%'; 
 					general_data[iter].history = data;
-				
+					gen_data[0].players[iter].general_stats[3]=general_data[iter].history[10];
+					if(global_show_stats_id==3)
+						{
+						$(".switch_div").animate({
+							opacity : 0
+
+						}, 100);
+						setTimeout(function() {
+
+							populateData(gen_data, 3);
+							
+							$(".switch_div").animate({
+								opacity : 1
+								
+
+							}, 100);
+						}, 150);
+						}
 					iter++;
 					if (iter == global_player_id) {
 						$("#kda_his").text("");
@@ -747,7 +783,7 @@
 					}
 
 					if (iter < 10) {
-
+					
 						getHistory(gen_data[0]);
 
 					}
@@ -757,7 +793,7 @@
 					
 					if (iter == 10) {
 						
-						populateHistoryRoles(general_data);
+						populateHistoryRoles(gen_data[0]);
 					}
 					}
 				},
@@ -788,12 +824,25 @@
 						dataType : 'json',
 						timeout : 100000,
 						success : function(data) {
-							
+							console.log(data);
 							for (i = 0; i < 5; i++) {
 								roles_data[i].history = data[i].history_stats;
 
 							}
+							$("#section-linemove-93").text("");
+							$("#section-linemove-93")
+							.append(
+									"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
+											+ data[6].highest_kda
+											+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[6].highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+											+ "</tr>"
+											+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
+											+ data[6].lowest_kda
+											+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[6].lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
 
+											+ "</tr>"
+
+							);
 							$("#loading_history").text("");
 							$("#loading_history")
 									.append(
@@ -854,7 +903,8 @@
 													+ "</tr>");
 					
 							for (i = 0; i < 10; i++) {
-					
+								
+								
 								general_data[i].history[10].kda_rate = data[5][i].history_rates[0].counter;
 
 							}
@@ -876,15 +926,124 @@
 		}, 500);
 		$("#extra_data").hide();
 		function populateData(data, show_stats) {
-
+			console.log(data);
+			global_show_stats_id=show_stats;
 			$("#first_row").text("");
 			$("#second_row").text("");
 			$("#sortable").text("");
 			$("#sortable1").text("");
 			for (i = 0; i < 5; i++) {
 				$("#sortable")
-						.append(
-								"<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				.append(
+						"<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				if(data[0].players[i].general_stats[show_stats].history=="none")
+				{
+					$("#first_row")
+					.append(
+							"<div class='col-md-2'>  <div  class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size grid1 effect-zoe'>"
+
+									/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
+									      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
+									
+									+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
+
+									+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
+
+									+ " <div class='mdl-card__title'>"
+									+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+									+ "<table class='sum_table'>"
+									+ "<tr>"
+									+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune1_img + "' class='img_card  sum'></img></td>"
+									+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune2_img + "' class='img_card  sum'></img></td>"
+
+									+ "</tr>"
+									+ "<tr>"
+									+ "<td colspan='2'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/mastery/" + data[0].players[i].keystone_img + "' class='img_card  sum'></img></td>"
+
+									+ "</tr>"
+
+									+ "</table>"
+									+ "<div style='font-weight: bold;color:white;'>"
+									+ "<img src= '../img/tiers/" + data[0].players[i].tier_img + ".png' class='  tier'></img><p class='tier_text'>"
+									+ data[0].players[i].tier
+									+ "</p></div></div>"
+									+ " </div>"
+
+									+
+
+									" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+									+
+
+									" <table  class='main-panel is-active'>"
+									+
+
+									"  <tr> "
+									+ "    <td> "
+									+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+								
+									+ "<span class='kdd'>/</span></p></div> "
+									+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+							
+									+ "<span class='kdd'>/</span></p></div> "
+									+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+								
+									+ "</p></div> "
+									+
+
+									"     </td>"
+									+
+
+									"  </tr>"
+									+ "  <tr>"
+									+ "      <td>"
+									+ "    <p class='col-md-5' style='font-weight:bold; margin-top:1px;  color: white'>"
+									+ "      Winrate<span class='kdd'>:</span>"
+									+ "    </p>"
+									+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:9px;  color: white'>-"
+									
+									+ "</p>"
+									+
+
+									"      </td>"
+									+ "  </tr>"
+									+ "  <tr>"
+									+ "      <td>"
+									+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
+									+ "          Games<span style='    padding-left: 10px;' class='kdd'>:</span>"
+									+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:19px;  color: white'>-"
+									
+									+ "</p>"
+									+ "      </td>"
+									+ "  </tr>"
+									+ "  <tr>"
+									+ "    <td>"
+
+									+ "    </td>  </tr></table>"
+
+									+ "</div>"
+
+									+ "<table>"
+
+									+ "</table>"
+									+ "<figcaption>"
+									+ "<p style='float:left;position:relative;top:10px;font-weight: 800;left:10px;'>Info</p>"
+									+ "<p class='icon-links'>"
+									+ "	<button class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+									+ "	<button id='"+i+"_hisid' class='info_button'><i class='fa fa-history' style='color:#374d5a;'></i></button>"
+									+ "	<button class='info_button test1' data-placement='bottom' data-toggle='tooltip' title='Hooray!' id='"
+									+ i
+									+ "_"
+									+ data[0].players[i].id
+									+ "_hover' class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+									+ "</p>"
+									+ "<p class='description'></p>"
+									+ "</figcaption>" + "</div>"
+
+									+ "</div>");
+					
+				}
+				else
+					{
 				$("#first_row")
 						.append(
 								"<div class='col-md-2'>  <div  class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size grid1 effect-zoe'>"
@@ -987,6 +1146,7 @@
 										+ "</figcaption>" + "</div>"
 
 										+ "</div>");
+					}
 				$("#" + i + "_" + data[0].players[i].id + "_hover").hover(
 				/* 		function() {
 
@@ -1042,112 +1202,220 @@
 				});
 			}
 			for (i = 5; i < 10; i++) {
-				$("#sortable1")
-						.append(
-								"<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				$("#sortable")
+				.append(
+						"<div id = "+i+" class='ui-state-default'><img src='http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'/></div>");
+				if(data[0].players[i].general_stats[show_stats].history=="none")
+				{
+					$("#second_row")
+					.append(
+							"<div class='col-md-2'>  <div  class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size grid1 effect-zoe'>"
+
+									/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
+									      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
+									
+									+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
+
+									+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
+
+									+ " <div class='mdl-card__title'>"
+									+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+									+ "<table class='sum_table'>"
+									+ "<tr>"
+									+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune1_img + "' class='img_card  sum'></img></td>"
+									+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune2_img + "' class='img_card  sum'></img></td>"
+
+									+ "</tr>"
+									+ "<tr>"
+									+ "<td colspan='2'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/mastery/" + data[0].players[i].keystone_img + "' class='img_card  sum'></img></td>"
+
+									+ "</tr>"
+
+									+ "</table>"
+									+ "<div style='font-weight: bold;color:white;'>"
+									+ "<img src= '../img/tiers/" + data[0].players[i].tier_img + ".png' class='  tier'></img><p class='tier_text'>"
+									+ data[0].players[i].tier
+									+ "</p></div></div>"
+									+ " </div>"
+
+									+
+
+									" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+									+
+
+									" <table  class='main-panel is-active'>"
+									+
+
+									"  <tr> "
+									+ "    <td> "
+									+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+								
+									+ "<span class='kdd'>/</span></p></div> "
+									+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+							
+									+ "<span class='kdd'>/</span></p></div> "
+									+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>-"
+								
+									+ "</p></div> "
+									+
+
+									"     </td>"
+									+
+
+									"  </tr>"
+									+ "  <tr>"
+									+ "      <td>"
+									+ "    <p class='col-md-5' style='font-weight:bold; margin-top:1px;  color: white'>"
+									+ "      Winrate<span class='kdd'>:</span>"
+									+ "    </p>"
+									+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:9px;  color: white'>-"
+									
+									+ "</p>"
+									+
+
+									"      </td>"
+									+ "  </tr>"
+									+ "  <tr>"
+									+ "      <td>"
+									+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
+									+ "          Games<span style='    padding-left: 10px;' class='kdd'>:</span>"
+									+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:19px;  color: white'>-"
+									
+									+ "</p>"
+									+ "      </td>"
+									+ "  </tr>"
+									+ "  <tr>"
+									+ "    <td>"
+
+									+ "    </td>  </tr></table>"
+
+									+ "</div>"
+
+									+ "<table>"
+
+									+ "</table>"
+									+ "<figcaption>"
+									+ "<p style='float:left;position:relative;top:10px;font-weight: 800;left:10px;'>Info</p>"
+									+ "<p class='icon-links'>"
+									+ "	<button class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+									+ "	<button id='"+i+"_hisid' class='info_button'><i class='fa fa-history' style='color:#374d5a;'></i></button>"
+									+ "	<button class='info_button test1' data-placement='bottom' data-toggle='tooltip' title='Hooray!' id='"
+									+ i
+									+ "_"
+									+ data[0].players[i].id
+									+ "_hover' class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+									+ "</p>"
+									+ "<p class='description'></p>"
+									+ "</figcaption>" + "</div>"
+
+									+ "</div>");
+					
+				}
+				else
+					{
 				$("#second_row")
 						.append(
-							
-										"<div class='col-md-2'>  <div  class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size grid1 effect-zoe'>"
+								"<div class='col-md-2'>  <div  class='demo-card-wide mdl-card mdl-shadow1--2dp element element_size grid1 effect-zoe'>"
 
-												/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
-												      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
-												
-												+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
+										/*    +"<div id='"+data[0].players[i].id+"_hover_toggle1' class='hide_hover1'>"
+										      +" <img src= 'http://ddragon.leagueoflegends.com/cdn/6.22.1/img/profileicon/" + data[0].players[i].icon + ".png' class='img_card live_stats_size' style='margin-top: 30px;'></img>"
+										
+										+" <button type='button' style='padding-left: 24px; background-color:white;color:#374d5a;width:70px !important;height:70px !important;margin-top: 30px;' class='kda_text_main kda_text' >1</i></button></div>" */
 
-												+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
+										+ "<img src= 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+data[0].players[i].champion_key+"_0.jpg' class=' live_stats_border'></img>"
 
-												+ " <div class='mdl-card__title'>"
-												+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
-												+ "<table class='sum_table'>"
-												+ "<tr>"
-												+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune1_img + "' class='img_card  sum'></img></td>"
-												+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune2_img + "' class='img_card  sum'></img></td>"
+										+ " <div class='mdl-card__title'>"
+										+ " <div class' col-md-3'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].players[i].champion_key + ".png' class='img_card live_stats_size'></img>"
+										+ "<table class='sum_table'>"
+										+ "<tr>"
+										+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune1_img + "' class='img_card  sum'></img></td>"
+										+ "<td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/" + data[0].players[i].rune2_img + "' class='img_card  sum'></img></td>"
 
-												+ "</tr>"
-												+ "<tr>"
-												+ "<td colspan='2'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/mastery/" + data[0].players[i].keystone_img + "' class='img_card  sum'></img></td>"
+										+ "</tr>"
+										+ "<tr>"
+										+ "<td colspan='2'><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/mastery/" + data[0].players[i].keystone_img + "' class='img_card  sum'></img></td>"
 
-												+ "</tr>"
+										+ "</tr>"
 
-												+ "</table>"
-												+ "<div style='font-weight: bold;color:white;'>"
-												+ "<img src= '../img/tiers/" + data[0].players[i].tier_img + ".png' class='  tier'></img><p class='tier_text'>"
-												+ data[0].players[i].tier
-												+ "</p></div></div>"
-												+ " </div>"
+										+ "</table>"
+										+ "<div style='font-weight: bold;color:white;'>"
+										+ "<img src= '../img/tiers/" + data[0].players[i].tier_img + ".png' class='  tier'></img><p class='tier_text'>"
+										+ data[0].players[i].tier
+										+ "</p></div></div>"
+										+ " </div>"
 
-												+
+										+
 
-												" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
-												+
+										" <div class='mdl-tabs mdl-js-tabs mdl-js-ripple-effect'>"
+										+
 
-												" <table  class='main-panel is-active'>"
-												+
+										" <table  class='main-panel is-active'>"
+										+
 
-												"  <tr> "
-												+ "    <td> "
-												+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-												+ data[0].players[i].general_stats[show_stats].kills_per_game
-												+ "<span class='kdd'>/</span></p></div> "
-												+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-												+ data[0].players[i].general_stats[show_stats].deaths_per_game
-												+ "<span class='kdd'>/</span></p></div> "
-												+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
-												+ data[0].players[i].general_stats[show_stats].assists_per_game
-												+ "</p></div> "
-												+
+										"  <tr> "
+										+ "    <td> "
+										+ "    <div  class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].kills_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].deaths_per_game
+										+ "<span class='kdd'>/</span></p></div> "
+										+ "    <div class='col-md-4 switch_div' style='''><p class='kda_text_live '>"
+										+ data[0].players[i].general_stats[show_stats].assists_per_game
+										+ "</p></div> "
+										+
 
-												"     </td>"
-												+
+										"     </td>"
+										+
 
-												"  </tr>"
-												+ "  <tr>"
-												+ "      <td>"
-												+ "    <p class='col-md-5' style='font-weight:bold; margin-top:1px;  color: white'>"
-												+ "      Winrate<span class='kdd'>:</span>"
-												+ "    </p>"
-												+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:9px;  color: white'>"
-												+ data[0].players[i].general_stats[show_stats].winrate
-												+ "</p>"
-												+
+										"  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "    <p class='col-md-5' style='font-weight:bold; margin-top:1px;  color: white'>"
+										+ "      Winrate<span class='kdd'>:</span>"
+										+ "    </p>"
+										+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:9px;  color: white'>"
+										+ data[0].players[i].general_stats[show_stats].winrate
+										+ "</p>"
+										+
 
-												"      </td>"
-												+ "  </tr>"
-												+ "  <tr>"
-												+ "      <td>"
-												+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
-												+ "          Games played<span style='    padding-left: 10px;' class='kdd'>:</span>"
-												+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:19px;  color: white'>"
-												+ data[0].players[i].general_stats[show_stats].games_played
-												+ "</p>"
-												+ "      </td>"
-												+ "  </tr>"
-												+ "  <tr>"
-												+ "    <td>"
+										"      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "      <td>"
+										+ "        <p class='col-md-5 kda_text_live1' style='font-weight:bold; color: white;' >"
+										+ "          Games<span style='    padding-left: 10px;' class='kdd'>:</span>"
+										+ "    <p class='col-md-5 switch_div' style='font-weight:bold; margin-top:19px;  color: white'>"
+										+ data[0].players[i].general_stats[show_stats].games_played
+										+ "</p>"
+										+ "      </td>"
+										+ "  </tr>"
+										+ "  <tr>"
+										+ "    <td>"
 
-												+ "    </td>  </tr></table>"
+										+ "    </td>  </tr></table>"
 
-												+ "</div>"
+										+ "</div>"
 
-												+ "<table>"
+										+ "<table>"
 
-												+ "</table>"
-												+ "<figcaption>"
-												+ "<p style='float:left;position:relative;top:10px;font-weight: 800;left:10px;'>Info</p>"
-												+ "<p class='icon-links'>"
-												+ "	<button class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
-												+ "	<button id='"+i+"_hisid' class='info_button'><i class='fa fa-history' style='color:#374d5a;'></i></button>"
-												+ "	<button class='info_button test1' data-placement='bottom' data-toggle='tooltip' title='Hooray!' id='"
-												+ i
-												+ "_"
-												+ data[0].players[i].id
-												+ "_hover' class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
-												+ "</p>"
-												+ "<p class='description'></p>"
-												+ "</figcaption>" + "</div>"
+										+ "</table>"
+										+ "<figcaption>"
+										+ "<p style='float:left;position:relative;top:10px;font-weight: 800;left:10px;'>Info</p>"
+										+ "<p class='icon-links'>"
+										+ "	<button class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+										+ "	<button id='"+i+"_hisid' class='info_button'><i class='fa fa-history' style='color:#374d5a;'></i></button>"
+										+ "	<button class='info_button test1' data-placement='bottom' data-toggle='tooltip' title='Hooray!' id='"
+										+ i
+										+ "_"
+										+ data[0].players[i].id
+										+ "_hover' class='info_button'><i class='fa fa-bar-chart' style='color:#374d5a;'></i></button>"
+										+ "</p>"
+										+ "<p class='description'></p>"
+										+ "</figcaption>" + "</div>"
 
-												+ "</div>");
+										+ "</div>");
+					}
 				$("#" + data[0].players[i].id + "_hover").hover(function() {
 
 					var showID = $(this).attr("ID");

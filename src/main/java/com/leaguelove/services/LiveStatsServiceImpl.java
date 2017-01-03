@@ -151,11 +151,11 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				tier = "Unranked";
 				tier_img="Unranked";
 			}
-			if (tier.contains("Challenger")) {
+			if (tier.contains("Challenger I")) {
 				playerStats.put("tier", "Challenger");
 				playerStats.put("tier_img", "Challenger");
 			}
-			else if (tier.contains("Master")) {
+			else if (tier.contains("MASTER I")) {
 				playerStats.put("tier", "Master");
 				playerStats.put("tier_img", "Master");
 				
@@ -751,31 +751,87 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 	private JSONObject getStats(JSONArray players) {
 		JSONObject stats = new JSONObject();
+		stats.put("general_stats", getGeneralStats(players,0));
+		stats.put("champion_stats", getGeneralStats(players,1));
+		
+
+		return stats;
+	}
+
+	private JSONObject getGeneralStats(JSONArray players,int con) {
+		
+		JSONObject stats = new JSONObject();
 		String highestKDAName = "";
 		String highestKDAKey = "";
-		Double highestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+		Double highestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(con).getDouble("kda");
 		String lowestKDAName = "";
-		Double lowestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(0).getDouble("kda");
+		Double lowestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(con).getDouble("kda");
 		String lowestKDAKey = "";
-		for (int i = 0; i < players.length(); i++) {
-			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0).getString("name")
+		for (int i = 0; i < 10; i++) {
+			if (con==0) {
+				
+			
+			if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con).getString("name")
 					.contains("all")) {
 
-				if (highestKDA < players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0)
+				if (highestKDA < players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 						.getDouble("kda")) {
-					highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0)
+					highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda");
 					highestKDAName = players.getJSONObject(i).getString("name");
 					highestKDAKey = players.getJSONObject(i).getString("champion_key");
 				}
-				if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0)
+				if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 						.getDouble("kda")) {
-					lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(0)
+					lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda");
 					lowestKDAName = players.getJSONObject(i).getString("name");
 					lowestKDAKey = players.getJSONObject(i).getString("champion_key");
 				}
 			}
+			}
+			else if (con==1) {
+				
+				
+				if (!players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con).getString("name")
+						.contains("all")) {
+
+					if (highestKDA < players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+							.getDouble("kda")) {
+						highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+								.getDouble("kda");
+						highestKDAName = players.getJSONObject(i).getString("name");
+						highestKDAKey = players.getJSONObject(i).getString("champion_key");
+					}
+					if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+							.getDouble("kda")) {
+						lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+								.getDouble("kda");
+						lowestKDAName = players.getJSONObject(i).getString("name");
+						lowestKDAKey = players.getJSONObject(i).getString("champion_key");
+					}
+				}
+				}
+			else {
+				
+		
+
+					if (highestKDA < players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+							.getDouble("kda")) {
+						highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+								.getDouble("kda");
+						highestKDAName = players.getJSONObject(i).getString("name");
+						highestKDAKey = players.getJSONObject(i).getString("champion_key");
+					}
+					if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+							.getDouble("kda")) {
+						lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
+								.getDouble("kda");
+						lowestKDAName = players.getJSONObject(i).getString("name");
+						lowestKDAKey = players.getJSONObject(i).getString("champion_key");
+					}
+				
+				}
 		}
 		stats.put("highest_kda", highestKDA);
 		stats.put("highest_kda_name", highestKDAName);
@@ -783,7 +839,6 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		stats.put("lowest_kda", lowestKDA);
 		stats.put("lowest_kda_name", lowestKDAName);
 		stats.put("lowest_kda_key", lowestKDAKey);
-
 		return stats;
 	}
 
@@ -1247,7 +1302,10 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 	@Override
 	public JSONArray getHistoryRoles(JSONObject data_get) {
-		JSONArray data=data_get.getJSONArray("get_data");
+		JSONObject ja=data_get.getJSONObject("get_data");
+		JSONArray data=ja.getJSONArray("general_stats");
+		JSONArray players=ja.getJSONArray("players");
+		
 		JSONArray rolesArray=new JSONArray();
 		String ownerTeam="";
 		for (int i = 0; i < 10; i++) {
@@ -1405,6 +1463,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			}
 			
 			rolesArray.put(getHistoyStats(data));
+			rolesArray.put(getGeneralStats(players,3));
 		return rolesArray;
 	}
 
