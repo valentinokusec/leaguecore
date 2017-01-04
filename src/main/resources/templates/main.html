@@ -559,31 +559,24 @@
 												bottom : "+=10px"
 
 											}, 500);
-
+											for(i = 0; i < data[0].stats.general_stats.length - 1; i += 3)
 											$("#section-linemove-91")
 													.append(
-															"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
-																	+ data[0].stats.general_stats.highest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+															"<tr><td>"+data[0].stats.general_stats[i+1]+"</td><td><span class='kdd'> : </span></td><td>"
+																	+ data[0].stats.general_stats[i]
+																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats[i+2] + ".png' class='img_card live_stats_size_side'></img></td>"
 																	+ "</tr>"
-																	+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
-																	+ data[0].stats.general_stats.lowest_kda
-																	+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
-
-																	+ "</tr>"
+																
 
 													);
+											for(i = 0; i < data[0].stats.champion_stats.length - 1; i += 3)
 											$("#section-linemove-92")
 											.append(
-													"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
-															+ data[0].stats.champion_stats.highest_kda
-															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.champion_stats.highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+													"<tr><td>"+data[0].stats.champion_stats[i+1]+"</td><td><span class='kdd'> : </span></td><td>"
+															+ data[0].stats.champion_stats[i]
+															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.champion_stats[i+2] + ".png' class='img_card live_stats_size_side'></img></td>"
 															+ "</tr>"
-															+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
-															+ data[0].stats.champion_stats.lowest_kda
-															+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.champion_stats.lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
-
-															+ "</tr>"
+												
 
 											);
 											
@@ -719,6 +712,7 @@
 				dataType : 'json',
 				timeout : 100000,
 				success : function(data) {
+					console.log(data);
 					console.log("history:"+iter);
 					
 					  var elem = document.getElementById("myBar"); 
@@ -787,14 +781,11 @@
 						getHistory(gen_data[0]);
 
 					}
-					if (mode == "CLASSIC") {
-
-				
-					
+							
 					if (iter == 10) {
 						
 						populateHistoryRoles(gen_data[0]);
-					}
+					
 					}
 				},
 				error : function(e) {
@@ -830,17 +821,14 @@
 
 							}
 							$("#section-linemove-93").text("");
+							for(i = 0; i < data[6].length - 1; i += 3)
 							$("#section-linemove-93")
 							.append(
-									"<tr><td>Highest KDA</td><td><span class='kdd'> : </span></td><td>"
-											+ data[6].highest_kda
-											+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[6].highest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
+									"<tr><td>"+data[6][i+1]+"</td><td><span class='kdd'> : </span></td><td>"
+											+ data[6][i]
+											+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[6][i+2] + ".png' class='img_card live_stats_size_side'></img></td>"
 											+ "</tr>"
-											+ "<tr><td>Lowest KDA</td><td><span class='kdd'> : </span></td><td>"
-											+ data[6].lowest_kda
-											+ "</td><td><span class='kdd'> by     </span></td><td><img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[6].lowest_kda_key + ".png' class='img_card live_stats_size_side'></img></td>"
-
-											+ "</tr>"
+								
 
 							);
 							$("#loading_history").text("");

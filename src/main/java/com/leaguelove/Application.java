@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.robrua.orianna.api.core.RiotAPI;
-import com.robrua.orianna.store.HibernateDB;
+
 import com.robrua.orianna.type.core.common.Region;
 
 @SpringBootApplication

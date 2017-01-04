@@ -1,5 +1,10 @@
 package com.leaguelove.services;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -11,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -758,13 +764,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		return stats;
 	}
 
-	private JSONObject getGeneralStats(JSONArray players,int con) {
+	private JSONArray getGeneralStats(JSONArray players,int con) {
 		
-		JSONObject stats = new JSONObject();
-		String highestKDAName = "";
+		JSONArray stats = new JSONArray();
+		String firstTimeKey="";
 		String highestKDAKey = "";
 		Double highestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(con).getDouble("kda");
-		String lowestKDAName = "";
+
 		Double lowestKDA = players.getJSONObject(0).getJSONArray("general_stats").getJSONObject(con).getDouble("kda");
 		String lowestKDAKey = "";
 		for (int i = 0; i < 10; i++) {
@@ -778,14 +784,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 						.getDouble("kda")) {
 					highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda");
-					highestKDAName = players.getJSONObject(i).getString("name");
 					highestKDAKey = players.getJSONObject(i).getString("champion_key");
 				}
 				if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 						.getDouble("kda")) {
 					lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda");
-					lowestKDAName = players.getJSONObject(i).getString("name");
+					
 					lowestKDAKey = players.getJSONObject(i).getString("champion_key");
 				}
 			}
@@ -795,19 +800,21 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				
 				if (!players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con).getString("name")
 						.contains("all")) {
+					if (players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con).getString("name").contains("First Time")) {
+						firstTimeKey=players.getJSONObject(i).getString("champion_key");
+					}
 
 					if (highestKDA < players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda")) {
 						highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 								.getDouble("kda");
-						highestKDAName = players.getJSONObject(i).getString("name");
 						highestKDAKey = players.getJSONObject(i).getString("champion_key");
 					}
 					if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda")) {
 						lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 								.getDouble("kda");
-						lowestKDAName = players.getJSONObject(i).getString("name");
+					
 						lowestKDAKey = players.getJSONObject(i).getString("champion_key");
 					}
 				}
@@ -820,25 +827,34 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 							.getDouble("kda")) {
 						highestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 								.getDouble("kda");
-						highestKDAName = players.getJSONObject(i).getString("name");
 						highestKDAKey = players.getJSONObject(i).getString("champion_key");
 					}
 					if (lowestKDA > players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 							.getDouble("kda")) {
 						lowestKDA = players.getJSONObject(i).getJSONArray("general_stats").getJSONObject(con)
 								.getDouble("kda");
-						lowestKDAName = players.getJSONObject(i).getString("name");
+						
 						lowestKDAKey = players.getJSONObject(i).getString("champion_key");
 					}
 				
 				}
 		}
-		stats.put("highest_kda", highestKDA);
-		stats.put("highest_kda_name", highestKDAName);
-		stats.put("highest_kda_key", highestKDAKey);
-		stats.put("lowest_kda", lowestKDA);
-		stats.put("lowest_kda_name", lowestKDAName);
-		stats.put("lowest_kda_key", lowestKDAKey);
+		if (!firstTimeKey.equals("")) {
+			stats.put(0);
+			stats.put("First Time");
+			stats.put(firstTimeKey);
+		}
+		if (!highestKDAKey.equals("")) {
+			stats.put(highestKDA);
+			stats.put("Highest KDA");
+			stats.put(highestKDAKey);
+		}
+		if (!lowestKDAKey.equals("")) {
+			stats.put(lowestKDA);
+			stats.put("Lowest KDA");
+			stats.put(lowestKDAKey);
+		}
+		
 		return stats;
 	}
 
@@ -969,6 +985,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			champion1.put("loserate", Integer.toString(0));
 		
 			championList.put(champion1);
+			championList.put("noPrefferedChamps");
 		}
 		championList.put(new JSONObject().put("history","none"));
 		return championList;
@@ -1113,7 +1130,30 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		// TODO Auto-generated method stub
 		Summoner summoner = RiotAPI.getSummonerByName(name);
 //		getHistory(summoner);
-		List<Game> games = RiotAPI.getRecentGames(summoner);
+		List<Game> games = null;
+		try
+		{
+		 games = RiotAPI.getRecentGames(summoner);
+		}
+		catch(ConstraintViolationException e)
+		{
+			System.out.println(e.getSQLException());
+			String[] parts = e.getSQLException().toString().split("'");
+			String parId=parts[1];
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				 String url = "jdbc:mysql://localhost:3306/leaguecore"; 
+			      Connection conn = DriverManager.getConnection(url,"root","ireliaftw"); 
+			      Statement stmt = conn.createStatement();
+			      ResultSet rs = stmt.executeQuery("DELETE FROM summoner WHERE id = 72507091");
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
+		      // Step 2: Establish the connection to the database 
+		     
+		}
 		List<MatchReference> listmatch = summoner.getMatchList();
 		JSONArray history = new JSONArray();
 		int kills=0;
@@ -1305,7 +1345,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		JSONObject ja=data_get.getJSONObject("get_data");
 		JSONArray data=ja.getJSONArray("general_stats");
 		JSONArray players=ja.getJSONArray("players");
-		
+		String gameMode=ja.getString("game_mode");
 		JSONArray rolesArray=new JSONArray();
 		String ownerTeam="";
 		for (int i = 0; i < 10; i++) {
@@ -1316,6 +1356,8 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 			for (int i = 0; i < 5; i++) {
 				JSONObject users=new JSONObject();
 				
+				if (gameMode.contains("CLASSIC")) {
+					
 				
 				JSONArray generalStats=new JSONArray();
 				
@@ -1458,7 +1500,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 				}
 			
 				users.put("history_stats",generalStats);
-				
+				}
 				rolesArray.put(users);
 			}
 			
