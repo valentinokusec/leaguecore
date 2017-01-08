@@ -2346,7 +2346,32 @@ input:-webkit-autofill {
 	left: 40%;
 	border: 0;
 }
-
+.roles_left_label {
+	-webkit-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+-moz-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+background:white;
+}
+.roles_left_label td{
+    color: #374d5a;
+}
+.extra_class_roles_label {
+	position: absolute;
+	background: #374d5a;
+	top: 22%;
+    left: 23%;
+	border: 0;
+	-webkit-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+-moz-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75) !important;
+}
+.extra_class_roles_label td{
+text-align: center;
+    width: 330px;
+    font-size: 25px;
+    font-weight: 800;
+    background: white;
+}
 .extra_class_roles td {
 	width: 100px;
 }
@@ -2369,7 +2394,7 @@ input:-webkit-autofill {
 	width: 100px;
 }
 .his_nav {
-	    margin: auto;
+	      margin-left: 25%;
 }
 .his_nav p:hover {
 	    cursor: pointer;
@@ -2445,7 +2470,7 @@ canvas {
 .extra_class_stats_roles {
 	position: absolute;
 	
-	top: 25%;
+	top: 30%;
 	border: 0;
 	left: 0%;
 }

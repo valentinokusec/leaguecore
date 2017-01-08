@@ -559,8 +559,11 @@
 												bottom : "+=10px"
 
 											}, 500);
-											for(i = 0; i < data[0].stats.general_stats.length - 1; i += 3)
-											$("#section-linemove-91")
+											for(i = 0; i < data[0].stats.general_stats.length - 1; i += 4)
+												
+												if(data[0].stats.general_stats[i+3]==0)
+												{
+													$("#section-linemove-91")
 													.append(
 															"<tr><td>"+data[0].stats.general_stats[i+1]+"</td><td><span class='kdd'> : </span></td><td>"
 																	+ data[0].stats.general_stats[i]
@@ -569,6 +572,42 @@
 																
 
 													);
+												}
+												else if(data[0].stats.general_stats[i+3]==1)
+												{
+													$("#section-linemove-91")
+													.append(
+															"<tr><td>"+data[0].stats.general_stats[i+1]+"</td><td><span class='kdd'> : </span></td><td>"
+																	+ data[0].stats.general_stats[i]
+																	+ "</td>"
+																	+ "</tr>"
+																
+
+													);
+												}
+												else
+												{
+													$("#section-linemove-91")
+													.append(
+															"<tr><td>"+data[0].stats.general_stats[i+1]+"</td><td><span class='kdd'> : </span></td>"
+																
+																+"<td colspan='3' id='"+data[0].stats.general_stats[i+1].replace(" ", "")+"'></td>"
+																	+ "</tr>"
+																
+
+													);
+													console.log(data[0].stats.general_stats[i+2]);
+													for(k = 0; k < data[0].stats.general_stats[i+2].length; k++)
+													{
+														console.log(data[0].stats.general_stats[i+1]);
+														console.log(data[0].stats.general_stats[i+2][k]);
+														$("#"+data[0].stats.general_stats[i+1].replace(" ", ""))
+														.append(
+																"<img src= 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/" + data[0].stats.general_stats[i+2][k] + ".png' class='img_card live_stats_size_side'></img>"
+																);
+													}
+												}
+								
 											for(i = 0; i < data[0].stats.champion_stats.length - 1; i += 3)
 											$("#section-linemove-92")
 											.append(
@@ -1599,8 +1638,19 @@
 									
 
 									+ "</table>"
+									+		"<table class='extra_class_roles_label'>"
+									+ "<tr>"
+								
+									+ "<td colspan='' style='text-align:center;'><span class='roles_vs'>General</span></td>"
+									+ "<td colspan='' style='text-align:center;'><span class='roles_vs'>Champion</span></td>"
+									+ "<td colspan='' style='text-align:center;'><span class='roles_vs'>Last 10</span></td>"
+								
+									+ "</tr>"
+									
+
+									+ "</table>"
 									+ "<div class='extra_class_stats_roles'>"
-									+ "	<table style='float: left; width:300px;'>"
+									+ "	<table style='float: left; width:300px;' class='roles_left_label'>"
 									+ "		<tr>"
 									+ "			<td colspan='3'><p>Games Played</p></td><tr>"
 									+ "		<tr>"

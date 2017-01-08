@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="summoner")
-public class Summoner {
+@Table(name="summoners")
+public class Summoners {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,6 +17,18 @@ public class Summoner {
 	private Long id;
 	@Column(name="summonerid")
 	private Long summonerid;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getSummonerid() {
+		return summonerid;
+	}
+	public void setSummonerid(Long summonerid) {
+		this.summonerid = summonerid;
+	}
 	
 
 }

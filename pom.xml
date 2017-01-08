@@ -53,12 +53,9 @@
   <artifactId>orianna-hibernate</artifactId>
   <version>2.4.0</version>
 </dependency> -->
-	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.2.Final</version>
-		</dependency>
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
