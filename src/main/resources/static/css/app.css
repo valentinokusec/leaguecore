@@ -1090,6 +1090,7 @@ svg {
 	font-size: 20px;
 	font-weight: 800;
 	padding: 3px;
+	padding-bottom: 15px;
 }
 
 .left_stats h1 {
@@ -2408,7 +2409,7 @@ text-align: center;
 }
 
 .extra_class_stats table {
-	background: #374d5a;
+/* 	background: #374d5a; */
 }
 
 .sort {
@@ -2422,7 +2423,27 @@ text-align: center;
 	height: 50px;
 	padding: 0px !important;
 }
+#metrics_sidebar {
+	background-color: rgb(255, 64, 129) !important;
+	border-radius: 200px 200px 200px 200px !important;
+	-moz-border-radius: 200px 200px 200px 200px !important;
+	-webkit-border-radius: 200px 200px 200px 200px !important;
+	border: 0px solid #969696 !important;
+	width: 70px !important;
+    height: 70px !important;
+	padding-left: 9px;
+	display: none;
+	position: absolute;
+	left: 3%;
+    top: 90px;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
 
+#metrics_sidebar:hover {
+	opacity: 0.9;
+}
 #metrics {
 	background-color: rgb(255, 64, 129) !important;
 	border-radius: 200px 200px 200px 200px !important;
@@ -2441,7 +2462,7 @@ text-align: center;
 	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-#metrics_hover {
+#metrics:hover {
 	opacity: 0.9;
 }
 
@@ -2640,8 +2661,8 @@ canvas {
 }
 
 .extra_class td {
-	color: white;
-	font-weight: bolder;
+	color: #273f4c;
+	font-weight: 800;
 	font-size: 30px;
 	padding: 10px;
 }

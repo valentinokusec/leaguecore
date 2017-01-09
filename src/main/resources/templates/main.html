@@ -77,6 +77,10 @@
 						<i class="fa fa-random fa-2x" style="font-size: 25px !important;"
 							aria-hidden="true"></i>
 					</button>
+					<button id="metrics_sidebar" onClick="showSidebar()">
+						<i class="fa fa-info fa-3x" style="padding-left: 8px;"
+							aria-hidden="true"></i>
+					</button>
 					<div id="morphsearch" class="morphsearch">
 						<form class="morphsearch-form">
 							<input class="morphsearch-input" type="search"
@@ -132,7 +136,7 @@
 						</ul>
 					</nav>
 					<div class="content-wrap">
-						<section id="section-linemove-91"></section>
+						<section ><table id="section-linemove-91"></table></section>
 						<section id="section-linemove-92"></section>
 						<section id="section-linemove-93"></section>
 					
@@ -541,6 +545,7 @@
 
 								$("#check").fadeIn();
 								$("#metrics").fadeIn();
+								$("#metrics_sidebar").fadeIn();
 								$("#que").text(data[0].game_mode);
 								/* $("#table_stats").stop().fadeIn();
 								$("#table_stats").stop().animate({
@@ -1473,7 +1478,13 @@
 
 			}
 		}
-
+		function showSidebar() {
+			
+			$(".sidebar").animate({
+				left : 0,
+			}, 200);
+			$("#metrics_sidebar").fadeOut();
+		}
 		function getMetricsData() {
 			console.log(metrics);
 			populateMetricsData();
@@ -1918,10 +1929,10 @@
 									+ "</i>General"
 									+ "</p></td>"
 									+ "		<td><p>"
-									+ "General"
+									+ "Champion"
 									+ "</p></td>"
 									+ "		<td><p>"
-									+ "General"
+									+ "Last 10"
 									+ "</p></td>"
 									+ "	</tr>"
 									+ "	<tr>"
@@ -1968,7 +1979,7 @@
 
 									+ "	</tr>"
 									+ "</table>"
-									+ "	<table style='float: left;' class='shade'>"
+									+ "	<table style='float: left;' class=''>"
 									+ "	<tr>"
 
 									+ "		<td><p>"
@@ -2030,13 +2041,13 @@
 									+ "			</p></td>"
 									+ "	</tr>"
 									+ "</table>"
-									+ "<table style='float: left;' class='shade'>"
+									+ "<table style='float: left;' class=''>"
 									+ "	<tr>"
 
 									+ "		<td><p>"
 									+ data[player_id].champion_info[0].stat
 									+ "</p></td>"
-									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+ "		<td><p type='button' style='padding-top: 3px !important;'"
 									+ "				class='kda_text_main kda_text' id=''>"
 									+ "				"
 									+ data[player_id].champion_info[0].counter
@@ -2048,7 +2059,7 @@
 									+ "		<td><p>"
 									+ data[player_id].champion_info[1].stat
 									+ "</p></td>"
-									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+ "		<td><p type='button' style='padding-top: 3px !important;'"
 									+ "				class='kda_text_main kda_text' id=''>"
 									+ "				"
 									+ data[player_id].champion_info[1].counter
@@ -2060,7 +2071,7 @@
 									+ "		<td><p>"
 									+ data[player_id].champion_info[2].stat
 									+ "</p></td>"
-									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+ "		<td><p type='button' style='padding-top:3px !important;'"
 									+ "				class='kda_text_main kda_text' id=''>"
 									+ "				"
 									+ data[player_id].champion_info[2].counter
@@ -2072,7 +2083,7 @@
 									+ "		<td><p>"
 									+ data[player_id].champion_info[4].stat
 									+ "</p></td>"
-									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+ "		<td><p type='button' style='padding-top: 3px !important;'"
 									+ "				class='kda_text_main kda_text' id=''>"
 									+ "				"
 									+ data[player_id].champion_info[4].counter
@@ -2084,7 +2095,7 @@
 									+ "		<td><p>"
 									+ data[player_id].champion_info[3].stat
 									+ "</p></td>"
-									+ "		<td><p type='button' style='padding-top: 12px !important;'"
+									+ "		<td><p type='button' style='padding-top: 3px !important;'"
 									+ "				class='kda_text_main kda_text' id=''>"
 									+ "				"
 									+ data[player_id].champion_info[3].counter
@@ -2093,7 +2104,7 @@
 									+ "	</tr>"
 
 									+ "</table>"
-									+ "<table style='float: left;' id='loading_history' class='shade'> "
+									+ "<table style='float: left;' id='loading_history' class=''> "
 									+ "	<tr>"
 									+ "		<td><p></p></td>"
 

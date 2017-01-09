@@ -338,7 +338,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					.put(infowinrate);
 
 		}
-		gamesGeneralArray.put("label", "Games played");
+		gamesGeneralArray.put("label", "Games");
 		gamesGeneralArray.put("data", gamesGeneral);
 		returnData.put(gamesGeneralArray);
 
@@ -742,7 +742,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 		gamesInfo.put("stat", games);
 		gamesInfo.put("counter", counterGames);
-		gamesInfo.put("label", "Games Played");
+		gamesInfo.put("label", "Games");
 		kdaInfo.put("stat", kda);
 		kdaInfo.put("counter", counterKDA);
 		kdaInfo.put("label", "KDA");
@@ -926,13 +926,13 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		}
 		averageKDAF = averageKDAF / 5;
 		stats.put(round(averageKDAF,2));
-		stats.put("Blue team average KDA");
+		stats.put("Blue team  KDA");
 		stats.put(0);
 		stats.put(1);
 		
 		averageKDAS = averageKDAS / 5;
 		stats.put(round(averageKDAS,2));
-		stats.put("Red team average KDA");
+		stats.put("Red team  KDA");
 		stats.put(0);
 		stats.put(1);
 		
@@ -1004,10 +1004,10 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		} catch (Exception e) {
 			JSONObject champion1 = new JSONObject();
 			que = summoner.getStats(Season.SEASON2016);
-			for (Entry<PlayerStatsSummaryType, PlayerStatsSummary> entry : que.entrySet()) {
+			
 
 				JSONObject champion = new JSONObject();
-				if (entry.getKey().toString().contentEquals("Unranked")) {
+				
 					champion.put("name", "unranked");
 					champion.put("games_played", 0);
 					champion.put("kills", round(0, 1));
@@ -1021,24 +1021,18 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					Double killsPerGame;
 					Double deathsPerGame;
 					Double assistsPerGame;
-					if (entry.getValue().getAggregatedStats().getTotalGamesPlayed() == 0) {
+				
+
+				
 						killsPerGame = 0d;
 						deathsPerGame = 0d;
 						assistsPerGame = 0d;
+					
 
-					} else {
-						killsPerGame = 0d;
-						deathsPerGame = 0d;
-						assistsPerGame = 0d;
-					}
-
-					Double winrate = (double) (entry.getValue().getAggregatedStats().getTotalWins())
-							/ (double) (entry.getValue().getAggregatedStats().getTotalGamesPlayed()) * 100;
-					if (deathsPerGame == 0) {
-						champion.put("kda", round((killsPerGame + assistsPerGame), 2));
-					} else {
-						champion.put("kda", round((killsPerGame + assistsPerGame) / deathsPerGame, 2));
-					}
+					Double winrate = 0d;
+				
+						champion.put("kda", 0);
+					
 					champion.put("kills_per_game", formatter.format(killsPerGame));
 					champion.put("deaths_per_game", formatter.format(deathsPerGame));
 					champion.put("assists_per_game", formatter.format(assistsPerGame));
@@ -1047,9 +1041,9 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 					Double loserate = 1 - winrate;
 					champion.put("loserate", round(loserate, 2));
 					championList.put(champion);
-				}
+				
 
-			}
+			
 			champion1.put("name", "First time");
 			champion1.put("games_played", 0);
 			champion1.put("kills", 0);
