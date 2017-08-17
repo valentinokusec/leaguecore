@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeagueCore</title>
+<meta name="description"
+	content="Page Preloading Effect: Re-creating the effect seen on fontface.ninja" />
+<meta name="keywords"
+	content="page loading, effect, initial, logo, sliding, web design, css animation, transform" />
+<meta name="author" content="Codrops" />
+<link rel="stylesheet" type="text/css" href="../css/app.css" />
+<link rel="stylesheet" type="text/css" href="../css/layout-simple.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../css/component.css" />
+<link rel="stylesheet" type="text/css" href="../css/style5.css" />
+<link rel="stylesheet" type="text/css" href="../css/style2.css" />
+<link rel="stylesheet" type="text/css" href="../css/style3.css" />
+	<link rel="stylesheet" type="text/css" href="../css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="../css/tabstyles.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/effect1.css" />
+<link rel="stylesheet" type="text/css" href="../css/hover.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/rpg-awesome.min.css" />
+</head>
+<body class="">
+
+	<div id="perspective" class="perspective effect-movedown grid">
+		<div class="container" id="container" style="padding: 0px">
+			<h1 class=" ele">Please wait</h1>
+			<div class="loader">
+
+				<svg width='196px' height='196px' xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+					class="uil-ripple">
+<rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
+					<g> <animate attributeName="opacity" dur="2s"
+						repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1"
+						values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#afafb7" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="0s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+					<g>
+					<animate attributeName="opacity" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#ff4081" fill="none"
+						stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+						begin="1s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+</svg>
+			</div>
+			<div class="wrapper">
+				<!-- wrapper needed for scroll -->
+				<nav style="height: 50px; padding: 17px;" class="main_nav">
+					<a href="/html/" style="color: white;">LeagueCore</a>
+					
+					
+				
+					<div id="morphsearch" class="morphsearch">
+						<form class="morphsearch-form">
+							<input class="morphsearch-input" type="search"
+								placeholder="Search..." />
+							<button class="morphsearch-submit" onClick="searchUser()"
+								style="box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.0);"></button>
+						</form>
+						<div class="morphsearch-content">
+							<div class="dummy-column">
+								<h2>Server</h2>
+
+								<p class="dummy-media-object" th:text="@{EU West}"></p>
+
+
+
+							</div>
+
+						</div>
+						<!-- /morphsearch-content -->
+						<span class="morphsearch-close"></span>
+					</div>
+					<!-- /morphsearch -->
+					<div style="float: right">
+						<p th:text="${name}" style="color: white;"></p>
+
+					</div>
+				</nav>
+
+
+
+
+
+				<p id="data" th:text="${name}" hidden="hidden"></p>
+				<div class="animate_el">
+					<div class="no_game" id="no_game">
+						<div style="margin-bottom: 10%;">No active game found!</div>
+						<div>Featured list:</div>
+						<table id="featured" class="featured"
+							style="margin-top: 60px;width: 380px; ">
+
+
+						</table>
+					</div>
+			
+			
+
+					<img
+						src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Braum_0.jpg"
+						class=" live_stats_back_op"></img>
+					<div class=" live_stats_back"></div>
+			
+				
+					<div id='output'></div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<nav class="outer-nav top horizontal" style="display: none;">
+		<table>
+			<tr>
+				<td>
+
+					<div id="sortable" class="ui-state-default"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+
+
+					<div id="sortable1" class="ui-state-default"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+
+					<div class="loader_roles">
+
+						<svg width='196px' height='196px'
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+							preserveAspectRatio="xMidYMid" class="uil-ripple">
+<rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
+					<g> <animate attributeName="opacity" dur="2s"
+								repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1"
+								values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#afafb7" fill="none"
+								stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+								begin="0s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+					<g>
+					<animate attributeName="opacity" dur="2s" repeatCount="indefinite"
+								begin="1s" keyTimes="0;0.33;1" values="1;1;0">
+</animate>
+					<circle cx="50" cy="50" r="40" stroke="#ff4081" fill="none"
+								stroke-width="6" stroke-linecap="round">
+					<animate attributeName="r" dur="2s" repeatCount="indefinite"
+								begin="1s" keyTimes="0;0.33;1" values="0;22;44">
+</animate></circle></g>
+</svg>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</nav>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+	<script src="../js/classie.js"></script>
+	<script src="../js/modernizr.custom.js"></script>
+	<script src="../js/main.js"></script>
+	<script src="../js/demo1.js"></script>
+	<script src="../js/pathLoader.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+
+<script src="../js/cbpFWTabs.js"></script>
+		
+	<script type="text/javascript">
+		/*<![CDATA[*/
+		           
+    getData();
+	function getData() {
+
+			$
+					.ajax({
+						type : "GET",
+						contentType : "application/json",
+						url : "/getstatsdata/" + $("#data").text(),
+
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							$(".ele").hide();
+							$(".loader").hide();
+							console.log("SUCCESS: ", data);
+				
+					
+						
+
+						},
+
+						done : function(e) {
+							console.log("DONE");
+						}
+					});
+		};
+	
+		/*]]>*/
+	</script>
+</body>
+</html>

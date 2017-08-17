@@ -1,32 +1,7 @@
 package com.leaguelove.web;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.RestController;
-
-
-
-import com.leaguelove.services.LiveStatsService;
-
-import com.robrua.orianna.api.core.RiotAPI;
-import com.robrua.orianna.type.core.common.Region;
-import com.robrua.orianna.type.core.common.Season;
-import com.robrua.orianna.type.core.match.Participant;
-import com.robrua.orianna.type.core.matchlist.MatchReference;
-import com.robrua.orianna.type.core.staticdata.Champion;
-import com.robrua.orianna.type.core.stats.ChampionStats;
-import com.robrua.orianna.type.core.summoner.Summoner;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.leaguelove.services.LiveStatsService;
+import com.leaguelove.services.StatsService;
 
 @Controller
 public class MainController {
@@ -47,6 +24,9 @@ public class MainController {
     
     @Autowired
 	private LiveStatsService livestatsService;
+    
+    @Autowired
+	private StatsService statsService;
     
     
        
@@ -79,6 +59,24 @@ public class MainController {
     	catch(Exception e) {
     		
     		return data.toString();
+		}
+    	
+    }
+    @RequestMapping("/getstatsdata/{name}")
+    public @ResponseBody String GetStatsData( @PathVariable(value = "name") String name,Model model) throws Exception {
+
+
+    	JSONObject data = statsService.getStats(name);
+    	try {
+    		
+    	
+    		return data.toString();
+    		
+    		
+		}
+    	catch(Exception e) {
+    		
+    		return null;
 		}
     	
     }
@@ -160,6 +158,17 @@ public class MainController {
     		
     	
         return  "main";
+    }
+    @CrossOrigin(origins = "http://localhost:8001")
+    @RequestMapping("/stats/{summoner}")
+    public String getStats(
+    		@PathVariable(value="summoner") String summoner, Model model) throws Exception {
+      	
+
+    	model.addAttribute("name",summoner);
+    		
+    	
+        return  "stats";
     }
     
 

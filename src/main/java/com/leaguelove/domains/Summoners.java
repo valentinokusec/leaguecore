@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
-@Table(name="summoners")
+@Data
+@Table(name="summoner")
 public class Summoners {
 	
 	@Id
@@ -16,19 +19,13 @@ public class Summoners {
 	@Column(name="id")
 	private Long id;
 	@Column(name="summonerid")
-	private Long summonerid;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getSummonerid() {
-		return summonerid;
-	}
-	public void setSummonerid(Long summonerid) {
-		this.summonerid = summonerid;
-	}
+	private Long summonerId;
+	@Column(name="profileid")
+	private Long profileId;
+	@Column(name="name")
+	private String name;
+	
+	
 	
 
 }

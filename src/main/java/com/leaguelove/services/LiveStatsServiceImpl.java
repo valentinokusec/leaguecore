@@ -1,5 +1,13 @@
 package com.leaguelove.services;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -117,7 +125,7 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 
 			JSONObject playerStats = new JSONObject();
 			Summoners sum = new Summoners();
-			sum.setSummonerid(player.getSummonerID());
+			sum.setSummonerId(player.getSummonerID());
 			summonerdao.save(sum);
 			playerStats.put("name", player.getSummonerName());
 			if (player.getSummonerName().contains(summoner.getName())) {
@@ -1792,4 +1800,38 @@ public class LiveStatsServiceImpl implements LiveStatsService {
 		statsLive.getJSONObject(0).put("roles", roles);
 		return statsLive;
 	}
+
+	@Override
+	public JSONObject getStats(String name) throws MalformedURLException, IOException {
+		
+		if (summonerdao.findAllByName(name)!=null) {
+			return null;
+		}
+		else
+		{
+		   InputStream is = new URL("https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/toysoldier1?api_key=RGAPI-1983204c-774a-4db0-b03b-7874f1418786").openStream();
+		    try {
+		      BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		      String jsonText = readAll(rd);
+		      JSONObject json = new JSONObject(jsonText);
+		      
+		      Summoners summoner= new Summoners();
+		      summoner.setSummonerId(json.getLong("accountId"));
+		      summoner.setName(json.getString("name"));
+		      summoner.setProfileId(json.getLong("profileIconId"));
+		      summonerdao.save(summoner);
+		      return json;
+		    } finally {
+		      is.close();
+		    }
+		}
+	}
+	  private static String readAll(Reader rd) throws IOException {
+		    StringBuilder sb = new StringBuilder();
+		    int cp;
+		    while ((cp = rd.read()) != -1) {
+		      sb.append((char) cp);
+		    }
+		    return sb.toString();
+		  }
 }
